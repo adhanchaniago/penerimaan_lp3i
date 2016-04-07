@@ -90,7 +90,7 @@ class M_Pendaftar extends CI_Model
 	public function create_no_pendaftaran()
 	{
 		$iter = '0000'.$this->db->query("
-			select count(no_pendaftaran) + 1 as JUMLAH
+			select ifnull(max(right(no_pendaftaran, 4)), 0) + 1 as JUMLAH
 			from pendaftar
 			where tanggal_daftar = '".date("y-M-d")."'
 		")->result()[0]->JUMLAH;

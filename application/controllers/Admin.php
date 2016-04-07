@@ -58,5 +58,59 @@ class Admin extends CI_Controller
 
 		$this->load->view('admin/layout', $data);
 	}	
+
+	public function manage()
+	{
+		$this->security_check->admin_check();
+		$data['judul'] = 'Kelola Akses Admin';
+		$data['konten'] = 'admin/admin';
+		$data['id'] = $this->user_admin->create_id_admin();
+		$data['admin'] = $this->user_admin->get_all();
+
+		$this->load->view('admin/layout', $data);
+	}
+
+	public function tambah()
+	{
+		$id 		= $this->input->post('id');
+		$nama 		= $this->input->post('nama');
+		$password 	= $this->input->post('password');
+		$role		= $this->input->post('role');
+
+		$query = $this->user_admin->add($id, $nama, $password, $role);
+		if ($query > 0) {
+			$this->session->set_flashdata('pesan', '<b>Berhasil!</b> Akun admin baru telah disimpan.');
+		} else {
+			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Akun admin gagal disimpan.');
+		}
+		redirect('admin/manage');
+	}
+
+	public function ubah()
+	{
+		$id 		= $this->input->post('id-u');
+		$nama 		= $this->input->post('nama-u');
+		$password 	= $this->input->post('password-u');
+		$role		= $this->input->post('role-u');
+
+		$query = $this->user_admin->edit($id, $nama, $password, $role);
+		if ($query > 0) {
+			$this->session->set_flashdata('pesan', '<b>Berhasil!</b> Akun admin baru telah diubah.');
+		} else {
+			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Akun admin gagal diubah.');
+		}
+		redirect('admin/manage');
+	}
+
+	public function hapus($id)
+	{
+		$query = $this->user_admin->remove($id);
+		if ($query > 0) {
+			$this->session->set_flashdata('pesan', '<b>Berhasil!</b> Akun admin <b>"'.$id.'"</b> telah dihapus.');
+		} else {
+			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Akun admin <b>"'.$id.'"</b> gagal dihapus.');
+		}
+		redirect('admin/manage');
+	}
 }
 ?>

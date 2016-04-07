@@ -47,16 +47,17 @@ class Page extends CI_Controller
 		$this->session->set_userdata('captcha_word', $cap['word']);
 
 		$data['judul'] = 'Pendaftaran Mahasiswa Baru';
+		$data['konten'] = 'registrasi/form_online';
 		$data['jurusan'] = $this->m_jurusan->get_all();
 		$data['captcha'] = $cap;
 		
-		$this->load->view('registrasi/form_online', $data);
+		$this->load->view('registrasi/layout', $data);
 	}
 
 	public function register_act()
 	{
 		$no_pendaftaran = $this->tbl_pendaftar->create_no_pendaftaran();
-		$id_admin = '1';
+		$id_admin = isset($_SESSION['id_admin'])?$_SESSION['id_admin']:'1';
 		$nama = $this->input->post('nama');
 		$tempat_lahir = $this->input->post('tmp_lahir');
 		$tanggal_lahir = date('y-M-d', strtotime($this->input->post('tgl_lahir')));
@@ -90,16 +91,30 @@ class Page extends CI_Controller
 			$agama, $status_pernikahan, $pekerjaan, $kewarganegaraan, $no_identitas, $alamat_tetap, 
 			$alamat_sekarang, $alamat_kantor, $no_handphone, $no_telepon, $email, $evaluasi_diri, 
 			$password, $valid, $tanggal_daftar, $sumber_informasi);
+		
 		if ($act > 0) {
-			if($prodi1 != '-') $this->tbl_pilihan->add($no_pendaftaran, $prodi1);
-			if($prodi2 != '-') $this->tbl_pilihan->add($no_pendaftaran, $prodi2);
+			if($prodi1 != '' || $prodi1 != null) $this->tbl_pilihan->add($no_pendaftaran, $prodi1);
+			if($prodi2 != '' || $prodi2 != null) $this->tbl_pilihan->add($no_pendaftaran, $prodi2);
 
 			$this->session->set_flashdata('pesan', "<b>Berhasil!</b> Data pendaftaran Anda telah disimpan. 
 				Silahkan <a href='".base_url().'index.php/page/login'."'>LOGIN</a> dan lengkapi data Anda.");
+
+			redirect('page/riwayat_pendidikan/'.$no_pendaftaran);
 		} else {
 			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Data pendaftaran Anda gagal disimpan.');
+			redirect('page/register');
 		}
-		redirect('registrasi/form_online');
+	}
+
+	public function riwayat_pendidikan($no_pendaftaran)
+	{
+		$pendaftar = $this->tbl_pendaftar->get_id($no_pendaftaran);
+
+		$data['judul'] = "Isi Riwayat Pendidikan";
+		$data['konten'] = "registrasi/form_riwayat_pendidikan";
+		$data['pendaftar'] = $pendaftar[0];
+
+		$this->load->view('registrasi/layout', $data);
 	}
 
 	public function login()

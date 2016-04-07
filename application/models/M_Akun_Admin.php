@@ -25,7 +25,7 @@ class M_Akun_Admin extends CI_Model
 		return $this->db->get_where(
 			'akun_admin',
 			array(
-				'nama_admin' => $name,
+				'id_admin' => $name,
 				'pass_admin' => md5($pass)
 			),
 			1
@@ -57,6 +57,13 @@ class M_Akun_Admin extends CI_Model
 	{
 		$this->db->where('id_admin', $id);
 		return $this->db->delete('akun_admin');
+	}
+
+	public function create_id_admin()
+	{
+		$iter = '00'.$this->db->query("select ifnull(max(right(id_admin, 2)), 0) + 1 as JUMLAH from akun_admin")->result()[0]->JUMLAH;
+		$id_admin = 'ADM'.substr($iter, strlen($iter) - 2, strlen($iter));
+		return $id_admin;
 	}
 }
 ?>

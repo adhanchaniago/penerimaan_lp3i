@@ -13,7 +13,7 @@ class Jurusan extends CI_Controller
 	public function index()
 	{
 		$this->security_check->admin_check();
-		$data['judul'] = 'Master Jurusan';
+		$data['judul'] = 'Kelola Data Jurusan';
 		$data['konten'] = 'admin/jurusan';
 
 		$data['id'] = $this->security_check->gen_ai_id('jurusan', 'id_jurusan');
@@ -24,11 +24,17 @@ class Jurusan extends CI_Controller
 
 	public function tambah()
 	{
-		$id 		= $this->input->post('id');
-		$nama 		= $this->input->post('nama');
-		$keterangan	= $this->input->post('keterangan');
+		$id 						= $this->input->post('id');
+		$nama 						= $this->input->post('nama');
+		$keterangan					= $this->input->post('keterangan');
+		
+		$checkKarakterSanguins		= $this->input->post('checkKarakterSanguins');
+		$checkKarakterKoleris		= $this->input->post('checkKarakterKoleris');
+		$checkKarakterMelankolis	= $this->input->post('checkKarakterMelankolis');	
+		$checkKarakterPhlegmatis	= $this->input->post('checkKarakterPhlegmatis');
+		$saran						= $checkKarakterSanguins.$checkKarakterKoleris.$checkKarakterMelankolis.$checkKarakterPhlegmatis;
 
-		$query = $this->m_jurusan->add($id, $nama, $keterangan);
+		$query = $this->m_jurusan->add($id, $nama, $saran, $keterangan);
 		if ($query > 0) {
 			$this->session->set_flashdata('pesan', '<b>Berhasil!</b> Data jurusan telah disimpan.');
 		} else {
@@ -43,7 +49,13 @@ class Jurusan extends CI_Controller
 		$nama 		= $this->input->post('nama-u');
 		$keterangan	= $this->input->post('keterangan-u');
 
-		$query = $this->m_jurusan->edit($id, $nama, $keterangan);
+		$checkKarakterSanguins		= $this->input->post('checkKarakterSanguins-u');
+		$checkKarakterKoleris		= $this->input->post('checkKarakterKoleris-u');
+		$checkKarakterMelankolis	= $this->input->post('checkKarakterMelankolis-u');	
+		$checkKarakterPhlegmatis	= $this->input->post('checkKarakterPhlegmatis-u');
+		$saran						= $checkKarakterSanguins.$checkKarakterKoleris.$checkKarakterMelankolis.$checkKarakterPhlegmatis;
+
+		$query = $this->m_jurusan->edit($id, $nama, $saran, $keterangan);
 		if ($query > 0) {
 			$this->session->set_flashdata('pesan', '<b>Berhasil!</b> Data jurusan telah diubah.');
 		} else {

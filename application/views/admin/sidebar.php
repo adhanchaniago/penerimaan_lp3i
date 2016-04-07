@@ -16,17 +16,44 @@
 				<span class="title">Beranda</span>
 				</a>
 			</li>
+			<?php if($_SESSION['role_admin'] == '1' || $_SESSION['role_admin'] == '2') { ?>
 			<li>
 				<a href="javascript:;">
 					<i class="icon-layers"></i>
-					<span class="title">Master Data</span>
+					<span class="title">Kelola Data Master</span>
 					<span class="arrow"></span>
 				</a>
 				<ul class="sub-menu">
 					<li><a href="<?php echo base_url().'index.php/jurusan'; ?>"><i class="fa fa-university"></i> Jurusan </a></li>
-					<li><a href="#"><i class="fa fa-book"></i> Tes Potensi Akademik </a></li>
+					<li><a href="<?php echo base_url().'index.php/admin/manage'; ?>"><i class="fa fa-user"></i> Admin </a></li>
+					<li>
+						<a href="javascript:;">
+							<i class="fa fa-book"></i> Tes Potensi Akademik <span class="arrow"></span>
+						</a>
+						<ul class="sub-menu">
+							<li><a href="#"><i class="fa fa-language"></i> Kelola Soal</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="javascript:;">
+							<i class="fa fa-camera"></i> Tes Minat Bakat <span class="arrow"></span>
+						</a>
+						<ul class="sub-menu">
+							<li><a href="#"><i class="fa fa-language"></i> Kelola Soal</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="javascript:;">
+							<i class="fa fa-suitcase"></i> Tes Wawancara <span class="arrow"></span>
+						</a>
+						<ul class="sub-menu">
+							<li><a href="#"><i class="fa fa-user"></i> Kelola Pewawancara</a></li>
+						</ul>
+					</li>
 				</ul>
 			</li>
+			<?php } ?>
+			<?php if($_SESSION['role_admin'] == '1' || $_SESSION['role_admin'] == '3') { ?>
 			<li>
 				<a href="#">
 				<i class="icon-user"></i>
@@ -44,7 +71,8 @@
 				<i class="icon-paper-plane"></i>
 				<span class="title">Info</span>
 				</a>
-			</li>						
+			</li>
+			<?php } ?>
 		</ul>
 		<!-- END SIDEBAR MENU -->
 	</div>
