@@ -128,7 +128,8 @@ License: You must have a valid license purchased only from themeforest(the above
     		<!-- Center Wrap END -->
 
 			<!-- Copyright BEGIN -->
-			<p class="copyright">2016 © PMB LP3I Surabaya by <a href="https://twitter.com/obyzz" target="_blank">@obyzz</a></p>
+			<p class="copyright">2016 © PMB LP3I Surabaya &bull; Developed by <a href="https://twitter.com/obyzz" target="_blank">@obyzz</a> &bull; 
+				<a href="<?php echo base_url().'index.php/admin'; ?>">Admin Page</a></p>
 			<!-- Copyright END -->
     	</div>
     </div>

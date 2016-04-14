@@ -127,9 +127,15 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('first_model' => 'first');
 */
 $autoload['model'] = array(
-	'M_Jurusan' 		=> 'm_jurusan', 
-	'M_Security' 		=> 'security_check', 
-	'M_Akun_Admin' 		=> 'user_admin',
-	'M_Pendaftar' 		=> 'tbl_pendaftar',
-	'M_Pilihan_Jurusan'	=> 'tbl_pilihan',
+	'M_Jurusan' 			=> 'm_jurusan', 
+	'M_Security' 			=> 'security_check', 
+	'M_Akun_Admin' 			=> 'user_admin',
+	'M_Pendaftar' 			=> 'tbl_pendaftar',
+	'M_Pilihan_Jurusan'		=> 'tbl_pilihan',
+	'M_Pewawancara'			=> 'tbl_pewawancara',
+	'M_Bidang_Soal'			=> 'tbl_bidang_soal_akademik',
+	'M_Soal_Akademik'		=> 'tbl_soal_akademik',
+	'M_Jawaban_Akademik'	=> 'tbl_jawaban_akademik',
+	'M_Soal_Minat_Bakat'	=> 'tbl_soal_minat_bakat',
+	'M_Jawaban_Minat_Bakat'	=> 'tbl_jawaban_minat_bakat',
 );

@@ -79,6 +79,7 @@ create table BIDANG_SOAL_AKADEMIK
 (
    ID_BIDANG_SOAL       int not null,
    NAMA_BIDANG_SOAL     varchar(20),
+   BOBOT_BIDANG_SOAL    decimal(9,2),
    primary key (ID_BIDANG_SOAL)
 );
 

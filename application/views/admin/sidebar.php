@@ -31,7 +31,8 @@
 							<i class="fa fa-book"></i> Tes Potensi Akademik <span class="arrow"></span>
 						</a>
 						<ul class="sub-menu">
-							<li><a href="#"><i class="fa fa-language"></i> Kelola Soal</a></li>
+							<li><a href="<?php echo base_url().'index.php/bidang_soal'; ?>"><i class="fa fa-cube"></i> Bidang Soal</a></li>
+							<li><a href="<?php echo base_url().'index.php/soal_akademik'; ?>"><i class="fa fa-language"></i> Kelola Soal</a></li>
 						</ul>
 					</li>
 					<li>
@@ -39,7 +40,7 @@
 							<i class="fa fa-camera"></i> Tes Minat Bakat <span class="arrow"></span>
 						</a>
 						<ul class="sub-menu">
-							<li><a href="#"><i class="fa fa-language"></i> Kelola Soal</a></li>
+							<li><a href="<?php echo base_url().'index.php/soal_minat_bakat'; ?>"><i class="fa fa-language"></i> Kelola Soal</a></li>
 						</ul>
 					</li>
 					<li>
@@ -47,7 +48,7 @@
 							<i class="fa fa-suitcase"></i> Tes Wawancara <span class="arrow"></span>
 						</a>
 						<ul class="sub-menu">
-							<li><a href="#"><i class="fa fa-user"></i> Kelola Pewawancara</a></li>
+							<li><a href="<?php echo base_url().'index.php/pewawancara'; ?>"><i class="fa fa-user"></i> Kelola Pewawancara</a></li>
 						</ul>
 					</li>
 				</ul>

@@ -113,7 +113,7 @@ License: You must have a valid license purchased only from themeforest(the above
 								</button>
 								<ul class="dropdown-menu-v2" role="menu">
 									<li>
-										<a href="profile.html">Profil Saya</a>
+										<a href="javascript:void(0);">Ubah Password</a>
 									</li>
 									<li class="divider"></li>
 									<li>

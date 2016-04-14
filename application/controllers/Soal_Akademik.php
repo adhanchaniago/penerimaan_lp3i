@@ -1,0 +1,118 @@
+<?php
+/**
+* 
+*/
+class Soal_Akademik extends CI_Controller
+{
+	
+	function __construct()
+	{
+		parent::__construct();
+	}
+
+	public function index()
+	{
+		$this->security_check->admin_check();
+		$data['judul'] = 'Kelola Soal Akademik';
+		$data['konten'] = 'admin/soal_akademik';
+
+		$data['id'] = $this->security_check->gen_ai_id('soal_akademik', 'id_soal');
+		$data['bidang_soal'] = $this->tbl_bidang_soal_akademik->get_all();
+		$data['soal_akademik'] = $this->tbl_soal_akademik->get_all();
+
+		$this->load->view('admin/layout', $data);
+	}
+
+	public function tambah()
+	{
+		// soal
+		$id 			= $this->input->post('id');
+		$bidang 		= $this->input->post('bidang');
+		$teks 			= $this->input->post('teks');
+
+		$benar			= $this->input->post('benar');
+		$idx_benar		= 0;
+		switch ($benar) {
+			case 'a': $idx_benar = 1; break;
+			case 'b': $idx_benar = 2; break;
+			case 'c': $idx_benar = 3; break;
+			case 'd': $idx_benar = 4; break;
+		}
+
+		$query = $this->tbl_soal_akademik->add($id, $bidang, $teks);
+		if ($query > 0) {
+			// jawaban
+			for($i = 1; $i<=4; $i++) {
+				$id_jawaban	= $this->security_check->gen_ai_id('jawaban_akademik', 'id_jawaban');
+				$jawaban	= $this->input->post('jawaban'.$i);
+				$nilai		= $idx_benar == $i?1:0;
+				
+				$this->tbl_jawaban_akademik->add($id_jawaban, $id, $jawaban, $nilai);
+			}
+
+			$this->session->set_flashdata('pesan', '<b>Berhasil!</b> Soal akademik telah disimpan.');
+		} else {
+			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Soal akademik gagal disimpan.');
+		}
+		redirect('soal_akademik');
+	}
+
+	public function ubah()
+	{
+		// soal
+		$id 		= $this->input->post('id-u');
+		$bidang 	= $this->input->post('bidang-u');
+		$teks		= $this->input->post('teks-u');
+
+		$benar			= $this->input->post('benar-u');
+		$idx_benar		= 0;
+		switch ($benar) {
+			case 'a': $idx_benar = 1; break;
+			case 'b': $idx_benar = 2; break;
+			case 'c': $idx_benar = 3; break;
+			case 'd': $idx_benar = 4; break;
+		}
+
+		$query = $this->tbl_soal_akademik->edit($id, $bidang, $teks);
+		if ($query > 0) {
+			// jawaban
+			for($i = 1; $i<=4; $i++) {
+				$id_jawaban	= $this->input->post('idjawaban-u'.$i);
+				$jawaban	= $this->input->post('jawaban-u'.$i);
+				$nilai		= $idx_benar == $i?1:0;
+				
+				$this->tbl_jawaban_akademik->edit($id_jawaban, $id, $jawaban, $nilai);
+			}
+
+			$this->session->set_flashdata('pesan', '<b>Berhasil!</b> Soal akademik telah diubah.');
+		} else {
+			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Soal akademik gagal diubah.');
+		}
+		redirect('soal_akademik');
+	}
+
+	public function get_detil()
+	{
+		$id_soal	= $this->input->post('id_soal');
+		$soal 		= $this->tbl_soal_akademik->get_id($id_soal);
+		$jawaban 	= $this->tbl_jawaban_akademik->get_soal($id_soal);
+		$arr_detil	= array(
+			'SOAL' 		=> $soal,
+			'JAWABAN'	=> $jawaban,
+			);
+		header('Content-Type: application/json');
+		echo json_encode($arr_detil);
+	}
+
+	public function hapus($id)
+	{
+		$query = $this->tbl_soal_akademik->remove($id);
+		if ($query > 0) {
+			$this->session->set_flashdata('pesan', '<b>Berhasil!</b> Soal akademik telah dihapus.');
+		} else {
+			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Soal akademik gagal dihapus.');
+		}
+		redirect('soal_akademik');
+	}
+}
+?>

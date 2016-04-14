@@ -12,14 +12,14 @@
       <div class="portlet-title">
         <div class="caption font-dark">
           <span class="caption-subject bold uppercase">Tambah</span>
-          <span class="caption-helper uppercase">Jurusan</span>
+          <span class="caption-helper uppercase">Bidang Soal</span>
         </div>
         <div class="actions">
           <a title="" data-original-title="" class="btn btn-circle btn-icon-only btn-default fullscreen" href="#"></a>
         </div>
       </div>
       <div class="portlet-body">
-        <form class="form-horizontal" method="post" action="<?php echo base_url().'index.php/jurusan/tambah' ?>">
+        <form class="form-horizontal" method="post" action="<?php echo base_url().'index.php/bidang_soal/tambah' ?>">
             <!-- <div class="form-group">
               <label class='col-sm-3 control-label' for='id'>ID</label>
               <div class='col-sm-9'>
@@ -28,31 +28,20 @@
             </div> -->
             <input type='hidden' id='id' name="id" placeholder='ID' class='form-control' value="<?php echo $id; ?>" readonly="" required="" />
             <div class="form-group">
-              <label class='col-md-3 control-label' for='nama'>Nama</label>
+              <label class='col-md-3 control-label' for='nama'>Bidang Akademik</label>
               <div class='col-sm-9'>
-                <input type='text' id='nama' name="nama" placeholder='Nama' class='form-control' required="" />
+                <input type='text' id='nama' name="nama" placeholder='Nama' class='form-control' required="" autofocus />
               </div>
             </div>
             <div class="form-group">
-              <label class='col-md-3 control-label' for='karakter'>Saran Karakter</label>
+              <label class='col-md-3 control-label' for='bobot'>Bobot (%)</label>
               <div class='col-sm-9'>
-                <div class="checkbox-list">
-                  <label><input type="checkbox" id="checkKarakterSanguins" name="checkKarakterSanguins" value="Sanguins;"> Sanguins </label>
-                  <label><input type="checkbox" id="checkKarakterKoleris" name="checkKarakterKoleris" value="Koleris;"> Koleris </label>
-                  <label><input type="checkbox" id="checkKarakterMelankolis" name="checkKarakterMelankolis" value="Melankolis;"> Melankolis </label>
-                  <label><input type="checkbox" id="checkKarakterPhlegmatis" name="checkKarakterPhlegmatis" value="Phlegmatis;"> Phlegmatis </label>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class='col-sm-3 control-label' for='keterangan'>Keterangan</label>
-              <div class='col-sm-9'>
-                <textarea id='keterangan' name="keterangan" placeholder='Keterangan' class='form-control'></textarea>
+                <input type='number' id='bobot' name="bobot" placeholder='0 - 100' class='form-control' required="" max="<?php echo $max_bobot; ?>" min="1" <?php if($total_bobot >= 100) { echo "readonly"; } ?> />
               </div>
             </div>
             <div class="form-group">
               <div class="col-md-offset-3 col-md-9">
-                <button class="btn btn-info" type="submit">
+                <button class="btn btn-info" type="submit" <?php if($total_bobot >= 100) { echo "disabled"; } ?>>
                   <i class="ace-icon fa fa-check bigger-110"></i>
                   Simpan
                 </button>
@@ -73,7 +62,7 @@
       <div class="portlet-title">
         <div class="caption font-dark">
           <span class="caption-subject bold uppercase">Daftar</span>
-          <span class="caption-helper uppercase">jurusan</span>
+          <span class="caption-helper uppercase">Bidang Akademik</span>
         </div>
         <div class="actions">
           <a title="" data-original-title="" class="btn btn-circle btn-icon-only btn-default fullscreen" href="#"></a>
@@ -85,27 +74,25 @@
             <tr>
               <th>No.</th>
               <th>Nama</th>
-              <th>Saran Karakter</th>
-              <th>Keterangan</th>
+              <th>Bobot (%)</th>
               <th>Opsi</th>
             </tr>
           </thead>
           <tbody>
             <?php
             $no = 1;
-            foreach($jurusan as $j) { ?>
+            foreach($bidang_soal_akademik as $j) { ?>
             <tr>
               <td style="text-align: right;width: 10%;"><?php echo $no; ?>.</td>
-              <td><?php echo $j->NAMA_JURUSAN; ?></td>
-              <td><?php echo $j->SARAN_KARAKTER; ?></td>
-              <td><?php echo $j->KETERANGAN; ?></td>
+              <td><?php echo $j->NAMA_BIDANG_SOAL; ?></td>
+              <td><?php echo $j->BOBOT_BIDANG_SOAL; ?>%</td>
               <td style="text-align: center;width: 20%;">
                 <div class="hidden-sm hidden-xs action-buttons">
-                  <a class="btn btn-xs btn-success" href="#modal-edit" data-toggle="modal" role="button" onclick="edit('<?php echo $j->ID_JURUSAN; ?>', '<?php echo $j->NAMA_JURUSAN; ?>', '<?php echo $j->SARAN_KARAKTER; ?>', '<?php echo $j->KETERANGAN; ?>')">
+                  <a class="btn btn-xs btn-success" href="#modal-edit" data-toggle="modal" role="button" onclick="edit('<?php echo $j->ID_BIDANG_SOAL; ?>', '<?php echo $j->NAMA_BIDANG_SOAL; ?>', '<?php echo $j->BOBOT_BIDANG_SOAL; ?>')">
                     <i class="ace-icon fa fa-pencil"></i> Ubah
                   </a>
 
-                  <a class="btn btn-xs btn-danger" href="<?php echo base_url().'index.php/jurusan/hapus/'.$j->ID_JURUSAN; ?>" onclick="return confirm('Anda yakin?');">
+                  <a class="btn btn-xs btn-danger" href="<?php echo base_url().'index.php/bidang_soal/hapus/'.$j->ID_BIDANG_SOAL; ?>" onclick="return confirm('Anda yakin?');">
                     <i class="ace-icon fa fa-trash-o"></i> Hapus
                   </a>
                 </div>
@@ -127,10 +114,10 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 						<span class="white">&times;</span>
 					</button>
-					Ubah Jurusan
+					Ubah Bidang Soal
 				</div>
 			</div>
-      <form class='form-horizontal' role='form' action='<?php echo base_url()."index.php/jurusan/ubah"; ?>' method='post'>
+      <form class='form-horizontal' role='form' action='<?php echo base_url()."index.php/bidang_soal/ubah"; ?>' method='post'>
       <div class='modal-body no-padding'>
         <!-- <div class="form-group">
           <label class='col-sm-3 control-label no-padding-right' for='id-u'>ID</label>
@@ -140,26 +127,15 @@
         </div> -->
         <input type='hidden' id='id-u' name="id-u" placeholder='ID' class='form-control' readonly="" required="" />
         <div class="form-group">
-          <label class='col-sm-3 control-label no-padding-right' for='nama-u'>Nama</label>
+          <label class='col-sm-3 control-label no-padding-right' for='nama-u'>Bidang Akademik</label>
           <div class='col-sm-9'>
             <input type='text' id='nama-u' name="nama-u" placeholder='Nama' class='form-control' required="" />
           </div>
         </div>
         <div class="form-group">
-          <label class='col-md-3 control-label' for='karakter'>Saran Karakter</label>
+          <label class='col-sm-3 control-label no-padding-right' for='bobot-u'>Bobot (%)</label>
           <div class='col-sm-9'>
-            <div class="checkbox-list">
-              <label><input type="checkbox" id="checkKarakterSanguins-u" name="checkKarakterSanguins-u" value="Sanguins;"> Sanguins </label>
-              <label><input type="checkbox" id="checkKarakterKoleris-u" name="checkKarakterKoleris-u" value="Koleris;"> Koleris </label>
-              <label><input type="checkbox" id="checkKarakterMelankolis-u" name="checkKarakterMelankolis-u" value="Melankolis;"> Melankolis </label>
-              <label><input type="checkbox" id="checkKarakterPhlegmatis-u" name="checkKarakterPhlegmatis-u" value="Phlegmatis;"> Phlegmatis </label>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class='col-sm-3 control-label' for='keterangan-u'>Keterangan</label>
-          <div class='col-sm-9'>
-            <textarea id='keterangan-u' name="keterangan-u" placeholder='Keterangan' class='form-control'></textarea>
+            <input type='number' id='bobot-u' name="bobot-u" placeholder='XX' class='form-control' required="" max="100" min="1" />
           </div>
         </div>
       </div>
@@ -177,23 +153,9 @@
 </div>
 
 <script type="text/javascript">
-  function edit(id, nama, saran, keterangan) {
-    // set default
-    $('#checkKarakterSanguins-u').attr('checked', false);
-    $('#checkKarakterKoleris-u').attr('checked', false);
-    $('#checkKarakterMelankolis-u').attr('checked', false);
-    $('#checkKarakterPhlegmatis-u').attr('checked', false);
-
-    // split saran
-    var arrSaran = saran.split(";");
-    for (var i = 0; i < arrSaran.length-1; i++) {
-      var mSaran = arrSaran[i];
-      var idCheck = '#checkKarakter' + mSaran + '-u';
-      $(idCheck).attr('checked', true);
-    };
-
+  function edit(id, nama, bobot) {
     $('#id-u').val(id);
     $('#nama-u').val(nama);
-    $('#keterangan-u').val(keterangan);
+    $('#bobot-u').val(bobot);
   }
 </script>
