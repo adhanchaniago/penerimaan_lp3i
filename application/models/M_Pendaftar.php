@@ -20,7 +20,7 @@ class M_Pendaftar extends CI_Model
 		return $this->db->get_where('pendaftar', array('no_pendaftaran' => $id))->result();
 	}
 
-	public function add($no_pendaftaran, $id_admin, $nama, $tempat_lahir, $tanggal_lahir, 
+	public function add($no_pendaftaran, $id_admin, $nama, $jk, $tempat_lahir, $tanggal_lahir, 
 		$agama, $status_pernikahan, $pekerjaan, $kewarganegaraan, $no_identitas, $alamat_tetap, 
 		$alamat_sekarang, $alamat_kantor, $no_handphone, $no_telepon, $email, $evaluasi_diri, 
 		$password, $valid, $tanggal_daftar, $sumber_informasi)
@@ -29,6 +29,7 @@ class M_Pendaftar extends CI_Model
 				'no_pendaftaran' 		=> $no_pendaftaran,
 				'id_admin' 				=> $id_admin,
 				'nama' 					=> $nama,
+				'jenis_kelamin'			=> $jk,
 				'tempat_lahir'			=> $tempat_lahir,
 				'tanggal_lahir'			=> $tanggal_lahir,
 				'agama'					=> $agama,
@@ -51,7 +52,7 @@ class M_Pendaftar extends CI_Model
 	}
 
 
-	public function edit($no_pendaftaran, $id_admin, $nama, $tempat_lahir, $tanggal_lahir, 
+	public function edit($no_pendaftaran, $id_admin, $nama, $jk, $tempat_lahir, $tanggal_lahir, 
 		$agama, $status_pernikahan, $pekerjaan, $kewarganegaraan, $no_identitas, $alamat_tetap, 
 		$alamat_sekarang, $alamat_kantor, $no_handphone, $no_telepon, $email, $evaluasi_diri, 
 		$password, $valid, $tanggal_daftar, $sumber_informasi)
@@ -60,6 +61,7 @@ class M_Pendaftar extends CI_Model
 		return $this->db->update('pendaftar', array(
 				'id_admin' 				=> $id_admin,
 				'nama' 					=> $nama,
+				'jenis_kelamin'			=> $jk,
 				'tempat_lahir'			=> $tempat_lahir,
 				'tanggal_lahir'			=> $tanggal_lahir,
 				'agama'					=> $agama,

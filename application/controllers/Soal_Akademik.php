@@ -23,6 +23,33 @@ class Soal_Akademik extends CI_Controller
 		$this->load->view('admin/layout', $data);
 	}
 
+	private function do_upload_images($inputname, $id_soal) {
+		$this->load->library('upload');
+
+	    $files = $_FILES;
+
+	    $cpt = count ($_FILES [$inputname] ['name']);
+	    for($i = 0; $i < $cpt; $i ++) {
+
+	        $_FILES [$inputname] ['name'] = $files [$inputname] ['name'] [$i];
+	        $_FILES [$inputname] ['type'] = $files [$inputname] ['type'] [$i];
+	        $_FILES [$inputname] ['tmp_name'] = $files [$inputname] ['tmp_name'] [$i];
+	        $_FILES [$inputname] ['error'] = $files [$inputname] ['error'] [$i];
+	        $_FILES [$inputname] ['size'] = $files [$inputname] ['size'] [$i];
+
+	        $config = array ();
+		    $config ['upload_path'] = './assets/global/img/soal/';
+		    $config ['allowed_types'] = 'bmp|jpg|png';
+		    $config ['overwrite']	= TRUE;
+	        $this->upload->initialize($config);
+	        $this->upload->do_upload($inputname);
+
+	        // insert to db
+	        $id_gambar = $this->security_check->gen_ai_id('gambar_akademik', 'id');
+	        $this->tbl_gambar_akademik->add($id_gambar, $id_soal, $_FILES[$inputname]['name'], $config['upload_path']);
+	    }
+	}
+
 	public function tambah()
 	{
 		// soal
@@ -49,6 +76,9 @@ class Soal_Akademik extends CI_Controller
 				
 				$this->tbl_jawaban_akademik->add($id_jawaban, $id, $jawaban, $nilai);
 			}
+
+			// upload gambar 
+			$this->do_upload_images('gambar', $id);
 
 			$this->session->set_flashdata('pesan', '<b>Berhasil!</b> Soal akademik telah disimpan.');
 		} else {
@@ -84,6 +114,9 @@ class Soal_Akademik extends CI_Controller
 				$this->tbl_jawaban_akademik->edit($id_jawaban, $id, $jawaban, $nilai);
 			}
 
+			// upload gambar 
+			$this->do_upload_images('gambar-u', $id);
+
 			$this->session->set_flashdata('pesan', '<b>Berhasil!</b> Soal akademik telah diubah.');
 		} else {
 			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Soal akademik gagal diubah.');
@@ -96,9 +129,11 @@ class Soal_Akademik extends CI_Controller
 		$id_soal	= $this->input->post('id_soal');
 		$soal 		= $this->tbl_soal_akademik->get_id($id_soal);
 		$jawaban 	= $this->tbl_jawaban_akademik->get_soal($id_soal);
+		$gambar		= $this->tbl_gambar_akademik->get_soal($id_soal);
 		$arr_detil	= array(
 			'SOAL' 		=> $soal,
 			'JAWABAN'	=> $jawaban,
+			'GAMBAR'	=> $gambar,
 			);
 		header('Content-Type: application/json');
 		echo json_encode($arr_detil);
@@ -113,6 +148,28 @@ class Soal_Akademik extends CI_Controller
 			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Soal akademik gagal dihapus.');
 		}
 		redirect('soal_akademik');
+	}
+
+	public function hapus_gambar($id)
+	{
+		$query = $this->tbl_gambar_akademik->remove($id);
+		if ($query > 0) {
+			$this->session->set_flashdata('pesan', '<b>Berhasil!</b> Gambar bantuan soal akademik telah dihapus.');
+		} else {
+			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Gambar bantuan akademik gagal dihapus.');
+		}
+		redirect('soal_akademik'); 
+	}
+
+	public function hapus_gambar_soal($soal)
+	{
+		$query = $this->tbl_gambar_akademik->remove_soal($soal);
+		if ($query > 0) {
+			$this->session->set_flashdata('pesan', '<b>Berhasil!</b> Gambar bantuan soal akademik telah dihapus.');
+		} else {
+			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Gambar bantuan akademik gagal dihapus.');
+		}
+		redirect('soal_akademik'); 
 	}
 }
 ?>

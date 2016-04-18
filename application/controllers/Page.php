@@ -57,8 +57,9 @@ class Page extends CI_Controller
 	public function register_act()
 	{
 		$no_pendaftaran = $this->tbl_pendaftar->create_no_pendaftaran();
-		$id_admin = isset($_SESSION['id_admin'])?$_SESSION['id_admin']:'1';
+		$id_admin = isset($_SESSION['id_admin'])?$_SESSION['id_admin']:'ADM01';
 		$nama = $this->input->post('nama');
+		$jk = $this->input->post('jk');
 		$tempat_lahir = $this->input->post('tmp_lahir');
 		$tanggal_lahir = date('y-M-d', strtotime($this->input->post('tgl_lahir')));
 		$agama = $this->input->post('agama');
@@ -87,7 +88,7 @@ class Page extends CI_Controller
 			redirect('registrasi/form_online');
 		}
 
-		$act = $this->tbl_pendaftar->add($no_pendaftaran, $id_admin, $nama, $tempat_lahir, $tanggal_lahir, 
+		$act = $this->tbl_pendaftar->add($no_pendaftaran, $id_admin, $nama, $jk, $tempat_lahir, $tanggal_lahir, 
 			$agama, $status_pernikahan, $pekerjaan, $kewarganegaraan, $no_identitas, $alamat_tetap, 
 			$alamat_sekarang, $alamat_kantor, $no_handphone, $no_telepon, $email, $evaluasi_diri, 
 			$password, $valid, $tanggal_daftar, $sumber_informasi);

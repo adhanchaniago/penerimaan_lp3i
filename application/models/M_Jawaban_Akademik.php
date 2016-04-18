@@ -40,7 +40,6 @@ class M_Jawaban_Akademik extends CI_Model
 	{
 		$this->db->where('id_jawaban', $id);
 		return $this->db->update('jawaban_akademik', array(
-				'id_jawaban' => $id,
 				'id_soal' => $soal,
 				'jawaban' => $jawaban,
 				'nilai' => $nilai

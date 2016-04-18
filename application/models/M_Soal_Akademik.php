@@ -48,6 +48,16 @@ class M_Soal_Akademik extends CI_Model
 
 	public function remove($id)
 	{
+		$files = $this->db->get_where('gambar_akademik', array('id_soal' => $id))->result();
+		if(count($files) > 0) {
+			foreach ($files as $file) {
+				unlink($file->LOKASI_FILE.$file->NAMA_FILE);
+			}
+		}
+
+		$this->db->where('id_soal', $id);
+		$this->db->delete('gambar_akademik');
+
 		$this->db->where('id_soal', $id);
 		$this->db->delete('jawaban_akademik');
 

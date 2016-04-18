@@ -40,7 +40,7 @@
 					</div>
 				</div>
 				<div class="portlet-body form">
-					<form action="<?php echo base_url().'index.php/page/register_act'; ?>" class="form-horizontal" role="form" method="POST">
+					<form action="<?php echo base_url().'index.php/page/register_act'; ?>" class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
 						<div class="row">
 							<div class="col-md-8">
 								<div class="form-group">
@@ -82,6 +82,15 @@
 									<label class="col-md-3 control-label">Nama Lengkap</label>
 									<div class="col-md-9">
 										<input type="text" name="nama" class="form-control" placeholder="Masukkan Nama Lengkap">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">Jenis Kelamin</label>
+									<div class="col-md-9">
+										<div class="radio-list">
+											<label class="radio-inline"><input type="radio" name="jk" id="jkLakiLaki" value="L" checked> Laki-laki </label>
+											<label class="radio-inline"><input type="radio" name="jk" id="jkPerempuan" value="P"> Perempuan </label>
+										</div>
 									</div>
 								</div>
 								<div class="form-group">
@@ -221,12 +230,12 @@
 								</div>
 							</div>
 							<div class="col-md-4">
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<label class="col-md-3 control-label">Pas Foto</label>
 									<div class="col-md-9">
-										<input type="file" name="pas_foto" class="form-control">
+										<input type="file" name="pas_foto[]" class="form-control" accept=".png,.jpg,.bmp">
 									</div>
-								</div>
+								</div> -->
 							</div>
 						</div>
 						<div class="form-actions">

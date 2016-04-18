@@ -138,4 +138,5 @@ $autoload['model'] = array(
 	'M_Jawaban_Akademik'	=> 'tbl_jawaban_akademik',
 	'M_Soal_Minat_Bakat'	=> 'tbl_soal_minat_bakat',
 	'M_Jawaban_Minat_Bakat'	=> 'tbl_jawaban_minat_bakat',
+	'M_Gambar_Akademik'		=> 'tbl_gambar_akademik',
 );

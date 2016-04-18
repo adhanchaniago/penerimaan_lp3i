@@ -79,7 +79,7 @@
           Tambah Soal Akademik
         </div>
       </div>
-      <form class='form-horizontal' role='form' action='<?php echo base_url()."index.php/soal_akademik/tambah"; ?>' method='post'>
+      <form class='form-horizontal' role='form' action='<?php echo base_url()."index.php/soal_akademik/tambah"; ?>' method='post' enctype="multipart/form-data">
       <div class='modal-body no-padding'>
         <div style="font-weight: bold;font-weight: 12pt;border-bottom: 1px solid #ececec;margin-bottom: 10px;">Soal</div>
         <input type='hidden' id='id' name="id" placeholder='ID' class='form-control' readonly="" required="" value="<?php echo $id; ?>" />
@@ -98,6 +98,14 @@
           <label class='col-sm-3 control-label no-padding-right' for='teks'>Teks Soal</label>
           <div class='col-sm-9'>
             <textarea id='teks' name="teks" placeholder='Teks Soal...' class='form-control' required=""></textarea>
+          </div>
+        </div>
+
+        <div style="font-weight: bold;font-weight: 12pt;border-bottom: 1px solid #ececec;margin-bottom: 10px;">Gambar Bantuan</div>
+        <div class="form-group">
+          <label class='col-sm-3 control-label no-padding-right' for='gambar'>Gambar Bantuan</label>
+          <div class='col-sm-9'>
+            <input type="file" id='gambar' name="gambar[]" placeholder='Pilih Gambar...' class='form-control' accept=".jpg,.png,.bmp" multiple />
           </div>
         </div>
 
@@ -153,7 +161,7 @@
 </div>
 
 <div id="modal-edit" class="modal fade" tabindex="-1">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header no-padding">
 				<div class="table-header">
@@ -163,7 +171,7 @@
 					Ubah Soal Akademik
 				</div>
 			</div>
-      <form class='form-horizontal' role='form' action='<?php echo base_url()."index.php/soal_akademik/ubah"; ?>' method='post'>
+      <form class='form-horizontal' role='form' action='<?php echo base_url()."index.php/soal_akademik/ubah"; ?>' method='post' enctype="multipart/form-data">
       <div class='modal-body no-padding'>
         <div style="font-weight: bold;font-weight: 12pt;border-bottom: 1px solid #ececec;margin-bottom: 10px;">Soal</div>
         <input type='hidden' id='id-u' name="id-u" placeholder='ID' class='form-control' readonly="" required="" />
@@ -182,6 +190,19 @@
           <label class='col-sm-3 control-label no-padding-right' for='teks-u'>Teks Soal</label>
           <div class='col-sm-9'>
             <textarea id='teks-u' name="teks-u" placeholder='Teks Soal...' class='form-control' required=""></textarea>
+          </div>
+        </div>
+
+        <div style="font-weight: bold;font-weight: 12pt;border-bottom: 1px solid #ececec;margin-bottom: 10px;">Gambar Bantuan</div>
+        <div class="form-group">
+          <label class='col-sm-3 control-label no-padding-right'>Gambar</label>
+          <div class='col-sm-9' id="list-gambar">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class='col-sm-3 control-label no-padding-right' for='gambar-u'>Tambah Gambar</label>
+          <div class='col-sm-9'>
+            <input type="file" id='gambar-u' name="gambar-u[]" placeholder='Pilih Gambar...' class='form-control' accept=".jpg,.png,.bmp" multiple />
           </div>
         </div>
 
@@ -251,6 +272,7 @@
       success: function(result) {
         var soal = result.SOAL;
         var jawaban = result.JAWABAN;
+        var gambar = result.GAMBAR;
 
         // soal
         $('#id-u').val(soal[0].ID_SOAL);
@@ -280,6 +302,21 @@
         else if(idxBenar == 2) jawabBenar = 'c';
         else jawabBenar = 'd';
         $('#benar-u').val(jawabBenar);
+
+        // list gambar
+        var listGambar = "<span>Tidak ada.</span>";
+        if(gambar.length > 0) {
+          listGambar = "";
+          var hostname = window.location.host + "/penerimaan_lp3i";
+          for(var j = 0; j < gambar.length; j++) {
+            listGambar += (j+1) + ". <a href='http://" + hostname + gambar[j].LOKASI_FILE.replace('.', '') + gambar[j].NAMA_FILE + "' target='_blank'>" + 
+              gambar[j].NAMA_FILE + "</a> [<a href='soal_akademik/hapus_gambar/" + gambar[j].ID + 
+              "' onclick='return confirm(\"Anda yakin?\")' style='color: red;'>Hapus</a>]&nbsp;";
+            if(j != gambar.length - 1) listGambar += "<br>";
+          }
+          if(gambar.length > 1) listGambar += "<br>Opsi: <a href='soal_akademik/hapus_gambar_soal/" + gambar[0].ID_SOAL + "' style='color: red;' onclick='return confirm(\"Anda yakin?\")'>Hapus Semua</a>" ;
+        }
+        $('#list-gambar').html(listGambar);
       },
       error: function(xhr, status, error) {
         console.log(error);
