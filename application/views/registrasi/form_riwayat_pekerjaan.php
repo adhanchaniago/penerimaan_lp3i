@@ -9,8 +9,8 @@
 			<table height="100px" width="100%" border="0" cellpadding="0" cellspacing="0" style="margin-top: 10px; margin-bottom: 10px;">
 				<tr style="text-align: center;font-size: 14pt;font-weight: bold;color: rgb(100, 100, 100)">
 					<td width="16%" style="background-color: rgb(145, 240, 150);color: rgb(255, 255, 255)">1. Data Pribadi</td>
-					<td width="16%" style="background-color: rgb(255, 185, 185);color: rgb(100, 100, 100)">2. Riwayat Pendidikan</td>
-					<td width="16%" style="background-color: rgb(255, 185, 185);color: rgb(255, 255, 255)">3. Riwayat Pekerjaan</td>
+					<td width="16%" style="background-color: rgb(145, 240, 150);color: rgb(255, 255, 255)">2. Riwayat Pendidikan</td>
+					<td width="16%" style="background-color: rgb(255, 185, 185);color: rgb(100, 100, 100)">3. Riwayat Pekerjaan</td>
 					<td width="16%" style="background-color: rgb(255, 185, 185);color: rgb(255, 255, 255)">4. Anggota Keluarga</td>
 					<td width="16%" style="background-color: rgb(255, 185, 185);color: rgb(255, 255, 255)">5. Evaluasi Diri</td>
 					<td width="16%" style="background-color: rgb(255, 185, 185);color: rgb(255, 255, 255)">6. Selesai</td>
@@ -34,7 +34,7 @@
 				<div class="portlet-title">
 					<div class="caption font-dark">
 						<span class="caption-subject bold uppercase">Riwayat</span>
-						<span class="caption-helper">Pendidikan</span>
+						<span class="caption-helper">Pekerjaan</span>
 					</div>
 					<div class="actions">
 						<a title="Fullscreen" data-original-title="" class="btn btn-circle btn-icon-only btn-default fullscreen" href="#"></a>
@@ -43,39 +43,43 @@
 				</div>
 				<div class="portlet-body">
 						<div class="col-md-12">
-							<p>Silahkan mengisi riwayat pendidikan Anda sesuai dengan yang pernah Anda tempuh.</p>
+							<p>Silahkan mengisi riwayat pekerjaan Anda sesuai dengan yang pernah Anda tempuh.</p>
 							<table id="dynamic-table" class="table table-striped table-bordered table-hover">
 					          <thead>
 					            <tr>
 					              <th width="5%">No.</th>
-					              <th width="15%">Nama</th>
-					              <th width="10%">Jenis</th>
-					              <th width="30%">Alamat</th>
+					              <th width="25%">Nama</th>
 					              <th width="15%">Periode</th>
-					              <th width="10%">Setifikat</th>
-					              <th width="15%">Opsi</th>
+					              <th width="15%">Jabatan Akhir</th>
+					              <th width="15%">Gaji Per Bulan</th>
+					              <th width="10%">Opsi</th>
 					            </tr>
 					          </thead>
 					          <tbody>
 					            <?php
 					            $no = 1;
-					            foreach($pendidikan as $j) { ?>
+					            foreach($pekerjaan as $j) { ?>
 					            <tr>
 					              <td style="text-align: right;width: 10%;"><?php echo $no; ?>.</td>
-					              <td><?php echo $j->NAMA_LEMBAGA; ?></td>
-					              <td><?php echo $j->JENIS; ?></td>
-					              <td><?php echo $j->ALAMAT_LEMBAGA; ?></td>
-					              <td><?php echo date("Y", strtotime($j->TANGGAL_MULAI))." - ".date("Y", strtotime($j->TANGGAL_SELESAI)); ?></td>
-					              <td><?php echo $j->SERTIFIKAT; ?></td>
+					              <td><?php echo $j->NAMA_PERUSAHAAN; ?></td>
+					              <?php
+					              $tahun = explode("-", $j->TANGGAL_SELESAI)[0];
+					              if($tahun == 9999) $tahun = "Sekerang";
+					              else $tahun = date("Y", strtotime($j->TANGGAL_SELESAI));
+					              ?>
+					              <td><?php echo date("Y", strtotime($j->TANGGAL_MULAI))." - ".$tahun; ?></td>
+					              <td><?php echo $j->JABATAN_AKHIR; ?></td>
+					              <td><?php echo "Rp".str_replace(",", ".", number_format($j->GAJI_PERBULAN)); ?></td>
 					              <td style="text-align: center;width: 20%;">
 					                <div class="hidden-sm hidden-xs action-buttons">
-					                  <a class="btn btn-xs btn-success" href="#modal-edit" data-toggle="modal" role="button" onclick="edit('<?php echo $j->ID; ?>', '<?php echo $j->JENIS; ?>', 
-					                  '<?php echo $j->NAMA_LEMBAGA; ?>', '<?php echo $j->TANGGAL_MULAI; ?>', '<?php echo $j->TANGGAL_SELESAI; ?>', '<?php echo $j->ALAMAT_LEMBAGA; ?>', 
-					                  '<?php echo $j->SERTIFIKAT; ?>')">
+					                  <a class="btn btn-xs btn-success" href="#modal-edit" data-toggle="modal" role="button" onclick="edit('<?php echo $j->ID; ?>', 
+					                  '<?php echo $j->NAMA_PERUSAHAAN; ?>', '<?php echo $j->TANGGAL_MULAI; ?>', '<?php echo $j->TANGGAL_SELESAI; ?>', 
+					                  '<?php echo $j->JABATAN_AKHIR; ?>', '<?php echo $j->GAJI_PERBULAN; ?>')">
 					                    <i class="ace-icon fa fa-pencil"></i> Ubah
 					                  </a>
 
-					                  <a class="btn btn-xs btn-danger" href="<?php echo base_url().'index.php/page/riwayat_pendidikan_act/'.$pendaftar->NO_PENDAFTARAN.'/hapus/'.$j->ID; ?>" onclick="return confirm('Anda yakin?');">
+					                  <a class="btn btn-xs btn-danger" href="<?php echo base_url().'index.php/page/riwayat_pekerjaan_act/'.$pendaftar->NO_PENDAFTARAN.'/hapus/'.$j->ID; ?>" 
+					                  onclick="return confirm('Anda yakin?');">
 					                    <i class="ace-icon fa fa-trash-o"></i> Hapus
 					                  </a>
 					                </div>
@@ -86,8 +90,8 @@
 					        </table>
 						</div>
 						
-						<a href="javascript:void(0);" class="btn grey" disabled>Lewati</a>
-						<a href="<?php echo base_url().'index.php/page/riwayat_pekerjaan/'.$pendaftar->NO_PENDAFTARAN; ?>" class="btn green pull-right" id="btnLanjut">Lanjut</a>
+						<a href="<?php echo base_url().'index.php/page/anggota_keluarga/'.$pendaftar->NO_PENDAFTARAN; ?>" class="btn grey">Lewati</a>
+						<a href="<?php echo base_url().'index.php/page/anggota_keluarga/'.$pendaftar->NO_PENDAFTARAN; ?>" class="btn green pull-right">Lanjut</a>
 				</div>
 			</div>
 		</div>
@@ -107,27 +111,17 @@
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
             <span class="white">&times;</span>
           </button>
-          Tambah Riwayat Pendidikan
+          Tambah Riwayat Pekerjaan
         </div>
       </div>
-      <form class='form-horizontal' role='form' action='<?php echo base_url()."index.php/page/riwayat_pendidikan_act/".$pendaftar->NO_PENDAFTARAN."/tambah"; ?>' method='post' enctype="multipart/form-data">
+      <form class='form-horizontal' role='form' action='<?php echo base_url()."index.php/page/riwayat_pekerjaan_act/".$pendaftar->NO_PENDAFTARAN."/tambah"; ?>' method='post' enctype="multipart/form-data">
       <div class='modal-body no-padding'>
         <input type='hidden' id='id' name="id" class='form-control' readonly="" required="" value="<?php echo $id; ?>" />
         
         <div class="form-group">
-          <label class='col-sm-3 control-label no-padding-right' for='nama'>Nama Lembaga</label>
+          <label class='col-sm-3 control-label no-padding-right' for='nama'>Nama Perusahaan</label>
           <div class='col-sm-9'>
-            <input type="text" id='nama' name="nama" placeholder='Contoh: SMA 1 Surabaya' class='form-control' required="" />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class='col-sm-3 control-label no-padding-right' for='jenis'>Jenis</label>
-          <div class='col-sm-9'>
-            <div class="radio-list">
-				<label class="radio-inline"><input type="radio" name="jenis" id="jenisFormal" value="Formal" checked> Formal </label>
-				<label class="radio-inline"><input type="radio" name="jenis" id="jenisNonformal" value="Nonformal"> Nonformal </label>
-			</div>
+            <input type="text" id='nama' name="nama" placeholder='Contoh: PT. ABDI BERKAH CAHAYA' class='form-control' required="" />
           </div>
         </div>
 
@@ -139,23 +133,23 @@
 		</div>
 
 		<div class="form-group">
-			<label class="col-md-3 control-label" for="selesai">Selesai/Lulus</label>
+			<label class="col-md-3 control-label" for="selesai">Selesai/Keluar</label>
 			<div class="col-md-9">
 				<input class="form-control form-control-inline input-medium date-picker" id="selesai" name="selesai" size="16" type="date" placeholder="DD/MM/YYYY" />
 			</div>
 		</div>
 
 		<div class="form-group">
-          <label class='col-sm-3 control-label no-padding-right' for='alamat'>Alamat Lembaga</label>
+          <label class='col-sm-3 control-label no-padding-right' for='jabatan'>Jabatan Terakhir</label>
           <div class='col-sm-9'>
-            <textarea id='alamat' name="alamat" placeholder='Alamat' class='form-control'></textarea>
+            <input type="text" id='jabatan' name="jabatan" placeholder='Jabatan' class='form-control' />
           </div>
         </div>
 
         <div class="form-group">
-          <label class='col-sm-3 control-label no-padding-right' for='sertifikat'>Sertifikat</label>
+          <label class='col-sm-3 control-label no-padding-right' for='gaji'>Gaji Per Bulan</label>
           <div class='col-sm-9'>
-            <input type="text" id='sertifikat' name="sertifikat" placeholder='Sertifikat' class='form-control' />
+            <input type="number" id='gaji' name="gaji" placeholder='1000000' class='form-control' />
           </div>
         </div>
 
@@ -181,27 +175,17 @@
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
             <span class="white">&times;</span>
           </button>
-          Ubah Riwayat Pendidikan
+          Ubah Riwayat Pekerjaan
         </div>
       </div>
-      <form class='form-horizontal' role='form' action='<?php echo base_url()."index.php/page/riwayat_pendidikan_act/".$pendaftar->NO_PENDAFTARAN."/ubah"; ?>' method='post' enctype="multipart/form-data">
+      <form class='form-horizontal' role='form' action='<?php echo base_url()."index.php/page/riwayat_pekerjaan_act/".$pendaftar->NO_PENDAFTARAN."/ubah"; ?>' method='post' enctype="multipart/form-data">
       <div class='modal-body no-padding'>
         <input type='hidden' id='id-u' name="id-u" class='form-control' readonly="" required="" value="<?php echo $id; ?>" />
         
         <div class="form-group">
-          <label class='col-sm-3 control-label no-padding-right' for='nama-u'>Nama Lembaga</label>
+          <label class='col-sm-3 control-label no-padding-right' for='nama-u'>Nama Perusahaan</label>
           <div class='col-sm-9'>
-            <input type="text" id='nama-u' name="nama-u" placeholder='Contoh: SMA 1 Surabaya' class='form-control' required="" />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class='col-sm-3 control-label no-padding-right' for='jenis-u'>Jenis</label>
-          <div class='col-sm-9'>
-            <div class="radio-list">
-				<label class="radio-inline"><input type="radio" name="jenis-u" id="jenisFormal-u" value="Formal"> Formal </label>
-				<label class="radio-inline"><input type="radio" name="jenis-u" id="jenisNonformal-u" value="Nonformal"> Nonformal </label>
-			</div>
+            <input type="text" id='nama-u' name="nama-u" placeholder='Contoh: PT. ABDI BERKAH CAHAYA' class='form-control' required="" />
           </div>
         </div>
 
@@ -213,23 +197,23 @@
 		</div>
 
 		<div class="form-group">
-			<label class="col-md-3 control-label" for="selesai-u">Selesai/Lulus</label>
+			<label class="col-md-3 control-label" for="selesai-u">Selesai/Keluar</label>
 			<div class="col-md-9">
 				<input class="form-control form-control-inline input-medium date-picker" id="selesai-u" name="selesai-u" size="16" type="date" placeholder="DD/MM/YYYY" />
 			</div>
 		</div>
 
 		<div class="form-group">
-          <label class='col-sm-3 control-label no-padding-right' for='alamat-u'>Alamat Lembaga</label>
+          <label class='col-sm-3 control-label no-padding-right' for='jabatan-u'>Jabatan Terakhir</label>
           <div class='col-sm-9'>
-            <textarea id='alamat-u' name="alamat-u" placeholder='Alamat' class='form-control'></textarea>
+            <input type="text" id='jabatan-u' name="jabatan-u" placeholder='Jabatan' class='form-control' />
           </div>
         </div>
 
         <div class="form-group">
-          <label class='col-sm-3 control-label no-padding-right' for='sertifikat-u'>Sertifikat</label>
+          <label class='col-sm-3 control-label no-padding-right' for='gaji-u'>Gaji Per Bulan</label>
           <div class='col-sm-9'>
-            <input type="text" id='sertifikat-u' name="sertifikat-u" placeholder='Sertifikat' class='form-control' />
+            <input type="number" id='gaji-u' name="gaji-u" placeholder='1000000' class='form-control' />
           </div>
         </div>
 
@@ -248,25 +232,12 @@
 </div>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		var jml = <?php echo sizeof($pendidikan); ?>;
-		if(jml<1)
-			$("#btnLanjut").attr("disabled", "true");
-	});
-</script>
-
-<script type="text/javascript">
-	function edit(id, jenis, nama, mulai, selesai, alamat, sertifikat) {
+	function edit(id, nama, mulai, selesai, jabatan, gaji) {
 		$("#id-u").val(id);
 		$("#nama-u").val(nama);
 		$("#mulai-u").val(mulai);
 		$("#selesai-u").val(selesai);
-		$("#alamat-u").val(alamat);
-		$("#sertifikat-u").val(sertifikat);
-
-		if(jenis === "Formal")
-			$("#jenisFormal-u").attr("checked", "true");
-		else
-			$("#jenisNonformal-u").attr("checked", "true");
+		$("#jabatan-u").val(jabatan);
+		$("#gaji-u").val(gaji);
 	}
 </script>

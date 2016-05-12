@@ -83,7 +83,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url', 'file', 'html', 'form');
+$autoload['helper'] = array('url', 'file', 'html', 'form', 'directory', 'array');
 
 /*
 | -------------------------------------------------------------------
@@ -139,4 +139,7 @@ $autoload['model'] = array(
 	'M_Soal_Minat_Bakat'	=> 'tbl_soal_minat_bakat',
 	'M_Jawaban_Minat_Bakat'	=> 'tbl_jawaban_minat_bakat',
 	'M_Gambar_Akademik'		=> 'tbl_gambar_akademik',
+	'M_Kriteria_Wawancara'	=> 'tbl_kriteria_wawancara',
+	'M_Riwayat_Pendidikan'	=> 'tbl_riwayat_pendidikan',
+	'M_Riwayat_Pekerjaan'	=> 'tbl_riwayat_pekerjaan',
 );

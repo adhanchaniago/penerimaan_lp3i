@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     4/18/2016 11:19:12 PM                        */
+/* Created on:     4/24/2016 6:55:36 PM                         */
 /*==============================================================*/
 
 
@@ -16,6 +16,8 @@ drop table if exists DETIL_TES_AKADEMIK;
 
 drop table if exists DETIL_TES_MINAT_BAKAT;
 
+drop table if exists DETIL_TES_WAWANCARA;
+
 drop table if exists GAMBAR_AKADEMIK;
 
 drop table if exists JADWAL_TES;
@@ -25,6 +27,8 @@ drop table if exists JAWABAN_AKADEMIK;
 drop table if exists JAWABAN_MINAT_BAKAT;
 
 drop table if exists JURUSAN;
+
+drop table if exists KRITERIA_WAWANCARA;
 
 drop table if exists PENDAFTAR;
 
@@ -122,6 +126,18 @@ create table DETIL_TES_MINAT_BAKAT
 );
 
 /*==============================================================*/
+/* Table: DETIL_TES_WAWANCARA                                   */
+/*==============================================================*/
+create table DETIL_TES_WAWANCARA
+(
+   NO_PENDAFTARAN       varchar(10) not null,
+   ID                   int not null,
+   ID_KRITERIA          int not null,
+   SKOR                 int,
+   primary key (NO_PENDAFTARAN, ID, ID_KRITERIA)
+);
+
+/*==============================================================*/
 /* Table: GAMBAR_AKADEMIK                                       */
 /*==============================================================*/
 create table GAMBAR_AKADEMIK
@@ -183,6 +199,16 @@ create table JURUSAN
 );
 
 /*==============================================================*/
+/* Table: KRITERIA_WAWANCARA                                    */
+/*==============================================================*/
+create table KRITERIA_WAWANCARA
+(
+   ID_KRITERIA          int not null,
+   NAMA_KRITERIA        varchar(50),
+   primary key (ID_KRITERIA)
+);
+
+/*==============================================================*/
 /* Table: PENDAFTAR                                             */
 /*==============================================================*/
 create table PENDAFTAR
@@ -208,7 +234,7 @@ create table PENDAFTAR
    PASSWORD             varchar(50),
    VALID                bool,
    TANGGAL_DAFTAR       date,
-   SUMBER_INFORMASI	   varchar(255),
+   SUMBER_INFORMASI     varchar(255),
    primary key (NO_PENDAFTARAN)
 );
 
@@ -334,14 +360,7 @@ create table TES_WAWANCARA
    ID                   int not null,
    ID_PEWAWANCARA       varchar(10),
    TANGGAL_TES          date,
-   SKOR_KOMUNIKASI      int,
-   SKOR_INTELEKTUAL     int,
-   SKOR_MOTIVASI        int,
-   SKOR_KEDEWASAAN      int,
-   SKOR_KERJASAMA       int,
-   SKOR_PERCAYA_DIRI    int,
-   SKOR_PEMAHAMAN_LP3I  int,
-   SKOR_BAHASA_INGGRIS  int,
+   TOTAL_NILAI          int,
    KETERANGAN           varchar(255),
    primary key (NO_PENDAFTARAN, ID)
 );
@@ -369,6 +388,12 @@ alter table DETIL_TES_MINAT_BAKAT add constraint FK_DETIL_TES_SOAL_MINAT_BAKAT f
 
 alter table DETIL_TES_MINAT_BAKAT add constraint FK_NILAI_SOAL_JAWABAN foreign key (ID_JAWABAN)
       references JAWABAN_MINAT_BAKAT (ID_JAWABAN) on delete restrict on update restrict;
+
+alter table DETIL_TES_WAWANCARA add constraint FK_DETIL_KRITERIA_WAWANCARA foreign key (ID_KRITERIA)
+      references KRITERIA_WAWANCARA (ID_KRITERIA) on delete restrict on update restrict;
+
+alter table DETIL_TES_WAWANCARA add constraint FK_DETIL_WAWANCARA foreign key (NO_PENDAFTARAN, ID)
+      references TES_WAWANCARA (NO_PENDAFTARAN, ID) on delete restrict on update restrict;
 
 alter table GAMBAR_AKADEMIK add constraint FK_GAMBAR_SOAL_AKADEMIK foreign key (ID_SOAL)
       references SOAL_AKADEMIK (ID_SOAL) on delete restrict on update restrict;
@@ -418,3 +443,11 @@ alter table TES_WAWANCARA add constraint FK_WAWANCARA_PESERTA foreign key (NO_PE
 -- insert data
 insert into AKUN_ADMIN(ID_ADMIN, NAMA_ADMIN, PASS_ADMIN, ROLE_ADMIN) values('ADM01', 'admin_online', md5('123'), 1);
 insert into AKUN_ADMIN(ID_ADMIN, NAMA_ADMIN, PASS_ADMIN, ROLE_ADMIN) values('ADM02', 'admin', md5('123'), 1);
+insert into KRITERIA_WAWANCARA(ID_KRITERIA, NAMA_KRITERIA) values(1, 'Komunikasi');
+insert into KRITERIA_WAWANCARA(ID_KRITERIA, NAMA_KRITERIA) values(2, 'Intelektual');
+insert into KRITERIA_WAWANCARA(ID_KRITERIA, NAMA_KRITERIA) values(3, 'Motivasi Diri');
+insert into KRITERIA_WAWANCARA(ID_KRITERIA, NAMA_KRITERIA) values(4, 'Kedewasaan');
+insert into KRITERIA_WAWANCARA(ID_KRITERIA, NAMA_KRITERIA) values(5, 'Kerjasama');
+insert into KRITERIA_WAWANCARA(ID_KRITERIA, NAMA_KRITERIA) values(6, 'Percaya Diri');
+insert into KRITERIA_WAWANCARA(ID_KRITERIA, NAMA_KRITERIA) values(7, 'Pemahaman LP3I');
+insert into KRITERIA_WAWANCARA(ID_KRITERIA, NAMA_KRITERIA) values(8, 'Bahasa Inggris');

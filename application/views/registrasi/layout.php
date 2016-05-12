@@ -33,6 +33,8 @@
 		<link href="<?php echo base_url(); ?>assets/admin/layout6/css/custom.css" rel="stylesheet" type="text/css"/>
 		<!-- END THEME STYLES -->
 		<link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico"/>
+
+		<script src="<?php echo base_url(); ?>assets/global/plugins/jquery.min.js" type="text/javascript"></script>
 	</head>
 
 	<body>
@@ -71,7 +73,6 @@
 	    <!-- END MAIN LAYOUT -->
 	    <a href="#index" class="go2top"><i class="icon-arrow-up"></i></a>
 
-		<script src="<?php echo base_url(); ?>assets/global/plugins/jquery.min.js" type="text/javascript"></script>
 		<script src="<?php echo base_url(); ?>assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
 		<script src="<?php echo base_url(); ?>assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 		<script src="<?php echo base_url(); ?>assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>

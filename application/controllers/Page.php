@@ -12,6 +12,11 @@ class Page extends CI_Controller
 		$this->load->view('start', $data);
 	}
 
+	public function not_found()
+	{
+		echo "Error 404: Halaman tidak ditemukan";
+	}
+
 	public function beranda()
 	{
 		$data['judul'] = 'Pendaftaran Mahasiswa Baru';
@@ -114,8 +119,106 @@ class Page extends CI_Controller
 		$data['judul'] = "Isi Riwayat Pendidikan";
 		$data['konten'] = "registrasi/form_riwayat_pendidikan";
 		$data['pendaftar'] = $pendaftar[0];
+		$data['pendidikan'] = $this->tbl_riwayat_pendidikan->get_pendaftar($no_pendaftaran);
+		$data['id'] = $this->security_check->gen_ai_id('riwayat_pendidikan', 'id');
 
 		$this->load->view('registrasi/layout', $data);
+	}
+
+	public function riwayat_pendidikan_act($no_pendaftaran, $act, $id = null)
+	{
+		switch ($act) {
+			case 'tambah':
+				$id = $this->input->post('id');
+				$jenis = $this->input->post('jenis');
+				$nama = $this->input->post('nama');
+				$alamat = $this->input->post('alamat');
+				$mulai = $this->input->post('mulai');
+				$selesai = $this->input->post('selesai');
+				$sertifikat = $this->input->post('sertifikat');
+
+				$this->tbl_riwayat_pendidikan->add($id, $no_pendaftaran, $jenis, $nama, $alamat, $mulai, $selesai, $sertifikat);
+
+				redirect('page/riwayat_pendidikan/'.$no_pendaftaran);
+				break;
+			
+			case 'hapus':
+				$this->tbl_riwayat_pendidikan->remove($id);
+
+				redirect('page/riwayat_pendidikan/'.$no_pendaftaran);
+				break;
+
+			case 'detil':
+				$id = $this->input->post('id');
+				$arr_detil = $this->tbl_riwayat_pendidikan->get_id($id)[0];
+				header('Content-Type: application/json');
+				echo json_encode($arr_detil);
+				break;
+
+			case 'ubah':
+				$id = $this->input->post('id-u');
+				$jenis = $this->input->post('jenis-u');
+				$nama = $this->input->post('nama-u');
+				$alamat = $this->input->post('alamat-u');
+				$mulai = $this->input->post('mulai-u');
+				$selesai = $this->input->post('selesai-u');
+				$sertifikat = $this->input->post('sertifikat-u');
+
+				$this->tbl_riwayat_pendidikan->edit($id, $no_pendaftaran, $jenis, $nama, $alamat, $mulai, $selesai, $sertifikat);
+
+				redirect('page/riwayat_pendidikan/'.$no_pendaftaran);
+				break;
+		}
+	}
+
+	public function riwayat_pekerjaan($no_pendaftaran)
+	{
+		$pendaftar = $this->tbl_pendaftar->get_id($no_pendaftaran);
+
+		$data['judul'] = "Isi Riwayat Pekerjaan";
+		$data['konten'] = "registrasi/form_riwayat_pekerjaan";
+		$data['pendaftar'] = $pendaftar[0];
+		$data['pekerjaan'] = $this->tbl_riwayat_pekerjaan->get_pendaftar($no_pendaftaran);
+		$data['id'] = $this->security_check->gen_ai_id('riwayat_kerja', 'id');
+
+		$this->load->view('registrasi/layout', $data);
+	}
+
+	public function riwayat_pekerjaan_act($no_pendaftaran, $act, $id = null)
+	{
+		switch ($act) {
+			case 'tambah':
+				$id = $this->input->post('id');
+				$nama = $this->input->post('nama');
+				$mulai = $this->input->post('mulai');
+				$selesai = $this->input->post('selesai');
+				$jabatan = $this->input->post('jabatan');
+				$gaji = $this->input->post('gaji');
+
+				$this->tbl_riwayat_pekerjaan->add($id, $no_pendaftaran, $nama, $mulai, $selesai, $jabatan, $gaji);
+
+				redirect('page/riwayat_pekerjaan/'.$no_pendaftaran);
+				break;
+			
+			case 'hapus':
+				$this->tbl_riwayat_pekerjaan->remove($id);
+
+				redirect('page/riwayat_pekerjaan/'.$no_pendaftaran);
+				break;
+
+			case 'ubah':
+				$id = $this->input->post('id-u');
+				$nama = $this->input->post('nama-u');
+				$mulai = $this->input->post('mulai-u');
+				$selesai = $this->input->post('selesai-u');
+				$jabatan = $this->input->post('jabatan-u');
+				$gaji = $this->input->post('gaji-u');
+
+				$this->tbl_riwayat_pekerjaan->edit($id, $no_pendaftaran, $nama, $mulai, $selesai, $jabatan, $gaji);
+
+				redirect('page/riwayat_pekerjaan/'.$no_pendaftaran);
+				break;
+		}
 	}
 
 	public function login()

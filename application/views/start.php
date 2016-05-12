@@ -93,7 +93,7 @@ License: You must have a valid license purchased only from themeforest(the above
 			    				</a>
 			    			</div>
 			    			<div class="col-sm-6 margin-bottom-30">
-			    				<a class="webapp-btn" href="#">
+			    				<a class="webapp-btn" href="<?php echo base_url().'index.php/informasi'; ?>">
 			    					<h3>Informasi</h3>
 			    					<p>Penerimaan Mahasiswa Baru</p>
 			    				</a>

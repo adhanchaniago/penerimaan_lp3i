@@ -12,36 +12,19 @@
       <div class="portlet-title">
         <div class="caption font-dark">
           <span class="caption-subject bold uppercase">Tambah</span>
-          <span class="caption-helper uppercase">Pewawancara</span>
+          <span class="caption-helper uppercase">Kriteria</span>
         </div>
         <div class="actions">
           <a title="" data-original-title="" class="btn btn-circle btn-icon-only btn-default fullscreen" href="#"></a>
         </div>
       </div>
       <div class="portlet-body">
-        <form class="form-horizontal" method="post" action="<?php echo base_url().'index.php/wawancara/tambah_pewawancara' ?>">
+        <form class="form-horizontal" method="post" action="<?php echo base_url().'index.php/wawancara/tambah_kriteria' ?>">
+            <input type='hidden' id='id' name="id" placeholder='ID' class='form-control' value="<?php echo $id; ?>" readonly="" required="" />
             <div class="form-group">
-              <label class='col-sm-3 control-label' for='id'>ID</label>
-              <div class='col-sm-9'>
-                <input type='text' id='id' name="id" placeholder='ID' class='form-control' value="<?php echo $id; ?>" readonly="" required="" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label class='col-md-3 control-label' for='nama'>Nama</label>
+              <label class='col-md-3 control-label' for='nama'>Kriteria</label>
               <div class='col-sm-9'>
                 <input type='text' id='nama' name="nama" placeholder='Nama' class='form-control' required="" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label class='col-md-3 control-label' for='password'>Password</label>
-              <div class='col-sm-9'>
-                <input type='password' id='password' name="password" placeholder='Password' class='form-control' required="" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label class='col-sm-3 control-label' for='keterangan'>Keterangan</label>
-              <div class='col-sm-9'>
-                <textarea id='keterangan' name="keterangan" placeholder='Keterangan' class='form-control'></textarea>
               </div>
             </div>
             <div class="form-group">
@@ -67,7 +50,7 @@
       <div class="portlet-title">
         <div class="caption font-dark">
           <span class="caption-subject bold uppercase">Daftar</span>
-          <span class="caption-helper uppercase">Pewawancara</span>
+          <span class="caption-helper uppercase">Kriteria</span>
         </div>
         <div class="actions">
           <a title="" data-original-title="" class="btn btn-circle btn-icon-only btn-default fullscreen" href="#"></a>
@@ -79,25 +62,23 @@
             <tr>
               <th>No.</th>
               <th>Nama</th>
-              <th>Keterangan</th>
               <th>Opsi</th>
             </tr>
           </thead>
           <tbody>
             <?php
             $no = 1;
-            foreach($pewawancara as $j) { ?>
+            foreach($kriteria as $j) { ?>
             <tr>
               <td style="text-align: right;width: 10%;"><?php echo $no; ?>.</td>
-              <td><?php echo $j->NAMA; ?></td>
-              <td><?php echo $j->KETERANGAN; ?></td>
+              <td><?php echo $j->NAMA_KRITERIA; ?></td>
               <td style="text-align: center;width: 20%;">
                 <div class="hidden-sm hidden-xs action-buttons">
-                  <a class="btn btn-xs btn-success" href="#modal-edit" data-toggle="modal" role="button" onclick="edit('<?php echo $j->ID_PEWAWANCARA; ?>', '<?php echo $j->NAMA; ?>', '<?php echo $j->KETERANGAN; ?>')">
+                  <a class="btn btn-xs btn-success" href="#modal-edit" data-toggle="modal" role="button" onclick="edit('<?php echo $j->ID_KRITERIA; ?>', '<?php echo $j->NAMA_KRITERIA; ?>')">
                     <i class="ace-icon fa fa-pencil"></i> Ubah
                   </a>
 
-                  <a class="btn btn-xs btn-danger" href="<?php echo base_url().'index.php/wawancara/hapus_pewawancara/'.$j->ID_PEWAWANCARA; ?>" onclick="return confirm('Anda yakin?');">
+                  <a class="btn btn-xs btn-danger" href="<?php echo base_url().'index.php/wawancara/hapus_kriteria/'.$j->ID_KRITERIA; ?>" onclick="return confirm('Anda yakin?');">
                     <i class="ace-icon fa fa-trash-o"></i> Hapus
                   </a>
                 </div>
@@ -119,33 +100,16 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 						<span class="white">&times;</span>
 					</button>
-					Ubah Data Pewawancara
+					Ubah Jurusan
 				</div>
 			</div>
-      <form class='form-horizontal' role='form' action='<?php echo base_url()."index.php/wawancara/ubah_pewawancara"; ?>' method='post'>
+      <form class='form-horizontal' role='form' action='<?php echo base_url()."index.php/wawancara/ubah_kriteria"; ?>' method='post'>
       <div class='modal-body no-padding'>
-        <div class="form-group">
-          <label class='col-sm-3 control-label no-padding-right' for='id-u'>ID</label>
-          <div class='col-sm-9'>
-            <input type='text' id='id-u' name="id-u" placeholder='ID' class='form-control' readonly="" required="" />
-          </div>
-        </div>
+        <input type='hidden' id='id-u' name="id-u" placeholder='ID' class='form-control' readonly="" required="" />
         <div class="form-group">
           <label class='col-sm-3 control-label no-padding-right' for='nama-u'>Nama</label>
           <div class='col-sm-9'>
             <input type='text' id='nama-u' name="nama-u" placeholder='Nama' class='form-control' required="" />
-          </div>
-        </div>
-        <div class="form-group">
-          <label class='col-sm-3 control-label no-padding-right' for='password-u'>Password</label>
-          <div class='col-sm-9'>
-            <input type='password' id='password-u' name="password-u" placeholder='Password' class='form-control' required="" />
-          </div>
-        </div>
-        <div class="form-group">
-          <label class='col-sm-3 control-label' for='keterangan-u'>Keterangan</label>
-          <div class='col-sm-9'>
-            <textarea id='keterangan-u' name="keterangan-u" placeholder='Keterangan' class='form-control'></textarea>
           </div>
         </div>
       </div>
@@ -163,9 +127,8 @@
 </div>
 
 <script type="text/javascript">
-  function edit(id, nama, keterangan) {
+  function edit(id, nama) {
     $('#id-u').val(id);
     $('#nama-u').val(nama);
-    $('#keterangan-u').val(keterangan);
   }
 </script>

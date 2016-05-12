@@ -8,11 +8,12 @@
 		<div class="col-md-12">
 			<table height="100px" width="100%" border="0" cellpadding="0" cellspacing="0" style="margin-top: 10px; margin-bottom: 10px;">
 				<tr style="text-align: center;font-size: 14pt;font-weight: bold;color: rgb(100, 100, 100)">
-					<td width="20%" style="background-color: rgb(145, 240, 150);color: rgb(100, 100, 100)">1. Data Pribadi</td>
-					<td width="20%" style="background-color: rgb(255, 185, 185);color: rgb(255, 255, 255)">2. Riwayat Pendidikan</td>
-					<td width="20%" style="background-color: rgb(255, 185, 185);color: rgb(255, 255, 255)">3. Riwayat Pekerjaan</td>
-					<td width="20%" style="background-color: rgb(255, 185, 185);color: rgb(255, 255, 255)">4. Evaluasi Diri</td>
-					<td width="20%" style="background-color: rgb(255, 185, 185);color: rgb(255, 255, 255)">5. Selesai</td>
+					<td width="16%" style="background-color: rgb(145, 240, 150);color: rgb(100, 100, 100)">1. Data Pribadi</td>
+					<td width="16%" style="background-color: rgb(255, 185, 185);color: rgb(255, 255, 255)">2. Riwayat Pendidikan</td>
+					<td width="16%" style="background-color: rgb(255, 185, 185);color: rgb(255, 255, 255)">3. Riwayat Pekerjaan</td>
+					<td width="16%" style="background-color: rgb(255, 185, 185);color: rgb(255, 255, 255)">4. Anggota Keluarga</td>
+					<td width="16%" style="background-color: rgb(255, 185, 185);color: rgb(255, 255, 255)">5. Evaluasi Diri</td>
+					<td width="16%" style="background-color: rgb(255, 185, 185);color: rgb(255, 255, 255)">6. Selesai</td>
 				</tr>
 			</table>
 		</div>

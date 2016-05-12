@@ -48,7 +48,8 @@
 							<i class="fa fa-suitcase"></i> Tes Wawancara <span class="arrow"></span>
 						</a>
 						<ul class="sub-menu">
-							<li><a href="<?php echo base_url().'index.php/pewawancara'; ?>"><i class="fa fa-user"></i> Kelola Pewawancara</a></li>
+							<li><a href="<?php echo base_url().'index.php/wawancara/kriteria'; ?>"><i class="fa fa-sliders"></i> Kriteria Wawancara</a></li>
+							<li><a href="<?php echo base_url().'index.php/wawancara/pewawancara'; ?>"><i class="fa fa-user"></i> Kelola Pewawancara</a></li>
 						</ul>
 					</li>
 				</ul>
