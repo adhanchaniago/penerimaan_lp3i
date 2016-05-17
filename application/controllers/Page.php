@@ -66,7 +66,7 @@ class Page extends CI_Controller
 		$nama = $this->input->post('nama');
 		$jk = $this->input->post('jk');
 		$tempat_lahir = $this->input->post('tmp_lahir');
-		$tanggal_lahir = date('y-M-d', strtotime($this->input->post('tgl_lahir')));
+		$tanggal_lahir = date('Y-m-d', strtotime($this->input->post('tgl_lahir')));
 		$agama = $this->input->post('agama');
 		$status_pernikahan = $this->input->post('status');
 		$pekerjaan = $this->input->post('pekerjaan');
@@ -81,7 +81,7 @@ class Page extends CI_Controller
 		$evaluasi_diri = '';
 		$password = md5($this->input->post('pass'));
 		$valid = '0';
-		$tanggal_daftar = date('y-M-d');
+		$tanggal_daftar = date('Y-m-d');
 		$sumber_informasi = $this->input->post('sumber_informasi');
 
 		$prodi1 = $this->input->post('prodi1');
@@ -219,6 +219,87 @@ class Page extends CI_Controller
 				redirect('page/riwayat_pekerjaan/'.$no_pendaftaran);
 				break;
 		}
+	}
+
+	public function anggota_keluarga($no_pendaftaran)
+	{
+		$pendaftar = $this->tbl_pendaftar->get_id($no_pendaftaran);
+
+		$data['judul'] = "Isi Anggota Keluarga";
+		$data['konten'] = "registrasi/form_anggota_keluarga";
+		$data['pendaftar'] = $pendaftar[0];
+		$data['anggota_keluarga'] = $this->tbl_anggota_keluarga->get_pendaftar($no_pendaftaran);
+		$data['id'] = $this->security_check->gen_ai_id('anggota_keluarga', 'id');
+
+		$this->load->view('registrasi/layout', $data);
+	}
+
+	public function anggota_keluarga_act($no_pendaftaran, $act, $id = null)
+	{
+		switch ($act) {
+			case 'tambah':
+				$id = $this->input->post('id');
+				$nama = $this->input->post('nama');
+				$hubungan = $this->input->post('hubungan');
+				$usia = $this->input->post('usia');
+				$pekerjaan = $this->input->post('pekerjaan');
+
+				$this->tbl_anggota_keluarga->add($id, $no_pendaftaran, $nama, $hubungan, $usia, $pekerjaan);
+
+				redirect('page/anggota_keluarga/'.$no_pendaftaran);
+				break;
+			
+			case 'hapus':
+				$this->tbl_anggota_keluarga->remove($id);
+
+				redirect('page/anggota_keluarga/'.$no_pendaftaran);
+				break;
+
+			case 'ubah':
+				$id = $this->input->post('id-u');
+				$nama = $this->input->post('nama-u');
+				$hubungan = $this->input->post('hubungan-u');
+				$usia = $this->input->post('usia-u');
+				$pekerjaan = $this->input->post('pekerjaan-u');
+
+				$this->tbl_anggota_keluarga->edit($id, $no_pendaftaran, $nama, $hubungan, $usia, $pekerjaan);
+
+				redirect('page/anggota_keluarga/'.$no_pendaftaran);
+				break;
+		}
+	}
+
+	public function evaluasi_diri($no_pendaftaran)
+	{
+		$pendaftar = $this->tbl_pendaftar->get_id($no_pendaftaran);
+
+		$data['judul'] = "Evaluasi Diri";
+		$data['konten'] = "registrasi/form_evaluasi_diri";
+		$data['pendaftar'] = $pendaftar[0];
+
+		$this->load->view('registrasi/layout', $data);
+	}
+
+	public function evaluasi_diri_act()
+	{
+		$no_pendaftaran = $this->input->post('id');
+		$evaluasi_diri = $this->input->post('evaluasi');
+
+		$this->db->where("no_pendaftaran", $no_pendaftaran);
+		$act = $this->db->update("pendaftar", array('evaluasi_diri' => $evaluasi_diri));
+
+		redirect("page/summary/".$no_pendaftaran);
+	}
+
+	public function summary($no_pendaftaran)
+	{
+		$pendaftar = $this->tbl_pendaftar->get_id($no_pendaftaran);
+
+		$data['judul'] = "Selesai";
+		$data['konten'] = "registrasi/form_summary";
+		$data['pendaftar'] = $pendaftar[0];
+
+		$this->load->view('registrasi/layout', $data);
 	}
 
 	public function login()

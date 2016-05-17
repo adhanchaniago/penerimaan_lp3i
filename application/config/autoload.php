@@ -142,4 +142,5 @@ $autoload['model'] = array(
 	'M_Kriteria_Wawancara'	=> 'tbl_kriteria_wawancara',
 	'M_Riwayat_Pendidikan'	=> 'tbl_riwayat_pendidikan',
 	'M_Riwayat_Pekerjaan'	=> 'tbl_riwayat_pekerjaan',
+	'M_Anggota_Keluarga'	=> 'tbl_anggota_keluarga',
 );
