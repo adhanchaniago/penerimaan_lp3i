@@ -2,7 +2,7 @@
 	<div class="page-content page-content-popup">
 		<!-- BEGIN PAGE CONTENT FIXED -->
 		<div class="page-content-fixed-header">
-			<h2><?php echo $judul; ?></h2>					
+			<h2><?php echo $judul; ?></h2>
 		</div>
 
 		<div class="col-md-12">
@@ -17,7 +17,7 @@
 				</tr>
 			</table>
 		</div>
-		
+
 		<div class="col-md-12">
 			<?php if (isset($_SESSION['pesan'])) { ?>
 			<div class="alert alert-block alert-info" role="alert">
@@ -97,13 +97,20 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">Tempat Lahir</label>
 									<div class="col-md-9">
-										<input type="text" name="tmp_lahir" class="form-control" placeholder="Masukkan Tempat Lahir">
+										<!-- <input type="text" name="tmp_lahir" class="form-control" placeholder="Masukkan Tempat Lahir"> -->
+										<select class="form-control select2me" data-placeholder="Pilih..." required>
+											<option></option>
+											<?php foreach ($kota as $k) {
+												echo "<option>".$k."</option>";
+											} ?>
+										</select>
+
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label">Tanggal Lahir</label>
 									<div class="col-md-9">
-										<input class="form-control form-control-inline input-medium date-picker" name="tgl_lahir" size="16" type="text" placeholder="DD/MM/YYYY" />
+										<input class="form-control form-control-inline input-medium date-picker" name="tgl_lahir" size="16" type="date" placeholder="MM/DD/YYYY" required />
 									</div>
 								</div>
 								<div class="form-group">
@@ -257,7 +264,8 @@
 		<p class="copyright-v2">2016 © PMB LP3I Surabaya by <a href="https://twitter.com/obyzz" target="_blank">@obyzz</a></p>
 		<!-- Copyright END -->
 	</div>
-</div>    
+
+</div>
 <script type="text/javascript">
 	function setFirstChoice() {
 		var selectedOption = $('#prodi1').val();

@@ -1,10 +1,10 @@
-<?php 
+<?php
 /**
-* 
+*
 */
 class Page extends CI_Controller
 {
-	
+
 	public function index()
 	{
 		$data['judul'] = 'Pendaftaran Mahasiswa Baru';
@@ -38,7 +38,7 @@ class Page extends CI_Controller
 			'expiration'    => '7200',
 			'pool'			=> 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
 			'font_size'     => '20',
-			
+
 			// White background and border, black text and red grid
 			'colors'        => array(
 					'background' 	=> array(255, 255, 255),
@@ -55,7 +55,10 @@ class Page extends CI_Controller
 		$data['konten'] = 'registrasi/form_online';
 		$data['jurusan'] = $this->m_jurusan->get_all();
 		$data['captcha'] = $cap;
-		
+
+		$txtKota = read_file('./daftar_kota.txt');
+		$data['kota'] = explode(';', $txtKota);
+
 		$this->load->view('registrasi/layout', $data);
 	}
 
@@ -93,16 +96,16 @@ class Page extends CI_Controller
 			redirect('registrasi/form_online');
 		}
 
-		$act = $this->tbl_pendaftar->add($no_pendaftaran, $id_admin, $nama, $jk, $tempat_lahir, $tanggal_lahir, 
-			$agama, $status_pernikahan, $pekerjaan, $kewarganegaraan, $no_identitas, $alamat_tetap, 
-			$alamat_sekarang, $alamat_kantor, $no_handphone, $no_telepon, $email, $evaluasi_diri, 
+		$act = $this->tbl_pendaftar->add($no_pendaftaran, $id_admin, $nama, $jk, $tempat_lahir, $tanggal_lahir,
+			$agama, $status_pernikahan, $pekerjaan, $kewarganegaraan, $no_identitas, $alamat_tetap,
+			$alamat_sekarang, $alamat_kantor, $no_handphone, $no_telepon, $email, $evaluasi_diri,
 			$password, $valid, $tanggal_daftar, $sumber_informasi);
-		
+
 		if ($act > 0) {
 			if($prodi1 != '' || $prodi1 != null) $this->tbl_pilihan->add($no_pendaftaran, $prodi1);
 			if($prodi2 != '' || $prodi2 != null) $this->tbl_pilihan->add($no_pendaftaran, $prodi2);
 
-			$this->session->set_flashdata('pesan', "<b>Berhasil!</b> Data pendaftaran Anda telah disimpan. 
+			$this->session->set_flashdata('pesan', "<b>Berhasil!</b> Data pendaftaran Anda telah disimpan.
 				Silahkan <a href='".base_url().'index.php/page/login'."'>LOGIN</a> dan lengkapi data Anda.");
 
 			redirect('page/riwayat_pendidikan/'.$no_pendaftaran);
@@ -141,7 +144,7 @@ class Page extends CI_Controller
 
 				redirect('page/riwayat_pendidikan/'.$no_pendaftaran);
 				break;
-			
+
 			case 'hapus':
 				$this->tbl_riwayat_pendidikan->remove($id);
 
@@ -199,7 +202,7 @@ class Page extends CI_Controller
 
 				redirect('page/riwayat_pekerjaan/'.$no_pendaftaran);
 				break;
-			
+
 			case 'hapus':
 				$this->tbl_riwayat_pekerjaan->remove($id);
 
@@ -248,7 +251,7 @@ class Page extends CI_Controller
 
 				redirect('page/anggota_keluarga/'.$no_pendaftaran);
 				break;
-			
+
 			case 'hapus':
 				$this->tbl_anggota_keluarga->remove($id);
 
@@ -305,7 +308,7 @@ class Page extends CI_Controller
 	public function login()
 	{
 		$data['judul'] = 'Login - PMB';
-		
+
 		$this->load->view('login', $data);
 	}
 

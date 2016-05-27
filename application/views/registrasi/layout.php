@@ -27,6 +27,10 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css"/>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"/>
 
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/global/plugins/bootstrap-select/bootstrap-select.min.css"/>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/global/plugins/select2/select2.css"/>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/global/plugins/jquery-multi-select/css/multi-select.css"/>
+
 		<link href="<?php echo base_url(); ?>assets/global/css/components-rounded.css" id="style_components" rel="stylesheet" type="text/css"/>
 		<link href="<?php echo base_url(); ?>assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>
 		<link href="<?php echo base_url(); ?>assets/admin/layout6/css/layout.css" rel="stylesheet" type="text/css"/>
@@ -89,13 +93,18 @@
 		<script type="text/javascript" src="<?php echo base_url(); ?>assets/global/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
 		<script type="text/javascript" src="<?php echo base_url(); ?>assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 
+		<script type="text/javascript" src="<?php echo base_url(); ?>assets/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+		<script type="text/javascript" src="<?php echo base_url(); ?>assets/global/plugins/select2/select2.min.js"></script>
+		<script type="text/javascript" src="<?php echo base_url(); ?>assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
+
 		<script src="<?php echo base_url(); ?>assets/global/scripts/metronic.js" type="text/javascript"></script>
 		<script src="<?php echo base_url(); ?>assets/admin/layout6/scripts/layout.js" type="text/javascript"></script>
 		<script src="<?php echo base_url(); ?>assets/admin/layout6/scripts/quick-sidebar.js" type="text/javascript"></script>
 		<script src="<?php echo base_url(); ?>assets/admin/layout6/scripts/index.js" type="text/javascript"></script>
 		<script src="<?php echo base_url(); ?>assets/admin/pages/scripts/tasks.js" type="text/javascript"></script>
-		<!--<script src="<?php echo base_url(); ?>assets/admin/layout/scripts/demo.js" type="text/javascript"></script>-->
+		<script src="<?php echo base_url(); ?>assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
 		<script src="<?php echo base_url(); ?>assets/admin/pages/scripts/components-pickers.js"></script>
+		<script src="<?php echo base_url(); ?>assets/admin/pages/scripts/components-dropdowns.js"></script>
 
 		<script>
 		jQuery(document).ready(function() {    
@@ -106,6 +115,7 @@
 		    Demo.init(); // init demo features
            	ComponentsPickers.init();
 		    Tasks.initDashboardWidget(); // init tash dashboard widget
+		    ComponentsDropdowns.init();
 		});
 		</script>
 	</body>
