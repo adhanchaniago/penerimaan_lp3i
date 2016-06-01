@@ -86,7 +86,28 @@ class M_Pendaftar extends CI_Model
 	public function remove($id)
 	{
 		$this->db->where('no_pendaftaran', $id);
+		$this->db->delete('riwayat_pendidikan');
+
+		$this->db->where('no_pendaftaran', $id);
+		$this->db->delete('pilihan_jurusan');
+
+		$this->db->where('no_pendaftaran', $id);
+		$this->db->delete('anggota_keluarga');
+
+		$this->db->where('no_pendaftaran', $id);
+		$this->db->delete('riwayat)_kerja');
+
+		$this->db->where('no_pendaftaran', $id);
+		$this->db->delete('bukti_pembayaran');
+
+		$this->db->where('no_pendaftaran', $id);
 		return $this->db->delete('pendaftar');
+	}
+
+	public function validasi($no_pendaftaran)
+	{
+		$this->db->where("no_pendaftaran", $no_pendaftaran);
+		return $this->db->update("pendaftar", array("valid" => 1));
 	}
 
 	public function create_no_pendaftaran()

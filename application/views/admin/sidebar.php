@@ -57,13 +57,13 @@
 			<?php } ?>
 			<?php if($_SESSION['role_admin'] == '1' || $_SESSION['role_admin'] == '3') { ?>
 			<li>
-				<a href="#">
+				<a href="<?php echo base_url().'index.php/aplikan'; ?>">
 				<i class="icon-user"></i>
 				<span class="title">Aplikan</span>
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="<?php echo base_url().'index.php/jadwal'; ?>">
 				<i class="icon-check"></i>
 				<span class="title">Jadwal</span>
 				</a>

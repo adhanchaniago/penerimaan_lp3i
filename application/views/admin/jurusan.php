@@ -80,7 +80,7 @@
         </div>
       </div>
       <div class="portlet-body">
-        <table id="dynamic-table" class="table table-striped table-bordered table-hover">
+        <table id="sample_1" class="table table-striped table-bordered table-hover">
           <thead>
             <tr>
               <th>No.</th>

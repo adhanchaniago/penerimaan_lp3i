@@ -37,6 +37,8 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!-- END PAGE LEVEL PLUGIN STYLES -->
 		<!-- BEGIN PAGE STYLES -->
 		<link href="<?php echo base_url(); ?>assets/admin/pages/css/tasks.css" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/global/plugins/select2/select2.css"/>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
 		<!-- END PAGE STYLES -->
 		<!-- BEGIN THEME STYLES -->
 		<!-- DOC: To use 'rounded corners' style just load 'components-rounded.css' stylesheet instead of 'components.css' in the below style tag -->
@@ -46,6 +48,9 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link href="<?php echo base_url(); ?>assets/admin/layout6/css/custom.css" rel="stylesheet" type="text/css"/>
 		<!-- END THEME STYLES -->
 		<link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico"/>
+
+		<script src="<?php echo base_url(); ?>assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+		<script src="<?php echo base_url(); ?>assets/global/plugins/jquery-redirect.js" type="text/javascript"></script>
 	</head>
 	<!-- END HEAD -->
 	<!-- BEGIN BODY -->
@@ -163,7 +168,6 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="../../assets/global/plugins/respond.min.js"></script>
 		<script src="../../assets/global/plugins/excanvas.min.js"></script> 
 		<![endif]-->
-		<script src="<?php echo base_url(); ?>assets/global/plugins/jquery.min.js" type="text/javascript"></script>
 		<script src="<?php echo base_url(); ?>assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
 		<script src="<?php echo base_url(); ?>assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 		<script src="<?php echo base_url(); ?>assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
@@ -173,14 +177,18 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="<?php echo base_url(); ?>assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 		<!-- END CORE PLUGINS -->
 		<!-- BEGIN PAGE LEVEL PLUGINS -->
-		<script src="<?php echo base_url(); ?>assets/global/plugins/amcharts/amcharts/amcharts.js" type="text/javascript" ></script>
+		<!--<script src="<?php echo base_url(); ?>assets/global/plugins/amcharts/amcharts/amcharts.js" type="text/javascript" ></script>
 		<script src="<?php echo base_url(); ?>assets/global/plugins/amcharts/amcharts/serial.js" type="text/javascript" ></script>
 		<script src="<?php echo base_url(); ?>assets/global/plugins/amcharts/amcharts/pie.js" type="text/javascript" ></script>
 		<script src="<?php echo base_url(); ?>assets/global/plugins/amcharts/amcharts/themes/light.js" type="text/javascript" ></script>
 		<script src="<?php echo base_url(); ?>assets/global/plugins/morris/morris.min.js" type="text/javascript"></script>
 		<script src="<?php echo base_url(); ?>assets/global/plugins/morris/raphael-min.js" type="text/javascript"></script>
-		<script src="<?php echo base_url(); ?>assets/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>
+		<script src="<?php echo base_url(); ?>assets/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>-->
 		<!-- END PAGE LEVEL PLUGINS -->
+
+		<script type="text/javascript" src="<?php echo base_url(); ?>assets/global/plugins/select2/select2.min.js"></script>
+		<script type="text/javascript" src="<?php echo base_url(); ?>assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="<?php echo base_url(); ?>assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
 
 		<!-- BEGIN PAGE LEVEL SCRIPTS -->
 		<script src="<?php echo base_url(); ?>assets/global/scripts/metronic.js" type="text/javascript"></script>
@@ -188,14 +196,16 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="<?php echo base_url(); ?>assets/admin/layout6/scripts/quick-sidebar.js" type="text/javascript"></script>
 		<script src="<?php echo base_url(); ?>assets/admin/layout6/scripts/index.js" type="text/javascript"></script>
 		<script src="<?php echo base_url(); ?>assets/admin/pages/scripts/tasks.js" type="text/javascript"></script>
+		<script src="<?php echo base_url(); ?>assets/admin/pages/scripts/table-managed.js"></script>
 		<!-- END PAGE LEVEL SCRIPTS -->
 		<script>
 		jQuery(document).ready(function() {    
 		   	Metronic.init(); // init metronic core componets
 		   	Layout.init(); // init layout
-		    Index.init(); // init index page
+		    TableManaged.init(); // DataTable Managed
+		    //Index.init(); // init index page
 		    QuickSidebar.init(); // init quick sidebar
-		    Tasks.initDashboardWidget(); // init tash dashboard widget
+		    //Tasks.initDashboardWidget(); // init tash dashboard widget
 		});
 		</script>
 		<!-- END JAVASCRIPTS -->

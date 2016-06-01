@@ -78,39 +78,49 @@
         </div>
       </div>
       <div class="portlet-body">
-        <table id="dynamic-table" class="table table-striped table-bordered table-hover">
+        <table id="sample_1" class="table table-striped table-bordered table-hover">
           <thead>
             <tr>
-              <th>No.</th>
-              <th>ID</th>
-              <th>Nama</th>
-              <th>Hak Akses</th>
-              <th>Opsi</th>
+              <th>
+                No.
+              </th>
+              <th>
+                ID
+              </th>
+              <th>
+                Nama
+              </th>
+              <th>
+                Hak Akses
+              </th>
+              <th>
+                Opsi
+              </th>
             </tr>
           </thead>
           <tbody>
             <?php
             $no = 1;
-            foreach($admin as $j) { ?>
-            <?php $role = ''; if($j->ROLE_ADMIN == '1') { $role = 'Akses Penuh'; } elseif($j->ROLE_ADMIN == '2') { $role = 'Master Data'; } else { $role = 'Informan'; } ?>
-            <tr>
-              <td style="text-align: right;width: 10%;"><?php echo $no; ?>.</td>
-              <td><?php echo $j->ID_ADMIN; ?></td>
-              <td><?php echo $j->NAMA_ADMIN; ?></td>
-              <td><?php echo $role; ?></td>
-              <td style="text-align: center;width: 20%;">
-                <div class="hidden-sm hidden-xs action-buttons">
-                  <a class="btn btn-xs btn-success" href="#modal-edit" data-toggle="modal" role="button" onclick="edit('<?php echo $j->ID_ADMIN; ?>', '<?php echo $j->NAMA_ADMIN; ?>', '<?php echo $j->ROLE_ADMIN; ?>')">
-                    <i class="ace-icon fa fa-pencil"></i> Ubah
+            foreach($admin as $j) { 
+              $role = ''; if($j->ROLE_ADMIN == '1') { $role = 'Akses Penuh'; } elseif($j->ROLE_ADMIN == '2') { $role = 'Master Data'; } else { $role = 'Informan'; } 
+              echo "<tr>
+              <td style='text-align: right;width: 10%;''>".$no."</td>
+              <td>".$j->ID_ADMIN."</td>
+              <td>".$j->NAMA_ADMIN."</td>
+              <td>".$role."</td>
+              <td style='text-align: center;width: 20%;'>
+                <div class='hidden-sm hidden-xs action-buttons'>
+                  <a class='btn btn-xs btn-success' href='#modal-edit' data-toggle='modal' role='button' onclick='edit(\"<?php echo $j->ID_ADMIN; ?>\", \"<?php echo $j->NAMA_ADMIN; ?>\", \"<?php echo $j->ROLE_ADMIN; ?>\")'>
+                    <i class='ace-icon fa fa-pencil'></i> Ubah
                   </a>
 
-                  <a class="btn btn-xs btn-danger" href="<?php echo base_url().'index.php/admin/hapus/'.$j->ID_ADMIN; ?>" onclick="return confirm('Anda yakin?');">
-                    <i class="ace-icon fa fa-trash-o"></i> Hapus
+                  <a class='btn btn-xs btn-danger' href='".base_url().'index.php/admin/hapus/'.$j->ID_ADMIN." onclick='return confirm(\"Anda yakin?\");'>
+                    <i class='ace-icon fa fa-trash-o'></i> Hapus
                   </a>
                 </div>
               </td>
-            </tr>
-            <?php $no++; } ?>
+            </tr>";
+            $no++; } ?>
           </tbody>
         </table>
       </div>

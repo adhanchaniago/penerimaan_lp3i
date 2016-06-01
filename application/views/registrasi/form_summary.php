@@ -71,7 +71,7 @@
 						<tr>
 							<td>No. Telepon</td> 
 							<td>:</td> 
-							<td><?php echo $pendaftar->NO_TELEPON; ?></td>
+							<td><?php echo $pendaftar->NO_HANDPHONE; ?></td>
 						</tr>
 						<tr>
 							<td>Email</td> 

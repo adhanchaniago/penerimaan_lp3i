@@ -143,4 +143,6 @@ $autoload['model'] = array(
 	'M_Riwayat_Pendidikan'	=> 'tbl_riwayat_pendidikan',
 	'M_Riwayat_Pekerjaan'	=> 'tbl_riwayat_pekerjaan',
 	'M_Anggota_Keluarga'	=> 'tbl_anggota_keluarga',
+	'M_Jadwal_Tes'			=> 'tbl_jadwal_tes',
+	'M_Peserta'				=> 'tbl_peserta',
 );
