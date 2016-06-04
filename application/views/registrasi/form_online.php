@@ -98,7 +98,7 @@
 									<label class="col-md-3 control-label">Tempat Lahir</label>
 									<div class="col-md-9">
 										<!-- <input type="text" name="tmp_lahir" class="form-control" placeholder="Masukkan Tempat Lahir"> -->
-										<select class="form-control select2me" data-placeholder="Pilih..." required>
+										<select class="form-control select2me" data-placeholder="Pilih..." name="tmp_lahir" required>
 											<option></option>
 											<?php foreach ($kota as $k) {
 												echo "<option>".$k."</option>";
