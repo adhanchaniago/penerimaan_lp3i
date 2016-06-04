@@ -98,7 +98,7 @@
 					Buat Jadwal Tes
 				</div>
 			</div>
-			<form class="form-horizontal" role="form" action="<?php echo base_url().'index.php/jadwal/new'; ?>" method="post" enctype="multipart/form-data">
+			<form class="form-horizontal" role="form" action="<?php echo base_url().'index.php/jadwal/baru'; ?>" method="post" enctype="multipart/form-data">
 			<div class='modal-body no-padding'>
 				<div class="form-group">
 					<label class='col-sm-3 control-label no-padding-right' for='tahap'>Tahap Tes</label>

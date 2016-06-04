@@ -99,18 +99,18 @@
 				if(no_pendaftaran != undefined){
 					console.log(isInclude);
 					if(isInclude > 0)
-						console.log(no_pendaftaran); 
-						//nomer += no_pendaftaran + ";";
+						//console.log(no_pendaftaran); 
+						nomer += no_pendaftaran + ";";
 				}
 			});
 			//console.log(nomer);
 
-			// var form = $("<form action='<?php echo base_url(); ?>index.php/jadwal/participant_patch' method='post'>" +
-			// 	"<input type='hidden' name='jadwal' value='<?php echo $jadwal->ID; ?>' />" +
-			// 	"<input type='hidden' name='pendaftar' value='" + nomer + "' />" +
-			// 	"</form>");
-			// $("body").append(form);
-			// $(form).submit();
+			var form = $("<form action='<?php echo base_url(); ?>index.php/jadwal/participant_patch' method='post'>" +
+				"<input type='hidden' name='jadwal' value='<?php echo $jadwal->ID; ?>' />" +
+				"<input type='hidden' name='pendaftar' value='" + nomer + "' />" +
+				"</form>");
+			$("body").append(form);
+			$(form).submit();
 		});
 	});
 </script>

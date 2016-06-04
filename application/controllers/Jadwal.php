@@ -21,7 +21,7 @@ class Jadwal extends CI_Controller
 		$this->load->view('admin/layout', $data);
 	}
 
-	public function new()
+	public function baru()
 	{
 		$id = $this->security_check->gen_ai_id('jadwal_tes', 'id');
 		$tahap = $this->input->post('tahap');

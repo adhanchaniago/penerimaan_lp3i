@@ -115,7 +115,7 @@ class M_Pendaftar extends CI_Model
 		$iter = '0000'.$this->db->query("
 			select ifnull(max(right(no_pendaftaran, 4)), 0) + 1 as JUMLAH
 			from pendaftar
-			where tanggal_daftar = '".date("y-M-d")."'
+			where tanggal_daftar = '".date("Y-m-d")."'
 		")->result()[0]->JUMLAH;
 		$no_pendaftaran = date('dmy').substr($iter, strlen($iter) - 4, strlen($iter));
 		return $no_pendaftaran;
