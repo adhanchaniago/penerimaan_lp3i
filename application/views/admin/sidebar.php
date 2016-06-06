@@ -11,7 +11,7 @@
 		<!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
 		<ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
 			<li>
-				<a href="<?php echo base_url().'index.php/admin/beranda'; ?>">
+				<a href="<?php echo base_url().'admin/beranda'; ?>">
 				<i class="icon-home"></i>
 				<span class="title">Beranda</span>
 				</a>
@@ -24,15 +24,15 @@
 					<span class="arrow"></span>
 				</a>
 				<ul class="sub-menu">
-					<li><a href="<?php echo base_url().'index.php/jurusan'; ?>"><i class="fa fa-university"></i> Jurusan </a></li>
-					<li><a href="<?php echo base_url().'index.php/admin/manage'; ?>"><i class="fa fa-user"></i> Admin </a></li>
+					<li><a href="<?php echo base_url().'jurusan'; ?>"><i class="fa fa-university"></i> Jurusan </a></li>
+					<li><a href="<?php echo base_url().'admin/manage'; ?>"><i class="fa fa-user"></i> Admin </a></li>
 					<li>
 						<a href="javascript:;">
 							<i class="fa fa-book"></i> Tes Potensi Akademik <span class="arrow"></span>
 						</a>
 						<ul class="sub-menu">
-							<li><a href="<?php echo base_url().'index.php/bidang_soal'; ?>"><i class="fa fa-cube"></i> Bidang Soal</a></li>
-							<li><a href="<?php echo base_url().'index.php/soal_akademik'; ?>"><i class="fa fa-language"></i> Kelola Soal</a></li>
+							<li><a href="<?php echo base_url().'bidang_soal'; ?>"><i class="fa fa-cube"></i> Bidang Soal</a></li>
+							<li><a href="<?php echo base_url().'soal_akademik'; ?>"><i class="fa fa-language"></i> Kelola Soal</a></li>
 						</ul>
 					</li>
 					<li>
@@ -40,7 +40,7 @@
 							<i class="fa fa-camera"></i> Tes Minat Bakat <span class="arrow"></span>
 						</a>
 						<ul class="sub-menu">
-							<li><a href="<?php echo base_url().'index.php/soal_minat_bakat'; ?>"><i class="fa fa-language"></i> Kelola Soal</a></li>
+							<li><a href="<?php echo base_url().'soal_minat_bakat'; ?>"><i class="fa fa-language"></i> Kelola Soal</a></li>
 						</ul>
 					</li>
 					<li>
@@ -48,8 +48,8 @@
 							<i class="fa fa-suitcase"></i> Tes Wawancara <span class="arrow"></span>
 						</a>
 						<ul class="sub-menu">
-							<li><a href="<?php echo base_url().'index.php/wawancara/kriteria'; ?>"><i class="fa fa-sliders"></i> Kriteria Wawancara</a></li>
-							<li><a href="<?php echo base_url().'index.php/wawancara/pewawancara'; ?>"><i class="fa fa-user"></i> Kelola Pewawancara</a></li>
+							<li><a href="<?php echo base_url().'wawancara/kriteria'; ?>"><i class="fa fa-sliders"></i> Kriteria Wawancara</a></li>
+							<li><a href="<?php echo base_url().'wawancara/pewawancara'; ?>"><i class="fa fa-user"></i> Kelola Pewawancara</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -57,13 +57,13 @@
 			<?php } ?>
 			<?php if($_SESSION['role_admin'] == '1' || $_SESSION['role_admin'] == '3') { ?>
 			<li>
-				<a href="<?php echo base_url().'index.php/aplikan'; ?>">
+				<a href="<?php echo base_url().'aplikan'; ?>">
 				<i class="icon-user"></i>
 				<span class="title">Aplikan</span>
 				</a>
 			</li>
 			<li>
-				<a href="<?php echo base_url().'index.php/jadwal'; ?>">
+				<a href="<?php echo base_url().'jadwal'; ?>">
 				<i class="icon-check"></i>
 				<span class="title">Jadwal</span>
 				</a>

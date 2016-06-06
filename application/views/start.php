@@ -93,7 +93,7 @@ License: You must have a valid license purchased only from themeforest(the above
 			    				</a>
 			    			</div>
 			    			<div class="col-sm-6 margin-bottom-30">
-			    				<a class="webapp-btn" href="<?php echo base_url().'index.php/informasi'; ?>">
+			    				<a class="webapp-btn" href="<?php echo base_url().'informasi'; ?>">
 			    					<h3>Informasi</h3>
 			    					<p>Penerimaan Mahasiswa Baru</p>
 			    				</a>
@@ -102,7 +102,7 @@ License: You must have a valid license purchased only from themeforest(the above
 			    		
 			    		<div class="row">
 			    			<div class="col-sm-6 sm-margin-bottom-30">
-			    				<a class="webapp-btn" href="<?php echo base_url().'index.php/page/register'; ?>">
+			    				<a class="webapp-btn" href="<?php echo base_url().'page/register'; ?>">
 			    					<h3>Daftar</h3>
 			    					<p>Isi formulir online disini</p>
 			    				</a>
@@ -117,7 +117,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 			    		<div class="row">
 			    			<div class="col-sm-12" style="margin-top: 30px;">
-			    				<a class="webapp-btn" href="<?php echo base_url().'index.php/page/login'; ?>">
+			    				<a class="webapp-btn" href="<?php echo base_url().'page/login'; ?>">
 			    					<p>Sudah daftar? Klik disini.</p>
 			    				</a>
 			    			</div>
@@ -129,7 +129,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 			<!-- Copyright BEGIN -->
 			<p class="copyright">2016 © PMB LP3I Surabaya &bull; Developed by <a href="https://twitter.com/obyzz" target="_blank">@obyzz</a> &bull; 
-				<a href="<?php echo base_url().'index.php/admin'; ?>">Admin Page</a></p>
+				<a href="<?php echo base_url().'admin'; ?>">Admin Page</a></p>
 			<!-- Copyright END -->
     	</div>
     </div>

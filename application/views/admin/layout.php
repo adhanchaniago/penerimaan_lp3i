@@ -122,7 +122,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									</li>
 									<li class="divider"></li>
 									<li>
-										<a href="<?php echo base_url().'index.php/admin/logout'; ?>">Keluar</a>
+										<a href="<?php echo base_url().'admin/logout'; ?>">Keluar</a>
 									</li>
 								</ul>
 							</div>

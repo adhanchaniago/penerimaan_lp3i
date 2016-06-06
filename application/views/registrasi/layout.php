@@ -55,7 +55,7 @@
 		                <!-- BEGIN TOPBAR ACTIONS -->
 		                <div class="topbar-actions">
 			                <!-- DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box -->
-							<form class="search-form" action="<?php echo base_url().'index.php/cari'; ?>" method="GET">
+							<form class="search-form" action="<?php echo base_url().'cari'; ?>" method="GET">
 								<div class="input-group">
 									<input type="text" class="form-control" placeholder="Cari" name="query">
 									<span class="input-group-btn">
