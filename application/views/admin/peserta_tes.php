@@ -26,13 +26,15 @@
 						if($key != "ID") {
 							if($key == "TANGGAL") $value = date("d M Y", strtotime($value));
 							echo "<tr>
-								<td style='font-weight: bold;'>".ucwords(strtolower($key))."</td>
+								<td style='font-weight: bold;' width='100px'>".ucwords(strtolower($key))."</td>
 								<td>:</td>
 								<td>".$value."</td>
 							</tr>";
 						}
 					} ?>
 				</table><hr>
+				<form action="<?= base_url(); ?>jadwal/participant_patch" method="post">
+				<input type="hidden" name="jadwal" id="jadwal" value="<?= $jadwal->ID; ?>">
 				<table class="table table-striped table-bordered table-hover" id="sample_1">
 					<thead>
 						<tr>
@@ -66,7 +68,7 @@
 								<td style='width: 30%;'>".$p->ALAMAT_TETAP."</td>
 								<td style='width: 20%;'>".$p->NO_HANDPHONE."</td>
 								<td style='width: 5%;text-align: center;'>
-									<input type='checkbox' class='checkboxes isInclude' value='1'/>
+									<input type='checkbox' name='pendaftar[]' class='checkboxes isInclude' value='".$p->NO_PENDAFTARAN."'/>
 								</td>
 							</tr>
 							";
@@ -80,37 +82,39 @@
 						<button type="button" id="btnKembali" class="btn btn-md red" onclick="javascript:history.go(-1);"><i class="fa fa-chevron-left"></i> Kembali</button>
 					</div>
 					<div class="col-md-6 col-xs-6">
-						<button type="button" id="btnSimpan" class="btn btn-md green pull-right"><i class="fa fa-save"></i> Simpan</button>
+						<button type="submit" id="btnSimpan" class="btn btn-md green pull-right"><i class="fa fa-save"></i> Simpan</button>
 					</div>
 				</div>
+				</form>
 			</div>
 		</div>
 	</div>
 </div>
 
+<?php 
+//<script type="text/javascript">
+	// $(document).ready(function() {
+		// $("#btnSimpan").click(function() {
+		// 	var nomer = "";
+		// 	$("#sample_1 tr").each(function() {
+		// 		var no_pendaftaran = $(this).find(".no_pendaftaran").html();
+		// 		var isInclude = $(this).find(".isInclude").val();
+		// 		if(no_pendaftaran != undefined){
+		// 			console.log(isInclude);
+		// 			if(isInclude > 0)
+		// 				//console.log(no_pendaftaran); 
+		// 				nomer += no_pendaftaran + ";";
+		// 		}
+		// 	});
+		// 	//console.log(nomer);
 
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#btnSimpan").click(function() {
-			var nomer = "";
-			$("#sample_1 tr").each(function() {
-				var no_pendaftaran = $(this).find(".no_pendaftaran").html();
-				var isInclude = $(this).find(".isInclude").val();
-				if(no_pendaftaran != undefined){
-					console.log(isInclude);
-					if(isInclude > 0)
-						//console.log(no_pendaftaran); 
-						nomer += no_pendaftaran + ";";
-				}
-			});
-			//console.log(nomer);
-
-			var form = $("<form action='<?php echo base_url(); ?>index.php/jadwal/participant_patch' method='post'>" +
-				"<input type='hidden' name='jadwal' value='<?php echo $jadwal->ID; ?>' />" +
-				"<input type='hidden' name='pendaftar' value='" + nomer + "' />" +
-				"</form>");
-			$("body").append(form);
-			$(form).submit();
-		});
-	});
-</script>
+		// 	var form = $("<form action= echo base_url();jadwal/participant_patch' method='post'>" +
+		// 		"<input type='hidden' name='jadwal' value=' echo $jadwal->ID; ' />" +
+		// 		"<input type='hidden' name='pendaftar' value='" + nomer + "' />" +
+		// 		"</form>");
+		// 	$("body").append(form);
+		// 	$(form).submit();
+		// });
+	// });
+//</script>
+?>

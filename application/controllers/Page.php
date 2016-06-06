@@ -314,14 +314,23 @@ class Page extends CI_Controller
 
 	public function login_auth()
 	{
-		$username = $this->input->post('username');
-		$password = $this->input->post('password');
+		$no_pendaftaran 	= $this->input->post('no_pendaftaran');
+		$password			= $this->input->post('password');
 
-		if ($username == 'admin' && $password == 'admin') {
-			redirect('page/beranda');
+		$peserta = $this->tbl_pendaftar->auth($no_pendaftaran, $password);
+
+		if (count($peserta) > 0) {
+			$peserta_sess = $this->tbl_pendaftar->get_id($peserta[0]->NO_PENDAFTARAN);
+			$session_data = array(
+				'no_pendaftaran' 	=> $peserta_sess[0]->NO_PENDAFTARAN,
+				'nama_peserta' 		=> $peserta_sess[0]->NAMA
+			);
+			$this->session->set_userdata($session_data);
+			redirect('peserta/beranda');
 		} else {
+			$this->session->set_flashdata('pesan', '<strong>Gagal!</strong> Mohon periksa Nomer pendaftaran dan Password yang Anda masukkan.');
 			redirect('page/login');
-		}
+		}		
 	}
 }
 ?>

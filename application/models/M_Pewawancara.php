@@ -53,5 +53,18 @@ class M_Pewawancara extends CI_Model
 		$id = 'INT'.substr($iter, strlen($iter) - 3, strlen($iter));
 		return $id;
 	}
+
+
+	public function auth($name, $pass)
+	{
+		return $this->db->get_where(
+			'pewawancara',
+			array(
+				'id_pewawancara' => $name,
+				'password' => md5($pass)
+			),
+			1
+		)->result();
+	}
 }
 ?>

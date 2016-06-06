@@ -19,6 +19,23 @@
 				</div>
 			</div>
 			<div class="portlet-body">
+			<!-- <?php if ($this->session->flashdata('pesan')):
+				$notif = $this->session->flashdata('pesan');?>
+					    	<div class="alert alert-block <?= "alert-".$notif ?>	 fade in">
+					<button type="button" class="close" data-dismiss="alert"></button>
+					<?php if ($notif == 'success'): ?>
+					<h4 class="alert-heading"><strong>Berhasil!</strong></h4>
+					<p>
+						input jadwal peserta ujian Akademik berhasil disimpan.
+					</p>
+					<?php else : ?>	
+					<h4 class="alert-heading"><strong>Gagal!</strong></h4>
+					<p>
+						input jadwal peserta ujian Akademik gagal disimpan, cek data yang sudah ada !
+					</p>
+					<?php endif ?>
+				</div>
+			<?php endif; ?> -->
 				<div class="table-toolbar">
 					<div class="row">
 						<div class="btn-group pull-right">
@@ -63,15 +80,15 @@
 											<i class='ace-icon fa fa-pencil'></i> Ubah
 										</a>
 
-										<a class='btn btn-xs btn-primary' href='".base_url().'index.php/jadwal/participant/'.$j->ID."'>
+										<a class='btn btn-xs btn-primary' href='".base_url().'jadwal/participant/'.$j->ID."'>
 											<i class='ace-icon fa fa-user'></i> Peserta
 										</a>
 
-										<a class='btn btn-xs purple' href='".base_url().'index.php/jadwal/brodcast/'.$j->ID."'>
+										<a class='btn btn-xs purple' href='".base_url().'jadwal/brodcast/'.$j->ID."'>
 											<i class='ace-icon fa fa-envelope'></i> Brodcast
 										</a>
 
-										<a class='btn btn-xs btn-danger' href='".base_url().'index.php/jadwal/delete/'.$j->ID."' onclick='return confirm(\"Anda yakin?\");'>
+										<a class='btn btn-xs btn-danger' href='".base_url().'jadwal/delete/'.$j->ID."' onclick='return confirm(\"Anda yakin?\");'>
 											<i class='ace-icon fa fa-trash-o'></i> Hapus
 										</a>
 									</div>
@@ -98,7 +115,7 @@
 					Buat Jadwal Tes
 				</div>
 			</div>
-			<form class="form-horizontal" role="form" action="<?php echo base_url().'index.php/jadwal/baru'; ?>" method="post" enctype="multipart/form-data">
+			<form class="form-horizontal" role="form" action="<?php echo base_url().'jadwal/baru'; ?>" method="post" enctype="multipart/form-data">
 			<div class='modal-body no-padding'>
 				<div class="form-group">
 					<label class='col-sm-3 control-label no-padding-right' for='tahap'>Tahap Tes</label>

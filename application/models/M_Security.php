@@ -21,11 +21,21 @@ class M_Security extends CI_Model
 
 	public function check()
 	{
-		$user = $this->session->userdata('user_id');
+		$user = $this->session->userdata('no_pendaftaran');
 		if(empty($user))
 		{
 			$this->session->sess_destroy();
 			redirect('page/login');
+		}
+	}
+
+	public function check_pewawancara()
+	{
+		$user = $this->session->userdata('id_pewawancara');
+		if(empty($user))
+		{
+			$this->session->sess_destroy();
+			redirect('admin/login');
 		}
 	}
 

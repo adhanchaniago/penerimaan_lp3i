@@ -13,7 +13,7 @@ class Jadwal extends CI_Controller
 	public function index()
 	{
 		$this->security_check->admin_check();
-		$data['judul'] = "Penjadwalan Tes";
+		$data['judul'] 	= "Penjadwalan Tes";
 		$data['konten'] = "admin/jadwal_tes";
 
 		$data['jadwal'] = $this->tbl_jadwal_tes->get_all();
@@ -73,18 +73,37 @@ class Jadwal extends CI_Controller
 		$data['konten'] = "admin/peserta_tes";
 
 		$data['jadwal'] = $this->tbl_jadwal_tes->get_id($id)[0];
-		$data['peserta'] = $this->tbl_peserta->custom_where("(peserta.total_nilai = 0 or peserta.total_nilai is null) and (jadwal_tes.tahap = '".$data['jadwal']->TAHAP."' or jadwal_tes.tahap is null)");
+		$data['peserta'] = $this->tbl_peserta->custom_where("(peserta.total_nilai = 0 or peserta.total_nilai is null) AND (jadwal_tes.tahap = '".$data['jadwal']->TAHAP."' or jadwal_tes.tahap is null)");
 
 		$this->load->view('admin/layout', $data);
 	}
 
 	public function participant_patch()
 	{
-		$jadwal = $this->input->post("jadwal");
-		$pendaftar = trim($this->input->post("pendaftar"));
-		$no_pendaftar = explode(";", $pendaftar);
+		$jadwal 		= $this->input->post("jadwal");
+		$no_pendaftar 	= $this->input->post("pendaftar");
 
-		var_dump($no_pendaftar);
+		$query = 0;
+		foreach ($no_pendaftar as $key => $no_pendaftaran)
+		{
+			$cek = $this->tbl_peserta->get_where(array('ID'=>$jadwal,'NO_PENDAFTARAN'=>$no_pendaftaran))->num_rows();
+			if ($cek == 0) {
+				$query = $this->tbl_peserta->add($jadwal, $no_pendaftaran,'','','','');
+			}			
+		}
+		if ($query > 0) {
+			$this->session->set_flashdata('pesan','input jadwal peserta ujian Akademik berhasil disimpan.');
+		}else{
+			$this->session->set_flashdata('pesan','input jadwal peserta ujian Akademik gagal disimpan, cek data yang sudah ada !');
+		}
+		redirect('jadwal');
 	}
+
+	public function test()
+	{
+
+
+	}
+
 }
 ?>

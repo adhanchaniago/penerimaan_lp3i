@@ -120,5 +120,17 @@ class M_Pendaftar extends CI_Model
 		$no_pendaftaran = date('dmy').substr($iter, strlen($iter) - 4, strlen($iter));
 		return $no_pendaftaran;
 	}
+
+	public function auth($no, $pass)
+	{
+		return $this->db->get_where(
+			'pendaftar',
+			array(
+				'no_pendaftaran' 	=> $no,
+				'password' 			=> md5($pass)
+			),
+			1
+		)->result();
+	}
 }
 ?>

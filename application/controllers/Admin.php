@@ -21,21 +21,49 @@ class Admin extends CI_Controller
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
 
-		$admin = $this->user_admin->auth($username, $password);
+		$cek_admin 			= count($this->user_admin->get_id($username));
+		$cek_pewawancara 	= count($this->tbl_pewawancara->get_id($username));
 
-		if (count($admin) > 0) {
-			$admin_sess = $this->user_admin->get_id($admin[0]->ID_ADMIN);
-			$session_data = array(
-				'id_admin' 		=> $admin_sess[0]->ID_ADMIN,
-				'nama_admin' 	=> $admin_sess[0]->NAMA_ADMIN,
-				'pass_admin' 	=> $admin_sess[0]->PASS_ADMIN,
-				'role_admin' 	=> $admin_sess[0]->ROLE_ADMIN
-			);
-			$this->session->set_userdata($session_data);
-			redirect('admin/beranda');
-		} else {
-			$this->session->set_flashdata('pesan', '<strong>Gagal!</strong> Mohon periksa Username dan Password yang Anda masukkan.');
-			redirect('admin/login');
+		if ($cek_admin > 0)
+		{
+			$admin = $this->user_admin->auth($username, $password);
+
+			if (count($admin) > 0) {
+				$admin_sess = $this->user_admin->get_id($admin[0]->ID_ADMIN);
+				$session_data = array(
+					'id_admin' 		=> $admin_sess[0]->ID_ADMIN,
+					'nama_admin' 	=> $admin_sess[0]->NAMA_ADMIN,
+					'pass_admin' 	=> $admin_sess[0]->PASS_ADMIN,
+					'role_admin' 	=> $admin_sess[0]->ROLE_ADMIN
+				);
+				$this->session->set_userdata($session_data);
+				redirect('admin/beranda');
+			} else {
+				$this->session->set_flashdata('pesan', '<strong>Gagal!</strong> Mohon periksa Password yang Anda masukkan.');
+				redirect('admin/login');
+			}
+		}
+		else if ($cek_pewawancara > 0)
+		{
+			$pewawancara = $this->tbl_pewawancara->auth($username, $password);
+
+			if (count($pewawancara) > 0) {
+				$pewawancara_sess = $this->tbl_pewawancara->get_id($pewawancara[0]->ID_PEWAWANCARA);
+				$session_data = array(
+					'id_pewawancara' 		=> $pewawancara_sess[0]->ID_PEWAWANCARA,
+					'nama_pewawancara' 		=> $pewawancara_sess[0]->NAMA,
+					'pass_pewawancara' 		=> $pewawancara_sess[0]->PASSWORD,
+					'role_pewawancara' 		=> $pewawancara_sess[0]->KETERANGAN
+				);
+				$this->session->set_userdata($session_data);
+				redirect('pewawancara/beranda');
+			} else {
+				$this->session->set_flashdata('pesan', '<strong>Gagal!</strong> Mohon periksa Password yang Anda masukkan.');
+				redirect('admin/login');
+			}
+		}else{
+				$this->session->set_flashdata('pesan', '<strong>Gagal!</strong> Mohon periksa Username dan Password yang Anda masukkan.');
+				redirect('admin/login');
 		}
 	}
 

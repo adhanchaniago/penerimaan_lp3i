@@ -60,16 +60,16 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!-- BEGIN LOGIN -->
 		<div class="content">
 			<!-- BEGIN LOGIN FORM -->
-			<form class="login-form" action="<?php echo base_url().'index.php/page/login_auth'; ?>" method="post">
+			<form class="login-form" action="<?php echo base_url().'page/login_auth'; ?>" method="post">
 				<h3 class="form-title">Log In</h3>
 				<div class="alert alert-danger display-hide">
 					<button class="close" data-close="alert"></button>
-					<span>Masukkan nama pengguna dan kata sandi Anda.</span>
+					<span>Masukkan nomer pendaftaran dan kata sandi Anda.</span>
 				</div>
 				<div class="form-group">
 					<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
-					<label class="control-label visible-ie8 visible-ie9">Nama Pengguna</label>
-					<input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="Nama Pengguna" name="username" autofocus/>
+					<label class="control-label visible-ie8 visible-ie9">Nomer Pendaftaran</label>
+					<input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="No. pendaftaran" name="no_pendaftaran" autofocus/>
 				</div>
 				<div class="form-group">
 					<label class="control-label visible-ie8 visible-ie9">Kata Sandi</label>
@@ -80,7 +80,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					<a href="javascript:;" id="forget-password" class="forget-password">Lupa Kata Sandi?</a>
 				</div>
 				<div class="create-account">
-					<p><a href="<?php echo base_url().'index.php/page/register'; ?>" class="uppercase">Daftar dulu?</a></p>
+					<p><a href="<?php echo base_url().'page/register'; ?>" class="uppercase">Daftar dulu?</a></p>
 				</div>
 			</form>
 			<!-- END LOGIN FORM -->

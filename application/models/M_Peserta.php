@@ -17,7 +17,7 @@ class M_Peserta extends CI_Model
 
 	public function get_where(array $cond)
 	{
-		return $this->db->get_where('peserta', $cond)->result();
+		return $this->db->get_where('peserta', $cond);
 	}
 
 	public function join_jadwal(array $cond)
@@ -79,5 +79,6 @@ class M_Peserta extends CI_Model
 		$this->db->where('no_pendaftaran', $no_pendaftaran);
 		return $this->db->delete('peserta');
 	}
+
 }
 ?>

@@ -929,6 +929,9 @@ html {
 .page-content .page-fixed-main-content {
   padding: 20px; }
 
+.page-content .page-full-main-content {
+  padding: 20px; }
+
 /* Stylesheet design for min-width: 992px */
 @media (min-width: 992px) {
   /* 992px */
