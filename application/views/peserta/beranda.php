@@ -64,7 +64,7 @@
 						 Pelaksanaan : 5 Juli 2016	
 					</div>
 				</div>
-				<a class="more" href="javascript:;">
+				<a class="more" data-toggle="modal" href="#detail_wawancara">
 				Lihat lokasi <i class="m-icon-swapright m-icon-white"></i>
 				</a>
 			</div>
@@ -155,3 +155,39 @@
 			</div><!-- end.portlet -->
 		</div>
 	</div>
+
+	<div class="modal fade" id="detail_wawancara" tabindex="-1" role="basic" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+					<h4 class="modal-title">Detail Tes Wawancara</h4>
+				</div>
+				<div class="modal-body">
+					 <table>
+					 	<tr>
+					 		<td width="20%"><b>Tanggal</b></td>
+					 		<td width="5%">:</td>
+					 		<td width="40%"><?= date("d-m-Y",strtotime($jadwal_wawancara->TANGGAL)) ?></td>
+					 	</tr>
+					 	<tr>
+					 		<td width="20%"><b>Tempat</b></td>
+					 		<td width="5%">:</td>
+					 		<td width="40%"><?= $jadwal_wawancara->TEMPAT ?></td>
+					 	</tr>
+					 	<tr>
+					 		<td width="20%"><b>Ruang</b></td>
+					 		<td width="5%">:</td>
+					 		<td width="40%"><?= $jadwal_wawancara->RUANG ?></td>
+					 	</tr>
+					 </table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->

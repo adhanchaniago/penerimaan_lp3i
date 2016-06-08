@@ -66,5 +66,6 @@ class M_Pewawancara extends CI_Model
 			1
 		)->result();
 	}
+
 }
 ?>

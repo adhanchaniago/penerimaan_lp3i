@@ -25,7 +25,7 @@ class M_Security extends CI_Model
 		if(empty($user))
 		{
 			$this->session->sess_destroy();
-			redirect('page/login');
+			redirect('admin/login');
 		}
 	}
 
@@ -36,6 +36,15 @@ class M_Security extends CI_Model
 		{
 			$this->session->sess_destroy();
 			redirect('admin/login');
+		}
+	}
+
+	public function check_tanggal_ujian($tgl_ujian)
+	{
+		$now	= date("Y-m-d");
+		if ($now != $tgl_ujian)
+		{
+			redirect('admin/login');	
 		}
 	}
 

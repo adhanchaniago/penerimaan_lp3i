@@ -87,21 +87,22 @@
           </p>
         </div><!-- end.alert -->
         <?php endif ?>
-        <form class="form-horizontal" method="post" action="<?php echo base_url().'pewawancara/pewawancara_act/simpan' ?>">
-          <input type='hidden' id='id' name="id" placeholder='ID' class='form-control' value="1" readonly="" required="" />
+        <form class="form-horizontal" method="post" action="<?php echo base_url().'pewawancara/pewawancara_act/update' ?>">
+          <?php $keterangan = ''; ?>
           <?php foreach ($kriteria as $k): ?>
           <?php if($k->ID_KRITERIA == '1' or $k->ID_KRITERIA == '2' or $k->ID_KRITERIA == '3' or $k->ID_KRITERIA == '8'){$max = '15';}else{$max = '10';} ?>
           <div class="form-group">
             <label class='col-md-3 control-label' for='nama'><?= $k->NAMA_KRITERIA ?></label>
             <div class='col-sm-8'>
-              <input type='number' id='kriteria_<?= $k->ID_KRITERIA ?>' name="kriteria[<?= $k->ID_KRITERIA ?>]"  class='form-control' max='<?= $max ?>' placeholder="nilai max <?= $max ?>" required=""/>
+              <input type='number' id='kriteria_<?= $k->ID_KRITERIA ?>' name="kriteria[<?= $k->ID_KRITERIA ?>]"  class='form-control' max='<?= $max ?>' placeholder="nilai max <?= $max ?>" value='<?= $k->SKOR ?>' required=""/>
             </div>
           </div>
+          <?php $keterangan = $k->KETERANGAN; ?>
           <?php endforeach ?>
           <div class="form-group">
             <label class='col-md-3 control-label' for='nama'>Keterangan</label>
             <div class='col-sm-8'>
-              <textarea name="keterangan" id="keterangan" cols="10" rows="5" class='form-control'></textarea>
+              <textarea name="keterangan" id="keterangan" cols="10" rows="5" class='form-control'><?= $keterangan ?></textarea>
               <input type='hidden' id='pendaftar' name="pendaftar"  class='form-control' value="<?= $peserta->NO_PENDAFTARAN ?>"/>
             </div>
           </div>

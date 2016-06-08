@@ -145,4 +145,6 @@ $autoload['model'] = array(
 	'M_Anggota_Keluarga'	=> 'tbl_anggota_keluarga',
 	'M_Jadwal_Tes'			=> 'tbl_jadwal_tes',
 	'M_Peserta'				=> 'tbl_peserta',
+	'M_Tes_Wawancara'		=> 'tbl_tes_wawancara',
+	'M_Detail_Tes_Wawancara'=> 'tbl_detail_tes_wawancara'
 );

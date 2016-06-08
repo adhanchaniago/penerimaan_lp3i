@@ -99,11 +99,5 @@ class Jadwal extends CI_Controller
 		redirect('jadwal');
 	}
 
-	public function test()
-	{
-
-
-	}
-
 }
 ?>

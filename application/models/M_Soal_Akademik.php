@@ -18,6 +18,15 @@ class M_Soal_Akademik extends CI_Model
 		return $this->db->get()->result();
 	}
 
+	public function get_by_bidang($id_bidang)
+	{
+		$this->db->select('soal_akademik.*, bidang_soal_akademik.NAMA_BIDANG_SOAL as BIDANG_SOAL');
+		$this->db->from('soal_akademik');
+		$this->db->join('bidang_soal_akademik', 'soal_akademik.ID_BIDANG_SOAL = bidang_soal_akademik.ID_BIDANG_SOAL');
+		$this->db->where('soal_akademik.ID_BIDANG_SOAL',$id_bidang);
+		return $this->db->get()->result();
+	}
+
 	public function get_id($id)
 	{
 		$this->db->select('soal_akademik.*, bidang_soal_akademik.NAMA_BIDANG_SOAL as BIDANG_SOAL');
