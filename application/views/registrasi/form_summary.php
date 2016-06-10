@@ -84,7 +84,7 @@
 					<br>
 					<p style="text-align: center;">
 						<a href="<?php echo base_url(); ?>" class="btn btn-primary">Beranda</a>
-						<a href="#" class="btn green">Login</a>
+						<a href="<?php echo base_url().'page/login'; ?>" class="btn green">Login</a>
 					</p>
 				</div>
 			</div>

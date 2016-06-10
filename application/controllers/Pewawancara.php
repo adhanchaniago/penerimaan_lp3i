@@ -20,8 +20,15 @@ class Pewawancara extends CI_Controller
 		$data['judul'] 		= 'Halaman Pewawancara';
 		$data['konten'] 	= 'pewawancara/beranda';
 		$data['peserta'] 	= $this->tbl_peserta->join_pendaftar_jadwal(array('jadwal_tes.TAHAP' => 'Wawancara'));
-		$data['no_tes']		= $this->tbl_jadwal_tes->get_where(array('jadwal_tes.TANGGAL >='=>date("Y-m-d"),'jadwal_tes.TAHAP'=> 'Wawancara'))[0]->ID;
-		$data['tanggal_tes']= $this->tbl_jadwal_tes->get_where(array('jadwal_tes.TANGGAL >='=>date("Y-m-d"),'jadwal_tes.TAHAP'=> 'Wawancara'))[0]->TANGGAL;
+
+		$tes_wawancara 		= $this->tbl_jadwal_tes->get_where(array('jadwal_tes.TANGGAL >='=>date("Y-m-d"),'jadwal_tes.TAHAP'=> 'Wawancara'));
+		if(count($tes_wawancara) > 0) {
+			$data['no_tes']		= $tes_wawancara[0]->ID;
+			$data['tanggal_tes']= $tes_wawancara[0]->TANGGAL;
+		} else {
+			$data['no_tes']		= null;
+			$data['tanggal_tes']= null;
+		}
 		$data['pewawancara']= $this->session->userdata('id_pewawancara');
 
 		$this->load->view('pewawancara/layout', $data);

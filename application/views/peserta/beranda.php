@@ -164,6 +164,7 @@
 					<h4 class="modal-title">Detail Tes Wawancara</h4>
 				</div>
 				<div class="modal-body">
+					<?php if(count($jadwal_wawancara) > 0) { ?> 
 					 <table>
 					 	<tr>
 					 		<td width="20%"><b>Tanggal</b></td>
@@ -181,6 +182,9 @@
 					 		<td width="40%"><?= $jadwal_wawancara->RUANG ?></td>
 					 	</tr>
 					 </table>
+					<?php } else {
+						echo "Wawancara belum terjadwal. Silahkan tunggu informasi lebih lanjut.";
+					} ?>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn default" data-dismiss="modal">Close</button>
