@@ -15,6 +15,11 @@ class M_Peserta extends CI_Model
 		return $this->db->get_where('peserta', array('id' => $jadwal))->result();
 	}
 
+	public function get_id($no_pendaftaran,$id)
+	{
+		return $this->db->get_where('peserta',array('NO_PENDAFTARAN'=>$no_pendaftaran,'ID'=>$id))->result();
+	}
+
 	public function get_where(array $cond)
 	{
 		return $this->db->get_where('peserta', $cond);
@@ -22,10 +27,11 @@ class M_Peserta extends CI_Model
 
 	public function join_jadwal(array $cond)
 	{
-		$this->db->select("peserta.*, jadwal_tes.TAHAP, jadwal_tes.TANGGAL, jadwal_tes.TEMPAT, jadwal_tes.RUANG");
+		$this->db->select("peserta.*, jadwal_tes.*");
 		$this->db->from("peserta");
-		$this->db->join("jadwal_tes", "peserta.id = jadwal_tes.id");
-		$this->db->where($cond);
+		$this->db->join("jadwal_tes", "peserta.ID = jadwal_tes.ID");
+		if (count($cond)>0)
+			$this->db->where($cond);
 		return $this->db->get()->result();
 	}
 
@@ -82,6 +88,12 @@ class M_Peserta extends CI_Model
 				'keputusan'			=> $keputusan,
 				'catatan'			=> $catatan,
 			));
+	}
+
+	public function update(array $data,array $cond)
+	{
+		$this->db->where($cond);
+		return $this->db->update('peserta',$data);
 	}
 
 	public function remove($id, $no_pendaftaran)

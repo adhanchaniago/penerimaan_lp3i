@@ -13,8 +13,10 @@
 			</div><!-- end.alert -->
 		</div>
 	</div>
-
+		
 	<div class="row">
+	<?php if ($tampil['akademik']->VALID == '1'): ?>
+	<?php if ($tampil['akademik']->TOTAL_NILAI < 0): ?>
 		<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 			<div class="dashboard-stat blue-madison">
 				<div class="visual">
@@ -25,14 +27,20 @@
 						 UJIAN AKADEMIK
 					</div>
 					<div class="desc">
-						 Pelaksanaan : 30 Juni 2016
+						Pelaksanaan : 
+						 <?php echo date("d-m-Y",strtotime($ujian['akademik']->TANGGAL)); ?>
 					</div>
 				</div>
-				<a class="more" href="<?= base_url() ?>peserta/ujian/akademik">
+				<?php $link_akademik = $ujian['akademik']->TANGGAL==date("Y-m-d")? base_url().'peserta/ujian/akademik/'.$jadwal['akademik']:'#'; ?>
+				<a class="more" href="<?php echo $link_akademik; ?>">
 				Mulai ujian<i class="m-icon-swapright m-icon-white"></i>
 				</a>
 			</div>
 		</div>
+	<?php endif ?>
+	<?php endif ?>
+	<?php if ($tampil['bakat']->VALID == '1'): ?>
+	<?php if ($tampil['bakat']->TOTAL_NILAI < 0): ?>
 		<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 			<div class="dashboard-stat red-intense">
 				<div class="visual">
@@ -43,14 +51,20 @@
 						 UJIAN MINAT BAKAT
 					</div>
 					<div class="desc">
-						 Pelaksanaan : 3 Juli 2016
+						 Pelaksanaan : 
+						 <?php echo date("d-m-Y",strtotime($ujian['bakat']->TANGGAL)); ?>
 					</div>
 				</div>
-				<a class="more" href="javascript:;">
+								<?php $link_bakat = $ujian['bakat']->TANGGAL==date("Y-m-d")? base_url().'peserta/ujian/bakat/'.$jadwal['bakat']:'#'; ?>
+				<a class="more" href="<?php echo $link_bakat; ?>">
 				Mulai ujian <i class="m-icon-swapright m-icon-white"></i>
 				</a>
 			</div>
 		</div>
+	<?php endif ?>
+	<?php endif ?>
+	<?php if ($tampil['wawancara']->VALID == '1'): ?>
+	<?php if ($tampil['wawancara']->TOTAL_NILAI < 0): ?>
 		<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 			<div class="dashboard-stat green-haze">
 				<div class="visual">
@@ -61,7 +75,8 @@
 						 UJIAN WAWANCARA
 					</div>
 					<div class="desc">
-						 Pelaksanaan : 5 Juli 2016	
+						 Pelaksanaan : 
+						 <?php echo date("d-m-Y",strtotime($ujian['wawancara']->TANGGAL)); ?>	
 					</div>
 				</div>
 				<a class="more" data-toggle="modal" href="#detail_wawancara">
@@ -69,6 +84,8 @@
 				</a>
 			</div>
 		</div>
+	<?php endif ?>
+	<?php endif ?>
 	</div>
 
 	<div class="row">

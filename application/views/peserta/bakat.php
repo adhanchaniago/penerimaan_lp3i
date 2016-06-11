@@ -1,14 +1,13 @@
-<form action="<?= base_url() ?>peserta/ujian/jawaban_akademik" method="POST" id="form_soal_akademik" onsubmit="return konfirmasi()">
-<input type="hidden" name="no_tes" value="<?= $akademik ?>">
+<form action="<?= base_url() ?>peserta/ujian/jawaban_bakat" method="POST" id="form_soal_akademik" onsubmit="return konfirmasi()">
+<input type="hidden" name="no_tes" value="<?= $bakat ?>">
 
-<?php foreach ($bidang as $b): ?>
 <div class="row">
 	<div class="col-md-12">
 		<div class="portlet light bordered">
 	      	<div class="portlet-title">
 		        <div class="caption caption-md font-red-sunglo">
 					<i class="fa fa-calendar-o font-red-sunglo"></i>
-					<span class="caption-subject theme-font bold uppercase">Bidang <?= $b->NAMA_BIDANG_SOAL ?></span>
+					<span class="caption-subject theme-font bold uppercase">SOAL MINAT BAKAT</span>
 				</div>
 		        <div class="actions">
 		          <a title="" data-original-title="" class="btn btn-circle btn-icon-only btn-default fullscreen" href="#"></a>
@@ -18,8 +17,6 @@
 				<div  data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
 					<div class="general-item-list">
 						<div class="panel-group accordion" id="accordion3">
-							<?php $soal = $this->tbl_soal_akademik->get_by_bidang($b->ID_BIDANG_SOAL); ?>
-							<?php if (count($soal) > 0): ?>
 							<?php $no_soal = 1; ?>
 							<?php foreach ($soal as $s): ?>
 								<div class="panel panel-default">
@@ -33,7 +30,7 @@
 									<div id="collapse_3_<?= $s->ID_SOAL ?>" class="panel-collapse collapse">
 										<div class="row">
 											<div class="col-md-11" style="margin-left:20px;">
-												<?php $jawaban = $this->tbl_jawaban_akademik->get_soal($s->ID_SOAL); ?>
+												<?php $jawaban = $this->tbl_jawaban_minat_bakat->get_soal($s->ID_SOAL); ?>
 												<div class="form-group form-md-radios">
 												<?php foreach ($jawaban as $j): ?>
 													<div class="md-radio-list">
@@ -53,7 +50,6 @@
 									</div>
 								</div>
 							<?php endforeach ?>
-							<?php endif ?>
 						</div>
 					</div>
 				</div>
@@ -61,7 +57,6 @@
 		</div>
 	</div>
 </div>
-<?php endforeach ?>
 <div class="row">
 	<div class="col-md-12">
 		<div class="pull-right">

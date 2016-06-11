@@ -78,6 +78,11 @@ class Pewawancara extends CI_Controller
 				if ($nilai_total <= 100 )
 				{
 					$this->tbl_tes_wawancara->add($no_pendaftaran,$no_tes,$id_pewawancara,$tanggal_tes,$nilai_total,$keterangan);
+					//mengupdate nilai total nilai peserta
+					$total_nilai 		= (30 * $nilai_total)/100; 
+					$peserta_where		= array('NO_PENDAFTARAN' =>$no_pendaftaran,'ID'=>$no_tes);
+					$peserta_update 	= array('TOTAL_NILAI' => $total_nilai);
+					$this->tbl_peserta->update($peserta_update,$peserta_where);
 					foreach ($kriteria as $key => $skor)
 					{
 						$this->tbl_detail_tes_wawancara->add($no_pendaftaran,$no_tes,$key,$skor);
@@ -89,7 +94,6 @@ class Pewawancara extends CI_Controller
 				$this->session->set_flashdata('pesan','Data berhasil di simpan dengan total nilai : <b>'.$nilai_total.'</b> .');
 				redirect('pewawancara');
 				break;
-
 			case 'update':
 				$kriteria 		= $this->input->post('kriteria');
 				$no_pendaftaran = $this->input->post('pendaftar');
