@@ -63,7 +63,7 @@ class Jadwal extends CI_Controller
 		} else {
 			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Jadwal tes gagal dihapus.');
 		}
-		// redirect('jadwal');
+		redirect('jadwal');
 	}
 
 	public function participant($id)
