@@ -40,11 +40,11 @@ class Jadwal extends CI_Controller
 
 	public function patch()
 	{
-		$id = $this->input->post('id');
-		$tahap = $this->input->post('tahap');
-		$tanggal = $this->input->post('tanggal');
-		$tempat = $this->input->post('tempat');
-		$ruang = $this->input->post('ruang');
+		$id = $this->input->post('id-u');
+		$tahap = $this->input->post('tahap-u');
+		$tanggal = $this->input->post('tanggal-u');
+		$tempat = $this->input->post('tempat-u');
+		$ruang = $this->input->post('ruang-u');
 
 		$act = $this->tbl_jadwal_tes->edit($id, $tahap, $tanggal, $tempat, $ruang);
 		if ($act > 0) {
@@ -63,7 +63,7 @@ class Jadwal extends CI_Controller
 		} else {
 			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Jadwal tes gagal dihapus.');
 		}
-		redirect('jadwal');
+		// redirect('jadwal');
 	}
 
 	public function participant($id)
@@ -73,7 +73,9 @@ class Jadwal extends CI_Controller
 		$data['konten'] = "admin/peserta_tes";
 
 		$data['jadwal'] = $this->tbl_jadwal_tes->get_id($id)[0];
-		$data['peserta'] = $this->tbl_peserta->custom_where("(peserta.total_nilai = 0 or peserta.total_nilai is null) AND (jadwal_tes.tahap = '".$data['jadwal']->TAHAP."' or jadwal_tes.tahap is null)");
+		$data['peserta'] = $this->tbl_peserta->custom_where("(peserta.total_nilai = 0 or peserta.total_nilai is null) 
+			AND (jadwal_tes.tahap = '".$data['jadwal']->TAHAP."' or jadwal_tes.tahap is null) 
+			AND (pendaftar.NO_PENDAFTARAN NOT IN (select distinct NO_PENDAFTARAN from peserta where ID <> '".$data['jadwal']->ID."'))");
 
 		$this->load->view('admin/layout', $data);
 	}
@@ -88,13 +90,15 @@ class Jadwal extends CI_Controller
 		{
 			$cek = $this->tbl_peserta->get_where(array('ID'=>$jadwal,'NO_PENDAFTARAN'=>$no_pendaftaran))->num_rows();
 			if ($cek == 0) {
-				$query = $this->tbl_peserta->add($jadwal, $no_pendaftaran,'','','','');
-			}			
+				$query = $this->tbl_peserta->add($jadwal, $no_pendaftaran, '', '', '', '');
+			} else if($cek[0]->TOTAL_NILAI == 0) {
+				$query = $this->tbl_peserta->remove($jadwal, $no_pendaftaran);
+			}
 		}
 		if ($query > 0) {
 			$this->session->set_flashdata('pesan','input jadwal peserta ujian Akademik berhasil disimpan.');
 		}else{
-			$this->session->set_flashdata('pesan','input jadwal peserta ujian Akademik gagal disimpan, cek data yang sudah ada !');
+			$this->session->set_flashdata('pesan','input jadwal peserta ujian Akademik gagal disimpan, cek data yang sudah ada!');
 		}
 		redirect('jadwal');
 	}

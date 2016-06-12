@@ -76,7 +76,7 @@
 								<td style='width: 20%;'>".$j->RUANG."</td>
 								<td style='width: 25%;text-align: center;'>
 									<div class='hidden-sm hidden-xs action-buttons'>
-										<a class='btn btn-xs btn-success' href='#modal-edit' data-toggle='modal' role='button'>
+										<a class='btn btn-xs btn-success' href='#modal-edit' data-toggle='modal' role='button' onclick='fill_edit(\"".$j->ID."\", \"".$j->TAHAP."\", \"".$j->TANGGAL."\", \"".$j->TEMPAT."\", \"".$j->RUANG."\")'>
 											<i class='ace-icon fa fa-pencil'></i> Ubah
 										</a>
 
@@ -88,7 +88,7 @@
 											<i class='ace-icon fa fa-envelope'></i> Brodcast
 										</a>
 
-										<a class='btn btn-xs btn-danger' href='".base_url().'jadwal/delete/'.$j->ID."' onclick='return confirm(\"Anda yakin?\");'>
+										<a class='btn btn-xs btn-danger' href='".base_url().'jadwal/delete/'.$j->ID."' onclick='return confirm(\"Anda yakin? Semua data peserta yang pada jadwal ini akan dihapus juga.\");'>
 											<i class='ace-icon fa fa-trash-o'></i> Hapus
 										</a>
 									</div>
@@ -162,3 +162,73 @@
 		</div>
 	</div>
 </div>
+
+<div id="modal-edit" class="modal fade" tabindex="-1">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header no-padding">
+				<div class="table-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						<span class="white">&times;</span>
+					</button>
+					Ubah Jadwal Tes
+				</div>
+			</div>
+			<form class="form-horizontal" role="form" action="<?php echo base_url().'jadwal/patch'; ?>" method="post" enctype="multipart/form-data">
+			<div class='modal-body no-padding'>
+				<input type="hidden" name="id-u" id="id-u" />
+				<div class="form-group">
+					<label class='col-sm-3 control-label no-padding-right' for='tahap'>Tahap Tes</label>
+					<div class='col-sm-9'>
+						<select id='tahap-u' name="tahap-u" placeholder='Tahap Tes' class='form-control' required="" >
+							<option></option>
+							<option>Akademik</option>
+							<option>Minat Bakat</option>
+							<option>Wawancara</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class='col-sm-3 control-label no-padding-right' for='tanggal'>Tanggal</label>
+					<div class='col-sm-3'>
+						<input type="date" id='tanggal-u' name="tanggal-u" placeholder='Tanggal Tes' class='form-control' required="" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class='col-sm-3 control-label no-padding-right' for='tempat'>Tempat</label>
+					<div class='col-sm-9'>
+						<input type="text" id='tempat-u' name="tempat-u" placeholder='Tempat Tes' class='form-control' required="" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class='col-sm-3 control-label no-padding-right' for='ruang'>Ruang</label>
+					<div class='col-sm-9'>
+						<input type="text" id='ruang-u' name="ruang-u" placeholder='Ruang Tes' class='form-control' required="" />
+					</div>
+				</div>
+			</div>
+			<div class='modal-footer no-margin-top'>
+				<button class='btn btn-sm btn-danger pull-left' data-dismiss='modal'>
+					<i class='ace-icon fa fa-times'></i> Tutup
+				</button>&nbsp;
+				<button class='btn btn-success btn-sm' type='submit'>
+					<i class='ace-icon fa fa-check'></i> Simpan
+				</button>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	function fill_edit(id, tahap, tanggal, tempat, ruang) {
+		$("#id-u").val(id);
+		$("#tahap-u").val(tahap);
+		$("#tanggal-u").val(tanggal);
+		$("#tempat-u").val(tempat);
+		$("#ruang-u").val(ruang);
+	}
+</script>

@@ -50,6 +50,9 @@ class M_Jadwal_Tes extends CI_Model
 	public function remove($id)
 	{
 		$this->db->where('id', $id);
+		$this->db->delete('peserta');
+
+		$this->db->where('id', $id);
 		return $this->db->delete('jadwal_tes');
 	}
 }

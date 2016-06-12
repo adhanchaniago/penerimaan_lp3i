@@ -58,7 +58,7 @@ class M_Peserta extends CI_Model
 
 	public function custom_where($where)
 	{
-		$this->db->select("pendaftar.*, peserta.ID, peserta.TOTAL_NILAI, peserta.KETERANGAN, peserta.KEPUTUSAN, peserta.CATATAN");
+		$this->db->select("pendaftar.*, peserta.ID, peserta.TOTAL_NILAI, peserta.KETERANGAN, peserta.KEPUTUSAN, peserta.CATATAN, if(peserta.ID is null, '', 'checked') as SELECTED");
 		$this->db->from("peserta");
 		$this->db->join("pendaftar", "peserta.no_pendaftaran = pendaftar.no_pendaftaran", "right");
 		$this->db->join("jadwal_tes", "peserta.id = jadwal_tes.id", "left");

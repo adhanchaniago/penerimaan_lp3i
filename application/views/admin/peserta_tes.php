@@ -68,7 +68,7 @@
 								<td style='width: 30%;'>".$p->ALAMAT_TETAP."</td>
 								<td style='width: 20%;'>".$p->NO_HANDPHONE."</td>
 								<td style='width: 5%;text-align: center;'>
-									<input type='checkbox' name='pendaftar[]' class='checkboxes isInclude' value='".$p->NO_PENDAFTARAN."'/>
+									<input type='checkbox' name='pendaftar[]' class='checkboxes' value='".$p->NO_PENDAFTARAN."' ".$p->SELECTED." />
 								</td>
 							</tr>
 							";
@@ -90,31 +90,3 @@
 		</div>
 	</div>
 </div>
-
-<?php 
-//<script type="text/javascript">
-	// $(document).ready(function() {
-		// $("#btnSimpan").click(function() {
-		// 	var nomer = "";
-		// 	$("#sample_1 tr").each(function() {
-		// 		var no_pendaftaran = $(this).find(".no_pendaftaran").html();
-		// 		var isInclude = $(this).find(".isInclude").val();
-		// 		if(no_pendaftaran != undefined){
-		// 			console.log(isInclude);
-		// 			if(isInclude > 0)
-		// 				//console.log(no_pendaftaran); 
-		// 				nomer += no_pendaftaran + ";";
-		// 		}
-		// 	});
-		// 	//console.log(nomer);
-
-		// 	var form = $("<form action= echo base_url();jadwal/participant_patch' method='post'>" +
-		// 		"<input type='hidden' name='jadwal' value=' echo $jadwal->ID; ' />" +
-		// 		"<input type='hidden' name='pendaftar' value='" + nomer + "' />" +
-		// 		"</form>");
-		// 	$("body").append(form);
-		// 	$(form).submit();
-		// });
-	// });
-//</script>
-?>
