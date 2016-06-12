@@ -21,7 +21,8 @@ class Peserta extends CI_Controller
 		$data['konten'] 			= 'peserta/beranda';
 		$no_pendaftaran 			= $this->session->userdata('no_pendaftaran');
 
-		$data['tampil']['akademik']	= $this->tbl_peserta->join_pendaftar_jadwal(array('peserta.NO_PENDAFTARAN'=>$no_pendaftaran,'jadwal_tes.TAHAP'=>'Akademik'))[0];
+		$tampil_akademik			= $this->tbl_peserta->join_pendaftar_jadwal(array('peserta.NO_PENDAFTARAN'=>$no_pendaftaran,'jadwal_tes.TAHAP'=>'Akademik'));
+		$data['tampil']['akademik']	= count($tampil_akademik)>0?$tampil_akademik[0]:null;
 		$cek_akademik				= $this->tbl_peserta->join_jadwal(array('peserta.NO_PENDAFTARAN'=>$no_pendaftaran,'jadwal_tes.TAHAP'=>'Akademik'));
 		if (count($cek_akademik) >0) 
 		{
@@ -29,7 +30,8 @@ class Peserta extends CI_Controller
 			$data['ujian']['akademik'] = $cek_akademik[0];
 		}
 		
-		$data['tampil']['bakat']	= $this->tbl_peserta->join_pendaftar_jadwal(array('peserta.NO_PENDAFTARAN'=>$no_pendaftaran,'jadwal_tes.TAHAP'=>'Minat bakat'))[0];
+		$tampil_bakat				= $this->tbl_peserta->join_pendaftar_jadwal(array('peserta.NO_PENDAFTARAN'=>$no_pendaftaran,'jadwal_tes.TAHAP'=>'Minat bakat'));
+		$data['tampil']['bakat']	= count($tampil_bakat)>0?$tampil_bakat[0]:null;
 		$cek_bakat					= $this->tbl_peserta->join_jadwal(array('peserta.NO_PENDAFTARAN'=>$no_pendaftaran,'jadwal_tes.TAHAP'=>'Minat bakat'));
 		if (count($cek_bakat) >0)
 		{
@@ -37,7 +39,8 @@ class Peserta extends CI_Controller
 			$data['ujian']['bakat'] = $cek_bakat[0];
 		}
 
-		$data['tampil']['wawancara']= $this->tbl_peserta->join_pendaftar_jadwal(array('peserta.NO_PENDAFTARAN'=>$no_pendaftaran,'jadwal_tes.TAHAP'=>'wawancara'))[0];
+		$tampil_wawancara			= $this->tbl_peserta->join_pendaftar_jadwal(array('peserta.NO_PENDAFTARAN'=>$no_pendaftaran,'jadwal_tes.TAHAP'=>'wawancara'));
+		$data['tampil']['wawancara']= count($tampil_wawancara)>0?$tampil_wawancara[0]:null;
 		$cek_wawancara				= $this->tbl_peserta->join_jadwal(array('peserta.NO_PENDAFTARAN'=>$no_pendaftaran,'jadwal_tes.TAHAP'=>'wawancara'));
 		if (count($cek_wawancara) >0)
 		{
