@@ -85,16 +85,26 @@ class Jadwal extends CI_Controller
 		$jadwal 		= $this->input->post("jadwal");
 		$no_pendaftar 	= $this->input->post("pendaftar");
 
+		// cek yang tidak terpilih
+		$not_in = $this->tbl_peserta->where_not_in("pendaftar.NO_PENDAFTARAN", $no_pendaftar);
+		if(count($not_in) > 0) {
+			foreach ($not_in as $applicant) {
+				if($applicant->TOTAL_NILAI == 0 || $applicant->TOTAL_NILAI == null) {
+					$this->tbl_peserta->remove($jadwal, $applicant->NO_PENDAFTARAN);
+				}
+			}
+		}
+
+		// peserta yang terpilih
 		$query = 0;
 		foreach ($no_pendaftar as $key => $no_pendaftaran)
 		{
 			$cek = $this->tbl_peserta->get_where(array('ID'=>$jadwal,'NO_PENDAFTARAN'=>$no_pendaftaran))->num_rows();
 			if ($cek == 0) {
 				$query = $this->tbl_peserta->add($jadwal, $no_pendaftaran, '', '', '', '');
-			} else if($cek[0]->TOTAL_NILAI == 0) {
-				$query = $this->tbl_peserta->remove($jadwal, $no_pendaftaran);
 			}
 		}
+
 		if ($query > 0) {
 			$this->session->set_flashdata('pesan','input jadwal peserta ujian Akademik berhasil disimpan.');
 		}else{

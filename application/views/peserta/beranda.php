@@ -17,7 +17,7 @@
 	<div class="row">
 	<?php if ($tampil['akademik'] != null) : ?>
 	<?php if ($tampil['akademik']->VALID == '1'): ?>
-	<?php if ($tampil['akademik']->TOTAL_NILAI < 0): ?>
+	<?php if ($tampil['akademik']->TOTAL_NILAI <= 0): ?>
 		<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 			<div class="dashboard-stat blue-madison">
 				<div class="visual">
@@ -44,7 +44,7 @@
 
 	<?php if ($tampil['bakat'] != null) : ?>
 	<?php if ($tampil['bakat']->VALID == '1'): ?>
-	<?php if ($tampil['bakat']->TOTAL_NILAI < 0): ?>
+	<?php if ($tampil['bakat']->TOTAL_NILAI <= 0): ?>
 		<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 			<div class="dashboard-stat red-intense">
 				<div class="visual">
@@ -71,7 +71,7 @@
 
 	<?php if ($tampil['wawancara'] != null) : ?>
 	<?php if ($tampil['wawancara']->VALID == '1'): ?>
-	<?php if ($tampil['wawancara']->TOTAL_NILAI < 0): ?>
+	<?php if ($tampil['wawancara']->TOTAL_NILAI <= 0): ?>
 		<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 			<div class="dashboard-stat green-haze">
 				<div class="visual">

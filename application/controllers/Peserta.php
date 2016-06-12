@@ -51,7 +51,12 @@ class Peserta extends CI_Controller
 		$jadwal_tes 				= $this->tbl_jadwal_tes->get_where(array('jadwal_tes.TANGGAL >='=>date("Y-m-d"),'jadwal_tes.TAHAP'=> 'Wawancara'));
 		if(count($jadwal_tes) > 0){
 			$no_tes						= $jadwal_tes[0]->ID;
-			$data['jadwal_wawancara'] 	= $this->tbl_peserta->join_pendaftar_jadwal(array('peserta.NO_PENDAFTARAN'=>$this->session->userdata('no_pendaftaran'),'peserta.ID'=>$no_tes))[0];
+			$jadwal_wawancara 	= $this->tbl_peserta->join_pendaftar_jadwal(array('peserta.NO_PENDAFTARAN'=>$this->session->userdata('no_pendaftaran'),'peserta.ID'=>$no_tes));
+			if (count($jadwal_wawancara) > 0) {
+				$data['jadwal_wawancara'] = $jadwal_wawancara[0]; 	
+			}else{
+				$data['jadwal_wawancara'] = null;
+			}
 		} else {
 			$data['jadwal_wawancara']	= null;
 		}
