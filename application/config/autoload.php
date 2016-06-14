@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('database', 'email', 'session', 'encrypt');
+$autoload['libraries'] = array('database', 'email', 'session', 'encrypt','upload');
 
 /*
 | -------------------------------------------------------------------
@@ -148,7 +148,9 @@ $autoload['model'] = array(
 	'M_Tes_Wawancara'		=> 'tbl_tes_wawancara',
 	'M_Tes_Akademik'		=> 'tbl_tes_akademik',
 	'M_Tes_Minat_Bakat'		=> 'tbl_tes_minat_bakat',
-	'M_Detail_Tes_Wawancara' => 'tbl_detail_tes_wawancara',
+	'M_Detail_Tes_Wawancara'=> 'tbl_detail_tes_wawancara',
 	'M_Detail_Tes_Akademik' => 'tbl_detail_tes_akademik',
-	'M_Detail_Tes_Minat_Bakat' => 'tbl_detail_tes_minat_bakat'
+	'M_Detail_Tes_Minat_Bakat' => 'tbl_detail_tes_minat_bakat',
+	'M_Bukti' 				=> 'tbl_bukti'
+
 );
