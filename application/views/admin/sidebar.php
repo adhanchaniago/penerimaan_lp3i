@@ -74,6 +74,17 @@
 				<span class="title">Info</span>
 				</a>
 			</li>
+			<li>
+				<a href="javascript:;">
+					<i class="fa fa-print"></i>
+					<span class="title"> Laporan </span>
+					<span class="arrow"></span>
+				</a>
+				<ul class="sub-menu">
+					<li><a href="<?php echo base_url().'laporan/individu'; ?>"><i class="fa fa-file-pdf-o"></i> Individu </a></li>
+					<li><a href="<?php echo base_url().'laporan/keseluruhan'; ?>"><i class="fa fa-file-pdf-o"></i> Keseluruhan </a></li>
+				</ul>
+			</li>
 			<?php } ?>
 		</ul>
 		<!-- END SIDEBAR MENU -->
