@@ -50,12 +50,18 @@ class Aplikan extends CI_Controller
 	{
 		$no_pendaftaran = $this->input->post('no_pendaftaran');
 		$buktis = $this->tbl_bukti->join_pendaftar(array('bukti_pembayaran.no_pendaftaran' => $no_pendaftaran));
-		echo "<ol>";
-		foreach ($buktis as $bukti) {
-			echo "<li><a href='".base_url()."assets/global/img/bukti/".$bukti->FILENAME."' target='_blank'>"
-				.date('d-m-Y', strtotime($bukti->TANGGAL_UPLOAD))."&nbsp;".$bukti->KETERANGAN."</a></li>";
+		if(count($buktis) > 0) {
+			echo "<ol>";
+			foreach ($buktis as $bukti) {
+				echo "<li><a href='".base_url()."assets/global/img/bukti/".$bukti->FILENAME."' target='_blank'>"
+					.date('d-m-Y', strtotime($bukti->TANGGAL_UPLOAD))."&nbsp;".$bukti->KETERANGAN."</a></li>";
+			}
+			echo "</ol><br><span style='font-size: 9pt;'>&nbsp;*) Klik untuk melihat.</span>";
+		} else {
+			echo "<div style='display: block;width: 100%;text-align: center;'>
+				<strong>Aplikan belum mengupload bukti transfer biaya pendaftaran.</strong>
+				</div>";
 		}
-		echo "</ol><br><span style='font-size: 9pt;'>&nbsp;*) Klik untuk melihat.</span>";
 	}
 }
 ?>

@@ -125,7 +125,7 @@ class Peserta extends CI_Controller
  			case 'bakat':
  				$data['judul'] 		= 'Ujian Minat Bakat';
 				$data['konten'] 	= 'peserta/bakat';
-				$data['soal'] 	= $this->tbl_soal_minat_bakat->get_all();
+				$data['soal'] 		= $this->tbl_soal_minat_bakat->get_all();
 				$data['bakat']		= $no_tes;
 
 				$this->load->view('peserta/layout', $data);
@@ -189,6 +189,19 @@ class Peserta extends CI_Controller
 
 				$peserta_where		= array('NO_PENDAFTARAN' =>$no_pendaftaran,'ID'=>$no_tes);
 				$peserta_update 	= array('TOTAL_NILAI' => 1);
+				$this->tbl_peserta->update($peserta_update,$peserta_where);
+
+				$jurusan_terpilih = 0;
+				$pilihan_jurusan = $this->m_jurusan->get_pilihan($no_pendaftaran);
+				foreach ($pilihan_jurusan as $jurusan) {
+					$saran_karakter = explode(";", $jurusan->SARAN_KARAKTER);
+					$cari = array_search($karakter[1], $saran_karakter);
+					if(!$cari) {
+						$jurusan_terpilih = $jurusan->ID_JURUSAN;
+						break;
+					}
+				}
+				$peserta_update 	= array('KEPUTUSAN' => $jurusan_terpilih);
 				$this->tbl_peserta->update($peserta_update,$peserta_where);
 
 				redirect('peserta/beranda');

@@ -43,6 +43,7 @@
 				</div>
 				<div class="portlet-body">
 						<div class="col-md-12">
+							<a class="btn btn-success pull-right" href="#modal-add" data-toggle="modal" role="button"><i class="fa fa-plus"> Tambah</i></a><br>
 							<p>Silahkan mengisi anggota keluarga Anda dengan sesuai.</p>
 							<table id="dynamic-table" class="table table-striped table-bordered table-hover">
 					          <thead>

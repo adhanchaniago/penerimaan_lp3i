@@ -182,7 +182,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-md-3 control-label">Tahun Lulus</label>
+									<label class="col-md-3 control-label">Tahun Lulus SMA/SMK/Sederajat</label>
 									<div class="col-md-2">
 										<input type="number" name="tahun_lulus" class="form-control" placeholder="20xx" value="2005">
 									</div>

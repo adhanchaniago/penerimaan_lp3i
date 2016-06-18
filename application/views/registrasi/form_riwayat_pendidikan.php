@@ -42,52 +42,53 @@
 					</div>
 				</div>
 				<div class="portlet-body">
-						<div class="col-md-12">
-							<p>Silahkan mengisi riwayat pendidikan Anda sesuai dengan yang pernah Anda tempuh.</p>
-							<table id="dynamic-table" class="table table-striped table-bordered table-hover">
-					          <thead>
-					            <tr>
-					              <th width="5%">No.</th>
-					              <th width="15%">Nama</th>
-					              <th width="10%">Jenis</th>
-					              <th width="30%">Alamat</th>
-					              <th width="15%">Periode</th>
-					              <th width="10%">Setifikat</th>
-					              <th width="15%">Opsi</th>
-					            </tr>
-					          </thead>
-					          <tbody>
-					            <?php
-					            $no = 1;
-					            foreach($pendidikan as $j) { ?>
-					            <tr>
-					              <td style="text-align: right;width: 10%;"><?php echo $no; ?>.</td>
-					              <td><?php echo $j->NAMA_LEMBAGA; ?></td>
-					              <td><?php echo $j->JENIS; ?></td>
-					              <td><?php echo $j->ALAMAT_LEMBAGA; ?></td>
-					              <td><?php echo date("Y", strtotime($j->TANGGAL_MULAI))." - ".date("Y", strtotime($j->TANGGAL_SELESAI)); ?></td>
-					              <td><?php echo $j->SERTIFIKAT; ?></td>
-					              <td style="text-align: center;width: 20%;">
-					                <div class="hidden-sm hidden-xs action-buttons">
-					                  <a class="btn btn-xs btn-success" href="#modal-edit" data-toggle="modal" role="button" onclick="edit('<?php echo $j->ID; ?>', '<?php echo $j->JENIS; ?>', 
-					                  '<?php echo $j->NAMA_LEMBAGA; ?>', '<?php echo $j->TANGGAL_MULAI; ?>', '<?php echo $j->TANGGAL_SELESAI; ?>', '<?php echo $j->ALAMAT_LEMBAGA; ?>', 
-					                  '<?php echo $j->SERTIFIKAT; ?>')">
-					                    <i class="ace-icon fa fa-pencil"></i> Ubah
-					                  </a>
+					<div class="col-md-12">
+						<a class="btn btn-success pull-right" href="#modal-add" data-toggle="modal" role="button"><i class="fa fa-plus"> Tambah</i></a><br>
+						<p>Silahkan mengisi riwayat pendidikan Anda sesuai dengan yang pernah Anda tempuh.</p>
+						<table id="dynamic-table" class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th width="5%">No.</th>
+									<th width="15%">Nama</th>
+									<th width="10%">Jenis</th>
+									<th width="30%">Alamat</th>
+									<th width="15%">Periode</th>
+									<th width="10%">Setifikat</th>
+									<th width="15%">Opsi</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+								$no = 1;
+								foreach($pendidikan as $j) { ?>
+								<tr>
+									<td style="text-align: right;width: 10%;"><?php echo $no; ?>.</td>
+									<td><?php echo $j->NAMA_LEMBAGA; ?></td>
+									<td><?php echo $j->JENIS; ?></td>
+									<td><?php echo $j->ALAMAT_LEMBAGA; ?></td>
+									<td><?php echo date("Y", strtotime($j->TANGGAL_MULAI))." - ".date("Y", strtotime($j->TANGGAL_SELESAI)); ?></td>
+									<td><?php echo $j->SERTIFIKAT; ?></td>
+									<td style="text-align: center;width: 20%;">
+										<div class="hidden-sm hidden-xs action-buttons">
+											<a class="btn btn-xs btn-success" href="#modal-edit" data-toggle="modal" role="button" onclick="edit('<?php echo $j->ID; ?>', '<?php echo $j->JENIS; ?>', 
+												'<?php echo $j->NAMA_LEMBAGA; ?>', '<?php echo $j->TANGGAL_MULAI; ?>', '<?php echo $j->TANGGAL_SELESAI; ?>', '<?php echo $j->ALAMAT_LEMBAGA; ?>', 
+												'<?php echo $j->SERTIFIKAT; ?>')">
+												<i class="ace-icon fa fa-pencil"></i> Ubah
+											</a>
 
-					                  <a class="btn btn-xs btn-danger" href="<?php echo base_url().'index.php/page/riwayat_pendidikan_act/'.$pendaftar->NO_PENDAFTARAN.'/hapus/'.$j->ID; ?>" onclick="return confirm('Anda yakin?');">
-					                    <i class="ace-icon fa fa-trash-o"></i> Hapus
-					                  </a>
-					                </div>
-					              </td>
-					            </tr>
-					            <?php $no++; } ?>
-					          </tbody>
-					        </table>
-						</div>
-						
-						<a href="javascript:void(0);" class="btn grey" disabled>Lewati</a>
-						<a href="<?php echo base_url().'index.php/page/riwayat_pekerjaan/'.$pendaftar->NO_PENDAFTARAN; ?>" class="btn green pull-right" id="btnLanjut">Lanjut</a>
+											<a class="btn btn-xs btn-danger" href="<?php echo base_url().'index.php/page/riwayat_pendidikan_act/'.$pendaftar->NO_PENDAFTARAN.'/hapus/'.$j->ID; ?>" onclick="return confirm('Anda yakin?');">
+												<i class="ace-icon fa fa-trash-o"></i> Hapus
+											</a>
+										</div>
+									</td>
+								</tr>
+								<?php $no++; } ?>
+							</tbody>
+				        </table>
+					</div>
+					
+					<a href="javascript:void(0);" class="btn grey" disabled>Lewati</a>
+					<a href="<?php echo base_url().'index.php/page/riwayat_pekerjaan/'.$pendaftar->NO_PENDAFTARAN; ?>" class="btn green pull-right" id="btnLanjut">Lanjut</a>
 				</div>
 			</div>
 		</div>
@@ -117,7 +118,7 @@
         <div class="form-group">
           <label class='col-sm-3 control-label no-padding-right' for='nama'>Nama Lembaga</label>
           <div class='col-sm-9'>
-            <input type="text" id='nama' name="nama" placeholder='Contoh: SMA 1 Surabaya' class='form-control' required="" />
+            <input type="text" id='nama' name="nama" placeholder='Contoh: SMA 1 Surabaya, LBB Primagama' class='form-control' required="" />
           </div>
         </div>
 
@@ -152,7 +153,7 @@
           </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" id="form-sertifikat">
           <label class='col-sm-3 control-label no-padding-right' for='sertifikat'>Sertifikat</label>
           <div class='col-sm-9'>
             <input type="text" id='sertifikat' name="sertifikat" placeholder='Sertifikat' class='form-control' />
@@ -226,7 +227,7 @@
           </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" id="form-sertifikat-u">
           <label class='col-sm-3 control-label no-padding-right' for='sertifikat-u'>Sertifikat</label>
           <div class='col-sm-9'>
             <input type="text" id='sertifikat-u' name="sertifikat-u" placeholder='Sertifikat' class='form-control' />
@@ -252,6 +253,50 @@
 		var jml = <?php echo sizeof($pendidikan); ?>;
 		if(jml<1)
 			$("#btnLanjut").attr("disabled", "true");
+
+		// untuk baru
+		$("#form-sertifikat").hide();
+		$("#sertifikat").val("Ijazah");
+		$("#jenisNonformal").click(function() {
+			if($(this).is(':checked')) {
+				$("#form-sertifikat").show();
+				$("#sertifikat").val("");
+			} else {
+				$("#form-sertifikat").hide();
+				$("#sertifikat").val("Ijazah");
+			}
+		});
+		$("#jenisFormal").click(function() {
+			if($(this).is(':checked')) {
+				$("#form-sertifikat").hide();
+				$("#sertifikat").val("Ijazah");
+			} else {
+				$("#form-sertifikat").show();
+				$("#sertifikat").val("");
+			}
+		});
+
+		// untuk update
+		// $("#form-sertifikat-u").hide();
+		// $("#sertifikat-u").val("Ijazah");
+		// $("#jenisNonformal-u").click(function() {
+		// 	if($(this).is(':checked')) {
+		// 		$("#form-sertifikat-u").show();
+		// 		$("#sertifikat-u").val("");
+		// 	} else {
+		// 		$("#form-sertifikat-u").hide();
+		// 		$("#sertifikat-u").val("Ijazah");
+		// 	}
+		// });
+		// $("#jenisFormal-u").click(function() {
+		// 	if($(this).is(':checked')) {
+		// 		$("#form-sertifikat-u").hide();
+		// 		$("#sertifikat-u").val("Ijazah");
+		// 	} else {
+		// 		$("#form-sertifikat-u").show();
+		// 		$("#sertifikat-u").val("");
+		// 	}
+		// });
 	});
 </script>
 
@@ -265,8 +310,8 @@
 		$("#sertifikat-u").val(sertifikat);
 
 		if(jenis === "Formal")
-			$("#jenisFormal-u").attr("checked", "true");
+			$("#jenisFormal-u").attr("checked", true);
 		else
-			$("#jenisNonformal-u").attr("checked", "true");
+			$("#jenisNonformal-u").attr("checked", true);
 	}
 </script>

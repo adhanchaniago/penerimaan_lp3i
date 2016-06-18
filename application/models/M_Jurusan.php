@@ -46,5 +46,14 @@ class M_Jurusan extends CI_Model
 		$this->db->where('id_jurusan', $id);
 		return $this->db->delete('jurusan');
 	}
+
+	public function get_pilihan($no_pendaftaran)
+	{
+		$this->db->select("pilihan_jurusan.NO_PENDAFTARAN, jurusan.*");
+		$this->db->from("pilihan_jurusan");
+		$this->db->join("jurusan", "pilihan_jurusan.ID_JURUSAN = jurusan.ID_JURUSAN", "left");
+		$this->db->where('no_pendaftaran', $no_pendaftaran);
+		return $this->db->get()->result();
+	}
 }
 ?>
