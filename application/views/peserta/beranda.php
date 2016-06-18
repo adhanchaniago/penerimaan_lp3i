@@ -1,40 +1,39 @@
-	<div class="row">
-		<div class="col-md-12">
-			<?php if (count($bukti) == 0): ?>
-			<div class="alert alert-block alert-danger fade in">
-				<button type="button" class="close" data-dismiss="alert"></button>
-				<h4 class="alert-heading"><b>Pemberitahuan!</b></h4>
-				<p>
-					Akun anda belum tervalidasi , lakukan pembayaran dan upload bukti pembayaran untuk dapat melihat jadwal ujian. 
-				</p>
-				<p>
-				<a class="btn purple" data-toggle="modal" href="#upload_bukti">
-					Upload bukti </a>
-				</p>
-			</div><!-- end.alert -->
-			<?php else: ?>
-				<?php if ($bukti[0]->VALID == '0'): ?>
-				<div class="alert alert-block alert-info fade in">
-					<button type="button" class="close" data-dismiss="alert"></button>
-					<h4 class="alert-heading"><b>Pemberitahuan!</b></h4>
-					<p>
-						terimah kasih telah mengupload bukti , verifikasi menunggu admin	. 
-					</p>
-				</div><!-- end.alert -->
-				<?php else: ?>
-				<div class="alert alert-block alert-success fade in">
-					<button type="button" class="close" data-dismiss="alert"></button>
-					<h4 class="alert-heading"><b>Pemberitahuan!</b></h4>
-					<p>
-						Akun anda sudah terferivikasi ,silahkan melihat info jadwal ujian anda	. 
-					</p>
-				</div><!-- end.alert -->
-				<?php endif ?>
-
-			<?php endif; ?>
+	<?php if (isset($_SESSION['pesan'])) { ?>
+		<div class="alert alert-block alert-info" role="alert">
+			<button type="button" class="close" data-dismiss="alert">
+			  <i class="ace-icon fa fa-times"></i>
+			</button>
+			<?php echo $this->session->flashdata('pesan'); ?>
 		</div>
-	</div>
-		
+	<?php } ?>
+
+	<?php if($pendaftar[0]->VALID == 0): ?>
+		<?php if(count($bukti) == 0): ?>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="alert alert-block alert-danger fade in">
+					<button type="button" class="close" data-dismiss="alert"></button>
+					<h4 class="alert-heading"><b>Pemberitahuan!</b></h4>
+					<p>
+						Akun anda belum tervalidasi , lakukan pembayaran dan upload bukti pembayaran untuk dapat melihat jadwal ujian. 
+					</p>
+					<p>
+					<a class="btn purple" data-toggle="modal" href="#upload_bukti">
+						Upload bukti </a>
+					</p>
+				</div>
+			</div>
+		</div>
+		<?php else: ?>
+			<div class="alert alert-block alert-info" role="alert">
+			<button type="button" class="close" data-dismiss="alert">
+			  	<i class="ace-icon fa fa-times"></i>
+			</button>
+			<strong>Informasi!</strong> No. Pendaftaran Anda belum divalidasi, mohon tunggu paling lambat 1x24 jam untuk divalidasi oleh Admin PMB LP3I Surabaya.
+		</div>
+		<?php endif	?>
+	<?php endif	?>
+	
 	<div class="row">
 	<?php if ($tampil['akademik'] != null) : ?>
 	<?php if ($tampil['akademik']->VALID == '1'): ?>
@@ -205,30 +204,40 @@
 	<div class="modal fade" id="upload_bukti" tabindex="-1" role="basic" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<?php echo form_open_multipart('upload/do_upload',array('method'=>'post'));?>
+				<form class='form-horizontal' role='form' action='<?php echo base_url()."upload/do_upload"; ?>' method='post' enctype="multipart/form-data">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 					<h4 class="modal-title">Upload Bukti Pembayaran</h4>
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<label for="bukti" class="control-label col-md-4">File Upload</label>
+						<label for="bukti" class="control-label col-md-4">Pilih File</label>
 						<div class="col-md-6">
-							<input type="file" name="bukti" size="20000" required>
+							<input type="file" id="bukti" name="bukti" accept=".jpg,.png,.bmp" class="form-control" required>
 							<p class="help-block">
-								 file type : jpg only.
+								 file type : jpg, bmp, png, pdf.
 							</p>
 						</div>
 					</div>
-					<br>
-					<!-- <input type="submit" class="btn btn-primary" value="upload" > -->
 
+					<div class="form-group">
+						<label for="keterangan" class="control-label col-md-4">Keterangan</label>
+						<div class="col-md-6">
+							<input type="text" id="keterangan" name="keterangan" class="form-control">
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary"><i class="fa fa-cloud-upload"></i> Upload</button>
-					<button type="reset" class="btn default">Cancel</button>
+					<button class="btn btn-info" type="submit">
+						<i class="ace-icon fa fa-cloud-upload"></i>
+						Simpan
+					</button>
+					<button class="btn" type="reset">
+						<i class="ace-icon fa fa-undo bigger-110"></i>
+						Cancel
+					</button>
 				</div>
-					</form>	
+				</form>	
 			</div>
 			<!-- /.modal-content -->
 		</div>

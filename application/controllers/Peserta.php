@@ -63,7 +63,7 @@ class Peserta extends CI_Controller
 
 		//cek upload bukti
 		$data['bukti'] 					= $this->tbl_bukti->join_pendaftar(array('bukti_pembayaran.NO_PENDAFTARAN'=>$no_pendaftaran));
-
+		$data['pendaftar']				= $this->tbl_pendaftar->get_id($no_pendaftaran);
 
 		$this->load->view('peserta/layout', $data);
 	}	

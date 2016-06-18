@@ -30,5 +30,9 @@ class M_Bukti extends CI_Model
 		return $this->db->get()->result();
 	}
 
+	public function add(array $value)
+	{
+		return $this->db->insert('bukti_pembayaran', $value);
+	}
 }
 ?>

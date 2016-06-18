@@ -106,8 +106,12 @@ class M_Pendaftar extends CI_Model
 
 	public function validasi($no_pendaftaran)
 	{
+		$id_admin = $this->session->userdata("id_admin");
 		$this->db->where("no_pendaftaran", $no_pendaftaran);
-		return $this->db->update("pendaftar", array("valid" => 1));
+		return $this->db->update("pendaftar", array(
+			"valid" 	=> 1,
+			"id_admin"	=> $id_admin
+			));
 	}
 
 	public function create_no_pendaftaran()

@@ -33,8 +33,9 @@ class Aplikan extends CI_Controller
 		redirect('aplikan');
 	}
 
-	public function validasi($no_pendaftaran)
+	public function validasi()
 	{
+		$no_pendaftaran = $this->input->post('no_pendaftaran');
 		$act = $this->tbl_pendaftar->validasi($no_pendaftaran);
 
 		if ($act > 0) {
@@ -43,6 +44,18 @@ class Aplikan extends CI_Controller
 			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Data aplikan gagal divalidasi.');
 		}
 		redirect('aplikan');
+	}
+
+	public function get_bukti()
+	{
+		$no_pendaftaran = $this->input->post('no_pendaftaran');
+		$buktis = $this->tbl_bukti->join_pendaftar(array('bukti_pembayaran.no_pendaftaran' => $no_pendaftaran));
+		echo "<ol>";
+		foreach ($buktis as $bukti) {
+			echo "<li><a href='".base_url()."assets/global/img/bukti/".$bukti->FILENAME."' target='_blank'>"
+				.date('d-m-Y', strtotime($bukti->TANGGAL_UPLOAD))."&nbsp;".$bukti->KETERANGAN."</a></li>";
+		}
+		echo "</ol><br><span style='font-size: 9pt;'>&nbsp;*) Klik untuk melihat.</span>";
 	}
 }
 ?>
