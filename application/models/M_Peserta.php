@@ -9,6 +9,10 @@ class M_Peserta extends CI_Model
 	{
 		parent::__construct();
 	}
+	public function get_full()
+	{
+		return $this->db->get('peserta')->result();
+	}
 
 	public function get_all($jadwal)
 	{
@@ -112,6 +116,8 @@ class M_Peserta extends CI_Model
 		$this->db->where('no_pendaftaran', $no_pendaftaran);
 		return $this->db->delete('peserta');
 	}
+
+
 
 }
 ?>

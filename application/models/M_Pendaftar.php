@@ -136,5 +136,25 @@ class M_Pendaftar extends CI_Model
 			1
 		)->result();
 	}
+
+	public function custom_where(array $cond = null)
+	{
+		$this->db->select('*');
+		$this->db->from('pendaftar');
+		if (count($cond) > 0)
+			$this->db->where($cond);
+		return $this->db->get()->result();
+	}
+
+	public function get_peserta($peserta)
+	{
+		return $this->db->query('
+			SELECT *
+			FROM pendaftar
+			WHERE
+			pendaftar.VALID = 1 AND
+			pendaftar.NO_PENDAFTARAN NOT IN ('.$peserta.')
+			')->result();
+	}
 }
 ?>

@@ -73,9 +73,24 @@ class Jadwal extends CI_Controller
 		$data['konten'] = "admin/peserta_tes";
 
 		$data['jadwal'] = $this->tbl_jadwal_tes->get_id($id)[0];
-		$data['peserta'] = $this->tbl_peserta->custom_where("(peserta.total_nilai = 0 or peserta.total_nilai is null) 
-			AND (jadwal_tes.tahap = '".$data['jadwal']->TAHAP."' or jadwal_tes.tahap is null) 
-			AND (pendaftar.NO_PENDAFTARAN NOT IN (select distinct NO_PENDAFTARAN from peserta where ID <> '".$data['jadwal']->ID."'))");
+		
+		//mendapatkan peserta dengan id valid dan terdaftar pada tahap tersebut
+		$terdaftar = $this->tbl_peserta->get_where(array('ID'=>$id))->result();
+		// echo "<pre>";
+		// print_r($terdaftar);
+		// echo "</pre>";
+		$peserta_terdaftar = '';
+		if (count($terdaftar) > 0) {
+			foreach ($terdaftar as $peserta) {
+				$peserta_terdaftar .= $peserta->NO_PENDAFTARAN.',';
+			}
+			$peserta_terdaftar = substr_replace($peserta_terdaftar, '', -1,1);
+			$data['pendaftar'] =  $this->tbl_pendaftar->get_peserta($peserta_terdaftar);
+		}else{
+			$data['pendaftar'] = $this->tbl_pendaftar->custom_where(array('VALID'=>1));
+		}
+
+		$data['peserta'] = $this->tbl_peserta->join_pendaftar(array('ID' => $id));
 
 		$this->load->view('admin/layout', $data);
 	}
@@ -86,14 +101,14 @@ class Jadwal extends CI_Controller
 		$no_pendaftar 	= $this->input->post("pendaftar");
 
 		// cek yang tidak terpilih
-		$not_in = $this->tbl_peserta->where_not_in("pendaftar.NO_PENDAFTARAN", $no_pendaftar);
-		if(count($not_in) > 0) {
-			foreach ($not_in as $applicant) {
-				if($applicant->TOTAL_NILAI == 0 || $applicant->TOTAL_NILAI == null) {
-					$this->tbl_peserta->remove($jadwal, $applicant->NO_PENDAFTARAN);
-				}
-			}
-		}
+		// $not_in = $this->tbl_peserta->where_not_in("pendaftar.NO_PENDAFTARAN", $no_pendaftar);
+		// if(count($not_in) > 0) {
+		// 	foreach ($not_in as $applicant) {
+		// 		if($applicant->TOTAL_NILAI == 0 || $applicant->TOTAL_NILAI == null) {
+		// 			$this->tbl_peserta->remove($jadwal, $applicant->NO_PENDAFTARAN);
+		// 		}
+		// 	}
+		// }
 
 		// peserta yang terpilih
 		$query = 0;
@@ -110,7 +125,13 @@ class Jadwal extends CI_Controller
 		}else{
 			$this->session->set_flashdata('pesan','input jadwal peserta ujian Akademik gagal disimpan, cek data yang sudah ada!');
 		}
-		redirect('jadwal');
+		redirect('jadwal/participant/'.$jadwal);
+	}
+
+	public function participant_del($no,$id)
+	{
+		$this->tbl_peserta->remove($id,$no);
+		redirect('jadwal/participant/'.$id);	
 	}
 
 }
