@@ -37,7 +37,7 @@ class Laporan extends CI_Controller
 		$cond 				= array('peserta.ID' => 1, 'peserta.KETERANGAN' => 'DITERIMA');
 		$data['pendaftar'] 	= $this->tbl_peserta->join_pendaftar($cond);
 
-		$fileName 			= 'Laporan Peserta';
+		$fileName 			= 'Laporan Peserta '.date('dmY_His');
 		$this->pdf->load_view('admin/cetak_keseluruhan',$data);
 		$this->pdf->render();
 		$this->pdf->stream($fileName);

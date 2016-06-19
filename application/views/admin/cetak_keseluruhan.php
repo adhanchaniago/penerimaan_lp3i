@@ -2,7 +2,7 @@
 		<tr>
 			<td width="100%" style="text-align:center; background:url('././assets/global/img/logo.jpg') no-repeat left;">
 				<h4><b>LP3I SURABAYA</b></h4>
-				Jl. Manyar 43 A Surabaya, Jawa timur , Indonesia
+				Jl. Manyar 43 A Surabaya, Jawa Timur, Indonesia
 			</td>
 		</tr>
 	</table>
@@ -16,7 +16,7 @@
 		</tr>
 		<tr>
 			<td style="text-align:center;">
-				Periode penerimaan : 2016/2017
+				Periode Penerimaan: <?php echo date('Y').'-'.(date('Y')+1); ?>
 			</td>
 		</tr>
 	</table>

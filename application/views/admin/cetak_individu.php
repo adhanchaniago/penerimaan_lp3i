@@ -2,7 +2,7 @@
 		<tr>
 			<td width="100%" style="text-align:center; background:url('./././assets/global/img/logo.jpg') no-repeat left;">
 				<h4><b>LP3I SURABAYA</b></h4>
-				Jl. Manyar 43 A Surabaya, Jawa timur , Indonesia
+				Jl. Manyar 43 A Surabaya, Jawa Timur, Indonesia
 			</td>
 		</tr>
 	</table>
@@ -16,7 +16,7 @@
 		</tr>
 		<tr>
 			<td style="text-align:center;">
-				Periode penerimaan : 2016/2017
+				Periode Penerimaan: <?php echo date('Y').'-'.(date('Y')+1); ?>
 			</td>
 		</tr>
 	</table>
@@ -24,7 +24,7 @@
 	<br>
 	<p>
 	Dengan hormat,<br>
-	Dengan surat ini, kami menyatakan anda yang beridentitas di bawah ini : 
+	Bersama dengan surat ini, kami menyatakan Anda yang beridentitas di bawah ini : 
 	</p>
 	<table style="margin-left:50px;">
 		<tr>
@@ -83,7 +83,7 @@
 					$benar = count($this->tbl_detail_tes_akademik->join_all($cond_t));
 					$nilai_benar = $benar * $bobot_nilai;
 				?>
-				<td style="text-align:center;"><?php echo round($nilai_benar,2) ?></td>
+				<td style="text-align:center;"><?php echo round($nilai_benar, 0) ?></td>
 			</tr>	
 			<?php endforeach ?>
 			<tr>
