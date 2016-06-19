@@ -78,11 +78,25 @@ class Pewawancara extends CI_Controller
 				if ($nilai_total <= 100 )
 				{
 					$this->tbl_tes_wawancara->add($no_pendaftaran,$no_tes,$id_pewawancara,$tanggal_tes,$nilai_total,$keterangan);
-					//mengupdate nilai total nilai peserta
 					$total_nilai 		= (30 * $nilai_total)/100; 
+					$cek_total_akademik 	= $this->tbl_peserta->get_id($no_pendaftaran,1)[0]->TOTAL_NILAI;
+					$jumlah_total_nilai  	= $cek_total_akademik + $total_nilai;
+
+					if ($jumlah_total_nilai >= 65)
+					{
+						$keterangan = "DITERIMA";
+					}else{
+						$keterangan = "GAGAL";
+					}
+
 					$peserta_where		= array('NO_PENDAFTARAN' =>$no_pendaftaran,'ID'=>$no_tes);
-					$peserta_update 	= array('TOTAL_NILAI' => $total_nilai);
+					$peserta_update 	= array('TOTAL_NILAI' => $total_nilai, 'KETERANGAN' => $keterangan, 'KEPUTUSAN' => $jumlah_total_nilai);
 					$this->tbl_peserta->update($peserta_update,$peserta_where);
+
+					$p_where			= array('NO_PENDAFTARAN' =>$no_pendaftaran,'ID'=>1);
+					$p_update 			= array('KETERANGAN' => $keterangan, 'KEPUTUSAN' => $jumlah_total_nilai);
+					$this->tbl_peserta->update($p_update,$p_where);
+
 					foreach ($kriteria as $key => $skor)
 					{
 						$this->tbl_detail_tes_wawancara->add($no_pendaftaran,$no_tes,$key,$skor);

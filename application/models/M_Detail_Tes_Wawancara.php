@@ -46,5 +46,15 @@ class M_Detail_Tes_Wawancara extends CI_Model
 			));
 	}
 
+	public function join_kriteria(array $cond = NULL)
+	{
+		$this->db->select('*');
+		$this->db->from('detil_tes_wawancara');
+		$this->db->join('kriteria_wawancara', 'kriteria_wawancara.ID_KRITERIA = detil_tes_wawancara.ID_KRITERIA');
+		if (count($cond) > 0)
+			$this->db->where($cond);
+		return $this->db->get()->result();
+	}
+
 }
 ?>

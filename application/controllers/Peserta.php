@@ -113,12 +113,23 @@ class Peserta extends CI_Controller
 				$this->tbl_tes_akademik->update($data,$where);//simpan ke tabel tes akademik
 				$total_nilai 		= round(($nilai*70)/100);
 
-				$get_total_nilai	= $this->tbl_peserta->get_id($no_pendaftaran,$no_tes)[0]->TOTAL_NILAI;
-				$total_nilai 		= $total_nilai + $get_total_nilai;
+				$cek_total_wawancara = $this->tbl_peserta->get_id($no_pendaftaran,3)[0]->TOTAL_NILAI;
+				$jumlah_total_nilai  = $cek_total_wawancara + $total_nilai;
+
+				if ($jumlah_total_nilai >= 65)
+				{
+					$keterangan = "DITERIMA";
+				}else{
+					$keterangan = "GAGAL";
+				}
+
 				$peserta_where		= array('NO_PENDAFTARAN' =>$no_pendaftaran,'ID'=>$no_tes);
-				$peserta_update 	= array('TOTAL_NILAI' => $total_nilai);
+				$peserta_update 	= array('TOTAL_NILAI' => $total_nilai, 'KETERANGAN' => $keterangan, 'KEPUTUSAN' => $jumlah_total_nilai);
 				$this->tbl_peserta->update($peserta_update,$peserta_where);
 
+				$w_where			= array('NO_PENDAFTARAN' =>$no_pendaftaran,'ID'=>3);
+				$w_update 			= array('KETERANGAN' => $keterangan, 'KEPUTUSAN' => $jumlah_total_nilai);
+				$this->tbl_peserta->update($w_update,$w_where);
 
 				redirect('peserta/beranda');
 				break;

@@ -1,6 +1,6 @@
 	<table width="100%" height="102px">
 		<tr>
-			<td width="100%" style="text-align:center; background:url('././assets/global/img/logo.jpg') no-repeat left;">
+			<td width="100%" style="text-align:center; background:url('./././assets/global/img/logo.jpg') no-repeat left;">
 				<h4><b>LP3I SURABAYA</b></h4>
 				Jl. Manyar 43 A Surabaya, Jawa timur , Indonesia
 			</td>
@@ -30,31 +30,35 @@
 		<tr>
 			<td>Nama Lengkap</td>
 			<td>:</td>
-			<td>achmad ainul yaqin</td>
+			<td><?php echo $pendaftar->NAMA ?></td>
 		</tr>
 		<tr>
 			<td>Tempat, Tanggal lahir</td>
 			<td>:</td>
-			<td>Pasuruan, 03 Maret 1993</td>
+			<td><?php echo $pendaftar->TEMPAT_LAHIR ?>, <?php echo date("d-m-Y",strtotime($pendaftar->TANGGAL_LAHIR)) ?></td>
 		</tr>
 		<tr>
 			<td>Jenis kelamin</td>
 			<td>:</td>
-			<td>Laki - laki</td>
+			<td><?php echo $pendaftar->JENIS_KELAMIN=='L'?'Laki - laki':'Perempuan' ?></td>
 		</tr>
 		<tr>
 			<td>Alamat</td>
 			<td>:</td>
-			<td>JL. Raya luwung no.28 beji</td>
+			<td><?php echo $pendaftar->ALAMAT_TETAP ?></td>
 		</tr>
 		<tr>
 			<td>No. handphone</td>
 			<td>:</td>
-			<td>085736071402</td>
+			<td><?php echo $pendaftar->NO_HANDPHONE ?></td>
 		</tr>
 	</table>
+	<?php 
+		$jurusan = $this->tbl_peserta->join_jurusan(array('peserta.NO_PENDAFTARAN' => $pendaftar->NO_PENDAFTARAN));
+		$j = count($jurusan)>0?$jurusan[0]->NAMA_JURUSAN:'';
+	?>
 	<p>
-		Telah dinyatakan DITERIMA sebagai mahasiswa pada LP3I pada jurusan EKONOMI. Berikut kami lampirkan hasil tes penerimaan anda yang telah di lakukan : 
+		Telah dinyatakan DITERIMA sebagai mahasiswa pada LP3I pada jurusan <?php echo strtoupper($j); ?>. Berikut kami lampirkan hasil tes penerimaan anda yang telah di lakukan : 
 	</p>
 	<table style="width:100%" border="1px" cellspacing="0" cellpadding="4px">
 			<tr>
@@ -65,11 +69,27 @@
 				<td width="80%" style="text-align:center;">BIDANG</td>
 				<td width="15%" style="text-align:center;">NILAI</td>
 			</tr>
+			<?php $no = 1; ?>
+			<?php foreach ($bidang_akademik as $akademik): ?>
 			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td style="text-align:center;"><?php echo $no++ ?></td>
+				<td><?php echo $akademik->NAMA_BIDANG_SOAL ?></td>
+				<?php 
+					$cond_t = array(
+							'detil_tes_akademik.NO_PENDAFTARAN' => $pendaftar->NO_PENDAFTARAN,
+							'jawaban_akademik.NILAI' => 1,
+							'bidang_soal_akademik.ID_BIDANG_SOAL' => $akademik->ID_BIDANG_SOAL
+						);
+					$benar = count($this->tbl_detail_tes_akademik->join_all($cond_t));
+					$nilai_benar = $benar * $bobot_nilai;
+				?>
+				<td style="text-align:center;"><?php echo round($nilai_benar,2) ?></td>
 			</tr>	
+			<?php endforeach ?>
+			<tr>
+				<td colspan="2" style="text-align:right;">Total Nilai Akademik</td>
+				<td style="text-align:center;"><b><?php echo $total_akademik ?></b></td>
+			</tr>
 	</table>
 	<br>
 	<table style="width:100%" border="1px" cellspacing="0" cellpadding="4px">
@@ -81,10 +101,17 @@
 				<td width="80%" style="text-align:center;">BIDANG</td>
 				<td width="15%" style="text-align:center;">NILAI</td>
 			</tr>
+			<?php $no = 1; ?>
+			<?php foreach ($kriteria as $kriteria): ?>
 			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td style="text-align:center;"><?php echo $no++ ?></td>
+				<td><?php echo $kriteria->NAMA_KRITERIA ?></td>
+				<td style="text-align:center;"><?php echo $kriteria->SKOR ?></td>
+			</tr>
+			<?php endforeach ?>
+			<tr>
+				<td colspan="2" style="text-align:right;">Total Nilai Wawancara</td>
+				<td style="text-align:center;"><b><?php echo $total_wawancara; ?></b></td>
 			</tr>	
 	</table>
 	<br>

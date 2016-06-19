@@ -25,36 +25,39 @@ class Laporan extends CI_Controller
 
 	public function keseluruhan()
 	{
-		$data['judul'] = "Laporan,Seluruh Peserta";
-		$data['konten'] = "admin/keseluruhan";
-		$data['pendaftar'] = $this->tbl_pendaftar->get_all();
-
-
+		$data['judul'] 		= "Laporan,Seluruh Peserta";
+		$data['konten'] 	= "admin/keseluruhan";
+		$cond 				= array('peserta.ID' => 1, 'peserta.KETERANGAN' => 'DITERIMA');
+		$data['pendaftar'] 	= $this->tbl_peserta->join_pendaftar($cond);
 		$this->load->view('admin/layout', $data);
 	}
 
 	public function cetak($tipe)
 	{
-		// $this->load->view('admin/cetak_keseluruhan');
+		$cond 				= array('peserta.ID' => 1, 'peserta.KETERANGAN' => 'DITERIMA');
+		$data['pendaftar'] 	= $this->tbl_peserta->join_pendaftar($cond);
 
 		$fileName 			= 'Laporan Peserta';
-
-		$isi = array();
-
-		$this->pdf->load_view('admin/cetak_keseluruhan',$isi);
+		$this->pdf->load_view('admin/cetak_keseluruhan',$data);
 		$this->pdf->render();
 		$this->pdf->stream($fileName);
 	}
 
-	public function detail()
+	public function detail($no_pendaftaran)
 	{
-		// $this->load->view('admin/cetak_individu');
+		$data ['pendaftar']			= $this->tbl_pendaftar->get_id($no_pendaftaran)[0];
+		$data ['bidang_akademik']	= $this->tbl_bidang_soal_akademik->get_all();
+		$data ['total_akademik']	= count($this->tbl_tes_akademik->get_id($no_pendaftaran,1))>0?$this->tbl_tes_akademik->get_id($no_pendaftaran,1)[0]->TOTAL_NILAI:"0";
+		
+		$total_soal					= count($this->tbl_soal_akademik->get_all());
+		$total_presentasi			= $this->tbl_bidang_soal_akademik->total_bobot();
+		$data ['bobot_nilai']		= $total_presentasi/$total_soal;
 
-		$fileName 			= '0606160001 achmad ainul yaqin';//nomer pendaftaran dan nama 
+		$data ['kriteria']			= $this->tbl_detail_tes_wawancara->join_kriteria(array('detil_tes_wawancara.NO_PENDAFTARAN' => $no_pendaftaran));
+		$data ['total_wawancara']	= count($this->tbl_tes_wawancara->get_total(array('tes_wawancara.NO_PENDAFTARAN' => $no_pendaftaran)))>0?$this->tbl_tes_wawancara->get_total(array('tes_wawancara.NO_PENDAFTARAN' => $no_pendaftaran))[0]->TOTAL_NILAI:"0";
 
-		$isi = array();
-
-		$this->pdf->load_view('admin/cetak_individu',$isi);
+		$fileName 			= $no_pendaftaran.' '.$data['pendaftar']->NAMA;
+		$this->pdf->load_view('admin/cetak_individu',$data);
 		$this->pdf->render();
 		$this->pdf->stream($fileName);	
 	}

@@ -24,4 +24,16 @@ class M_Detail_Tes_Akademik extends CI_Model
 		$this->db->where('jawaban_akademik.NILAI',1);
 		return $this->db->get()->result();
 	}
+
+	public function join_all(array $cond = NULL)
+	{
+		$this->db->select('*');
+		$this->db->from('detil_tes_akademik');
+		$this->db->join('jawaban_akademik','jawaban_akademik.ID_JAWABAN = detil_tes_akademik.ID_JAWABAN');
+		$this->db->join('soal_akademik','soal_akademik.ID_SOAL = detil_tes_akademik.ID_SOAL');
+		$this->db->join('bidang_soal_akademik','bidang_soal_akademik.ID_BIDANG_SOAL = soal_akademik.ID_BIDANG_SOAL');
+		if (count($cond) > 0)
+			$this->db->where($cond);
+		return $this->db->get()->result();
+	}
 }

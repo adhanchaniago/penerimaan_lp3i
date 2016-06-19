@@ -34,12 +34,17 @@
 							<?php $no = 1; ?>
 							<?php foreach ($pendaftar as $pendaftar): ?>
 							<tr>
-								<td><?= $no++ ?></td>
+								<td style="text-align:center;"><?= $no++ ?></td>
 								<td><a href="<?php echo base_url(); ?>laporan/detail/<?php echo $pendaftar->NO_PENDAFTARAN ?> "><?= $pendaftar->NAMA ?></a></td>
 								<td><?= $pendaftar->ALAMAT_TETAP?></td>
-								<td><?= $pendaftar->NO_HANDPHONE ?></td>
-								<td>EKONOMI</td>
-								<td>100</td>
+								<td style="text-align:center;"><?= $pendaftar->NO_HANDPHONE ?></td>
+								<td style="text-align:center;">
+									<?php 
+										$jurusan = $this->tbl_peserta->join_jurusan(array('peserta.NO_PENDAFTARAN' => $pendaftar->NO_PENDAFTARAN));
+										echo count($jurusan)>0?$jurusan[0]->NAMA_JURUSAN:'';
+									?>
+								</td>
+								<td style="text-align:center;"><?= $pendaftar->KEPUTUSAN?></td>
 							</tr>	
 							<?php endforeach ?>
 						</tbody>

@@ -49,6 +49,16 @@ class M_Peserta extends CI_Model
 		return $this->db->get()->result();
 	}
 
+	public function join_jurusan(array $cond)
+	{
+		$this->db->select("*");
+		$this->db->from("peserta");
+		$this->db->join("jurusan", "jurusan.ID_JURUSAN = peserta.KEPUTUSAN ","inner");
+		if(count($cond) > 0)
+			$this->db->where($cond);
+		return $this->db->get()->result();	
+	}
+
 	public function join_pendaftar_jadwal(array $cond)
 	{
 		$this->db->select("pendaftar.*, jadwal_tes.*, peserta.ID, peserta.TOTAL_NILAI, peserta.KETERANGAN, peserta.KEPUTUSAN, peserta.CATATAN");

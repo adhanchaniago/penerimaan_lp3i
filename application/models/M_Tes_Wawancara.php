@@ -44,22 +44,13 @@ class M_Tes_Wawancara extends CI_Model
 			));
 	}
 
-
-	// public function edit($id, $nama, $password, $keterangan)
-	// {
-	// 	$this->db->where('id_pewawancara', $id);
-	// 	return $this->db->update('pewawancara', array(
-	// 			'nama' => $nama,
-	// 			'password' => md5($password),
-	// 			'keterangan' => $keterangan
-	// 		));
-	// }
-
-	// public function remove($id)
-	// {
-	// 	$this->db->where('id_pewawancara', $id);
-	// 	return $this->db->delete('tes_wawancara');
-	// }
-
+	public function get_total(array $cond = NULL)
+	{
+		$this->db->select('*');
+		$this->db->from('tes_wawancara');
+		if (count($cond) > 0)
+			$this->db->where($cond);
+		return $this->db->get()->result();
+	}
 }
 ?>
