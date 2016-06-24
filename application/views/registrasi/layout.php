@@ -39,6 +39,7 @@
 		<link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico"/>
 
 		<script src="<?php echo base_url(); ?>assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+		<script src="<?php echo base_url(); ?>assets/admin/pages/scripts/numeric.js" type="text/javascript"></script>
 	</head>
 
 	<body>
@@ -110,7 +111,7 @@
 		jQuery(document).ready(function() {    
 		   	Metronic.init(); // init metronic core componets
 		   	Layout.init(); // init layout
-		    Index.init(); // init index page
+		    // Index.init(); // init index page
 		    QuickSidebar.init(); // init quick sidebar
 		    Demo.init(); // init demo features
            	ComponentsPickers.init();

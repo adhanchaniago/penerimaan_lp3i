@@ -69,7 +69,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="<?php echo base_url().'informasi/admin'; ?>">
 				<i class="icon-paper-plane"></i>
 				<span class="title">Info</span>
 				</a>

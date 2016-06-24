@@ -41,7 +41,8 @@
 					</div>
 				</div>
 				<div class="portlet-body form">
-					<form action="<?php echo base_url().'index.php/page/register_act'; ?>" class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
+					<form action="<?php echo base_url().'index.php/page/register_act'; ?>" class="form-horizontal" role="form" method="POST" 
+						enctype="multipart/form-data">
 						<div class="row">
 							<div class="col-md-8">
 								<div class="form-group">
@@ -172,13 +173,15 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">No. Handphone</label>
 									<div class="col-md-9">
-										<input type="text" name="no_handphone" class="form-control" placeholder="Masukkan No. Telepon">
+										<input type="text" name="no_handphone" id="no_handphone" class="form-control harus-angka" 
+											placeholder="08xxxxxxx" required>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-3 control-label">No. Telepon</label>
 									<div class="col-md-9">
-										<input type="text" name="no_telepon" class="form-control" placeholder="Masukkan No. Telepon">
+										<input type="text" name="no_telepon" id="no_telepon" class="form-control harus-angka" 
+											placeholder="031xxxxxxx">
 									</div>
 								</div>
 								<div class="form-group">
@@ -271,4 +274,19 @@
 		var selectedOption = $('#prodi1').val();
 		$("#prodi2 option[value='"+selectedOption+"']").remove();
 	}
+
+	function validateForm() {
+		var pesan = "";
+		var nohp = document.forms["formRegistrasi"]["no_handphone"].value;
+		if(isNaN(nohp)) {
+			$("#alertValidator").show();
+			$("#pesanValidator").html("Mohon isi kolom NO. HANDPHONE anda dengan sesuai.");
+			return false;
+		}
+	}
+
+	$(document).ready(function() {
+		$("#alertValidator").hide();
+		$(".harus-angka").numeric();
+	});
 </script>

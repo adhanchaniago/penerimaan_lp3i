@@ -13,13 +13,13 @@ var TableManaged = function () {
                     "sortAscending": ": activate to sort column ascending",
                     "sortDescending": ": activate to sort column descending"
                 },
-                "emptyTable": "No data available in table",
-                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
-                "infoEmpty": "No entries found",
-                "infoFiltered": "(filtered1 from _MAX_ total entries)",
-                "lengthMenu": "Show _MENU_ entries",
-                "search": "Search:",
-                "zeroRecords": "No matching records found"
+                "emptyTable": "Maaf, tidak ada data yang ditampilkan",
+                "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                "infoEmpty": "Tidak ditemukan data",
+                "infoFiltered": "(hasil pencarian dari total _MAX_ data)",
+                "lengthMenu": "Menampilkan _MENU_ data",
+                "search": "Cari:",
+                "zeroRecords": "Tidak ada data yang ditemukan"
             },
 
             // Or you can use remote translation file
@@ -32,47 +32,49 @@ var TableManaged = function () {
             // So when dropdowns used the scrollable div should be removed. 
             //"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
 
-            "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+            // "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
 
-            "columns": [{
-                "orderable": false
-            }, {
-                "orderable": true
-            }, {
-                "orderable": false
-            }, {
-                "orderable": false
-            }, {
-                "orderable": true
-            }, {
-                "orderable": false
-            }],
-            "lengthMenu": [
-                [5, 15, 20, -1],
-                [5, 15, 20, "All"] // change per page values here
-            ],
+            // "columns": [{
+            //     "orderable": false
+            // }, {
+            //     "orderable": true
+            // }, {
+            //     "orderable": false
+            // }, {
+            //     "orderable": false
+            // }, {
+            //     "orderable": true
+            // }, {
+            //     "orderable": false
+            // }],
+            // "lengthMenu": [
+            //     [5, 15, 20, -1],
+            //     [5, 15, 20, "All"] // change per page values here
+            // ],
             // set the initial value
-            "pageLength": 5,            
+            // "pageLength": 5,            
             "pagingType": "bootstrap_full_number",
             "language": {
-                "search": "My search: ",
-                "lengthMenu": "  _MENU_ records",
+                "search": "Cari: ",
+                "lengthMenu": "  _MENU_ data",
                 "paginate": {
-                    "previous":"Prev",
-                    "next": "Next",
-                    "last": "Last",
-                    "first": "First"
+                    "previous":"Sebelumnya",
+                    "next": "Selanjutnya",
+                    "last": "Terakhir",
+                    "first": "Pertama"
                 }
             },
-            "columnDefs": [{  // set default column settings
+            "columnDefs": [
+            {  // set default column settings
                 'orderable': false,
                 'targets': [0]
-            }, {
+            }, 
+            {
                 "searchable": false,
                 "targets": [0]
             }],
             "order": [
-                [1, "asc"]
+                [0, "asc"]
             ] // set first column as a default sort by asc
         });
 

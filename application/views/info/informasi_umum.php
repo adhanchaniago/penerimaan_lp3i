@@ -20,8 +20,9 @@
 		<div class="col-md-12">
 			<div class="portlet light bordered">
 				<div class="portlet-body">
-					<?php echo $info['value']; ?>
-					<span><i>Ditulis pada: <?php echo date("d M Y", strtotime($info['date'])); ?></i></span>
+					<h3><?php echo $info['judul']; ?></h3>
+					<span><i>Ditulis pada: <?php echo $info['tanggal']; ?></i></span>
+					<p><?php echo $info['isi']; ?></p>
 				</div>
 			</div>
 		</div>
