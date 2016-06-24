@@ -151,6 +151,7 @@ $autoload['model'] = array(
 	'M_Detail_Tes_Wawancara'=> 'tbl_detail_tes_wawancara',
 	'M_Detail_Tes_Akademik' => 'tbl_detail_tes_akademik',
 	'M_Detail_Tes_Minat_Bakat' => 'tbl_detail_tes_minat_bakat',
-	'M_Bukti' 				=> 'tbl_bukti'
+	'M_Bukti' 				=> 'tbl_bukti',
+	'M_Sms' 				=> 'tbl_sms'
 
 );

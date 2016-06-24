@@ -19,23 +19,6 @@
 				</div>
 			</div>
 			<div class="portlet-body">
-			<!-- <?php if ($this->session->flashdata('pesan')):
-				$notif = $this->session->flashdata('pesan');?>
-					    	<div class="alert alert-block <?= "alert-".$notif ?>	 fade in">
-					<button type="button" class="close" data-dismiss="alert"></button>
-					<?php if ($notif == 'success'): ?>
-					<h4 class="alert-heading"><strong>Berhasil!</strong></h4>
-					<p>
-						input jadwal peserta ujian Akademik berhasil disimpan.
-					</p>
-					<?php else : ?>	
-					<h4 class="alert-heading"><strong>Gagal!</strong></h4>
-					<p>
-						input jadwal peserta ujian Akademik gagal disimpan, cek data yang sudah ada !
-					</p>
-					<?php endif ?>
-				</div>
-			<?php endif; ?> -->
 				<div class="table-toolbar">
 					<div class="row">
 						<div class="btn-group pull-right">

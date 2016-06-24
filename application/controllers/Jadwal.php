@@ -136,5 +136,18 @@ class Jadwal extends CI_Controller
 		redirect('jadwal/participant/'.$id);	
 	}
 
+	public function brodcast($id)
+	{
+		$brodcast = $this->tbl_peserta->join_full(array('peserta.ID' => $id));
+		foreach ($brodcast as $b)
+		{
+			$nomer = $b->NO_HANDPHONE;
+			$pesan = 'Pemberitahuan ! pelaksanaan ujian '.$b->TAHAP.' dilaksanakan pada tanggal '.date("d/m/Y",strtotime($b->TANGGAL)).' bertempat di '.$b->TEMPAT.' pada Ruang '.$b->RUANG;
+			$this->tbl_sms->outbox($nomer,$pesan);
+		}
+		$this->session->set_flashdata('pesan','<b>Berhasil! </b>Data telah berhasil di brodcast ke seluruh peserta pada tahap tersebut');
+		redirect('jadwal');	
+	}
+
 }
 ?>
