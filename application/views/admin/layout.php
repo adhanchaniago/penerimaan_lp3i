@@ -95,14 +95,14 @@ License: You must have a valid license purchased only from themeforest(the above
 									<li>
 										<ul class="dropdown-menu-list scroller" style="height: 65px; padding: 0;" data-handle-color="#637283">
 											<li>
-												<a href="javascript:;">
+												<a href="<?php echo base_url().'aplikan'; ?>">
 													<span class="details">
 														<span class="label label-sm label-icon label-success">
 															<i class="fa fa-plus"></i>
 														</span>
-														Pendaftar baru
+														Aplikan Belum Tervalidasi
 													</span>
-													<span class="time">0</span>
+													<span class="time" id="notif-validasi">0</span>
 												</a>
 											</li>
 										</ul>
@@ -206,6 +206,21 @@ License: You must have a valid license purchased only from themeforest(the above
 		    //Index.init(); // init index page
 		    QuickSidebar.init(); // init quick sidebar
 		    //Tasks.initDashboardWidget(); // init tash dashboard widget
+		});
+		</script>
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$.ajax({
+				url: '<?php echo base_url()."aplikan/check_notif"; ?>',
+				type: 'get',
+				dataType: 'html',
+				success: function(result) {
+					$('#notif-validasi').html(result);
+				},
+				error: function(xhr, status, error) {
+					console.log(error);
+				}
+			});
 		});
 		</script>
 		<!-- END JAVASCRIPTS -->

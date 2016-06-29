@@ -110,7 +110,7 @@
               <td>".$role."</td>
               <td style='text-align: center;width: 20%;'>
                 <div class='hidden-sm hidden-xs action-buttons'>
-                  <a class='btn btn-xs btn-success' href='#modal-edit' data-toggle='modal' role='button' onclick='edit(\"<?php echo $j->ID_ADMIN; ?>\", \"<?php echo $j->NAMA_ADMIN; ?>\", \"<?php echo $j->ROLE_ADMIN; ?>\")'>
+                  <a class='btn btn-xs btn-success' href='#modal-edit' data-toggle='modal' role='button' onclick='edit(\"".$j->ID_ADMIN."\", \"".$j->NAMA_ADMIN."\", \"".$j->PASS_ADMIN."\", \"".$j->ROLE_ADMIN."\")'>
                     <i class='ace-icon fa fa-pencil'></i> Ubah
                   </a>
 
@@ -136,7 +136,7 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 						<span class="white">&times;</span>
 					</button>
-					Ubah Jurusan
+					Ubah Admin
 				</div>
 			</div>
       <form class='form-horizontal' role='form' action='<?php echo base_url()."index.php/admin/ubah"; ?>' method='post'>
@@ -144,7 +144,7 @@
         <div class="form-group">
           <label class='col-sm-3 control-label' for='id'>ID</label>
           <div class='col-sm-9'>
-            <input type='text' id='id-u' name="id-u" placeholder='ID' class='form-control' value="<?php echo $id; ?>" readonly="" required="" />
+            <input type='text' id='id-u' name="id-u" placeholder='ID' class='form-control' readonly="" required="" />
           </div>
         </div>
         <div class="form-group">
@@ -184,10 +184,10 @@
 </div>
 
 <script type="text/javascript">
-  function edit(id, nama, role) {
+  function edit(id, nama, password, role) {
     $('#id-u').val(id);
     $('#nama-u').val(nama);
-    $('#password-u').val('');
+    $('#password-u').val(password);
     $('#role-u').val(role);
   }
 </script>

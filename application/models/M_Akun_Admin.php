@@ -48,7 +48,7 @@ class M_Akun_Admin extends CI_Model
 		$this->db->where('id_admin', $id);
 		return $this->db->update('akun_admin', array(
 				'nama_admin' => $nama,
-				'pass_admin' => md5($pass),
+				'pass_admin' => $pass,
 				'role_admin' => $role
 			));
 	}

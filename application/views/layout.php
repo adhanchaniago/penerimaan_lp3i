@@ -95,9 +95,9 @@ License: You must have a valid license purchased only from themeforest(the above
 														<span class="label label-sm label-icon label-success">
 															<i class="fa fa-plus"></i>
 														</span>
-														Pendaftar baru
+														Aplikan Belum Tervalidasi
 													</span>
-													<span class="time">0</span>
+													<span class="time" id="notif-validasi">0</span>
 												</a>
 											</li>
 										</ul>

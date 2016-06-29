@@ -63,5 +63,11 @@ class Aplikan extends CI_Controller
 				</div>";
 		}
 	}
+
+	public function check_notif()
+	{
+		$pendaftar = $this->tbl_pendaftar->custom_where(array('valid' => '0'));
+		echo count($pendaftar);
+	}
 }
 ?>

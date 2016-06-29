@@ -12,7 +12,13 @@
 				</div>
 			</div>
 			<div class="portlet-body">
-				&nbsp;
+				<ul>
+					<?php foreach ($informasi as $info) {
+						echo "<li>
+						<strong>".date('d M Y', strtotime($info['tanggal']))."</strong>: ".$info['judul']."
+						</li>";
+					} ?>
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -29,7 +35,13 @@
 				</div>
 			</div>
 			<div class="portlet-body">
-				&nbsp;
+				<ol>
+					<?php foreach ($jadwal as $j) {
+						echo "<li>
+						<strong>".date('d M Y', strtotime($j->TANGGAL))."</strong> - ".$j->TAHAP." @".$j->TEMPAT." (".$j->RUANG.")
+						</li>";
+					} ?>
+				</ol>
 			</div>
 		</div>
 	</div>
