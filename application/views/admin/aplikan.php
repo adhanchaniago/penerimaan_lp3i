@@ -129,7 +129,6 @@
 		</div>
 	</div>
 </div>
-
 <script type="text/javascript">
 	function fill_validasi (no_pendaftaran) {
 		$('#no_pendaftaran').val(no_pendaftaran);

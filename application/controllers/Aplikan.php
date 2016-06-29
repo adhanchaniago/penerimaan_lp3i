@@ -69,5 +69,19 @@ class Aplikan extends CI_Controller
 		$pendaftar = $this->tbl_pendaftar->custom_where(array('valid' => '0'));
 		echo count($pendaftar);
 	}
+
+	public function detil($no_pendaftaran)
+	{
+		$this->security_check->admin_check();
+		$data['judul'] = "Detil Aplikan";
+		$data['konten'] = "admin/detil_aplikan";
+
+		$data['data'] 		= $this->tbl_pendaftar->get_id($no_pendaftaran)[0];		
+		$data['keluarga'] 	= $this->tbl_anggota_keluarga->get_pendaftar($no_pendaftaran);		
+		$data['pendidikan'] = $this->tbl_riwayat_pendidikan->get_pendaftar($no_pendaftaran);		
+		$data['pekerjaan'] 	= $this->tbl_riwayat_pekerjaan->get_pendaftar($no_pendaftaran);		
+
+		$this->load->view('admin/layout', $data);
+	}
 }
 ?>
