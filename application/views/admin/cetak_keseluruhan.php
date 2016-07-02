@@ -44,7 +44,7 @@
 				<td style="text-align:center;">
 					<?php 
 						$jurusan = $this->tbl_peserta->join_jurusan(array('peserta.NO_PENDAFTARAN' => $pendaftar->NO_PENDAFTARAN));
-						echo count($jurusan)>0?$jurusan[0]->NAMA_JURUSAN:'';
+						echo count($jurusan)>0?$jurusan[0]->NAMA_JURUSAN:'-';
 					?>
 				</td>
 				<td style="text-align:center;"><?= $pendaftar->KEPUTUSAN?></td>
@@ -52,13 +52,12 @@
 			<?php endforeach ?>
 		</tbody>
 	</table>
-
 	<br>
 	<table style="width:100%;">
 		<tr>
 			<td style="width:70%;text-align:center;"></td>
 			<td style="width:30%;text-align:center;">
-				<p>Surabaya, <?= date("d M Y") ?></p>
+				<p>Surabaya, <?= date("d").' '.$this->tanggal->get_INA_bln(date("m")).' '.date("Y") ?></p>
 				<p>Menyetujui,</p>
 				<p>Ketua LP3I Surabaya</p>
 				<br>

@@ -27,15 +27,15 @@ class Laporan extends CI_Controller
 	{
 		$data['judul'] 		= "Laporan,Seluruh Peserta";
 		$data['konten'] 	= "admin/keseluruhan";
-		$cond 				= array('peserta.ID' => 1, 'peserta.KETERANGAN' => 'DITERIMA');
-		$data['pendaftar'] 	= $this->tbl_peserta->join_pendaftar($cond);
+		$cond 				= array('peserta.ID' => 1);
+		$data['pendaftar'] 	= $this->tbl_peserta->get_pengumuman_diterima($cond);
 		$this->load->view('admin/layout', $data);
 	}
 
 	public function cetak($tipe)
 	{
-		$cond 				= array('peserta.ID' => 1, 'peserta.KETERANGAN' => 'DITERIMA');
-		$data['pendaftar'] 	= $this->tbl_peserta->join_pendaftar($cond);
+		$cond 				= array('peserta.ID' => 1);
+		$data['pendaftar'] 	= $this->tbl_peserta->get_pengumuman_diterima($cond);
 
 		$fileName 			= 'Laporan Peserta '.date('dmY_His');
 		$this->pdf->load_view('admin/cetak_keseluruhan',$data);
