@@ -83,6 +83,11 @@ class M_Pendaftar extends CI_Model
 			));
 	}
 
+	public function update(array $data, array $where)
+	{
+		return $this->db->update('pendaftar',$data,$where);
+	}
+
 	public function remove($id)
 	{
 		$this->db->where('no_pendaftaran', $id);

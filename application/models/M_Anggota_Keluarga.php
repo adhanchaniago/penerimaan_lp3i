@@ -28,12 +28,12 @@ class M_Anggota_Keluarga extends CI_Model
 	public function add($id, $no_pendaftaran, $nama, $hubungan, $usia, $pekerjaan)
 	{
 		return $this->db->insert('anggota_keluarga', array(
-				'id' => $id,
-				'no_pendaftaran' => $no_pendaftaran,
-				'nama' => $nama,
-				'hubungan_keluarga' => $hubungan,
-				'usia' => $usia,
-				'pekerjaan' => $pekerjaan
+				'ID' => $id,
+				'NO_PENDAFTARAN' => $no_pendaftaran,
+				'NAMA' => $nama,
+				'HUBUNGAN_KELUARGA' => $hubungan,
+				'USIA' => $usia,
+				'PEKERJAAN' => $pekerjaan
 			));
 	}
 
@@ -42,7 +42,6 @@ class M_Anggota_Keluarga extends CI_Model
 	{
 		$this->db->where('id', $id);
 		return $this->db->update('anggota_keluarga', array(
-				'id' => $id,
 				'no_pendaftaran' => $no_pendaftaran,
 				'nama' => $nama,
 				'hubungan_keluarga' => $hubungan,

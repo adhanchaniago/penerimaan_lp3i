@@ -110,7 +110,7 @@
           Tambah Riwayat Pekerjaan
         </div>
       </div>
-      <form class='form-horizontal' role='form' action='<?php echo base_url()."index.php/page/anggota_keluarga_act/".$pendaftar->NO_PENDAFTARAN."/tambah"; ?>' method='post' enctype="multipart/form-data">
+      <form class='form-horizontal' role='form' action='<?php echo base_url()."page/anggota_keluarga_act/".$pendaftar->NO_PENDAFTARAN."/tambah"; ?>' method='post' enctype="multipart/form-data">
       <div class='modal-body no-padding'>
         <input type='hidden' id='id' name="id" class='form-control' readonly="" required="" value="<?php echo $id; ?>" />
         
