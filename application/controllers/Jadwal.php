@@ -38,6 +38,21 @@ class Jadwal extends CI_Controller
 		redirect('jadwal');
 	}
 
+	public function cek_jadwal()
+	{
+		$tahap = $this->input->post('tahap');
+		$tanggal = $this->input->post('tanggal');
+		//mengecek pada database apakah ada tahapan dan tangan yang sama
+		$cek = $this->tbl_jadwal_tes->get_where(array('TAHAP'=>$tahap,'TANGGAL'=>$tanggal));
+		if (count($cek) > 0)
+		{
+			echo "ada";
+		}else{
+			echo "kosong";
+		}
+
+	}
+
 	public function patch()
 	{
 		$id = $this->input->post('id-u');
@@ -74,11 +89,7 @@ class Jadwal extends CI_Controller
 
 		$data['jadwal'] = $this->tbl_jadwal_tes->get_id($id)[0];
 		
-		//mendapatkan peserta dengan id valid dan terdaftar pada tahap tersebut
 		$terdaftar = $this->tbl_peserta->get_where(array('ID'=>$id))->result();
-		// echo "<pre>";
-		// print_r($terdaftar);
-		// echo "</pre>";
 		$peserta_terdaftar = '';
 		if (count($terdaftar) > 0) {
 			foreach ($terdaftar as $peserta) {

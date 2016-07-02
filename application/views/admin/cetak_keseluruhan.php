@@ -28,7 +28,7 @@
 				<th width="5%" style="text-align:center;">NO.</th>
 				<th width="20%" style="text-align:center;">NAMA</th>
 				<th width="25%" style="text-align:center;">ALAMAT</th>
-				<th width="15%" style="text-align:center;">No. HP</th>
+				<th width="15%" style="text-align:center;">STATUS</th>
 				<th width="25%" style="text-align:center;">DITERIMA DI JURUSAN</th>
 				<th width="10%" style="text-align:center;">TOTAL NILAI</th>
 			</tr>
@@ -40,7 +40,7 @@
 				<td style="text-align:center;"><?= $no++ ?></td>
 				<td><?= $pendaftar->NAMA ?></td>
 				<td><?= $pendaftar->ALAMAT_TETAP?></td>
-				<td style="text-align:center;"><?= $pendaftar->NO_HANDPHONE ?></td>
+				<td style="text-align:center;"><?= $pendaftar->KETERANGAN=='DITERIMA'?'Diterima':'Tidak Diterima' ?></td>
 				<td style="text-align:center;">
 					<?php 
 						$jurusan = $this->tbl_peserta->join_jurusan(array('peserta.NO_PENDAFTARAN' => $pendaftar->NO_PENDAFTARAN));

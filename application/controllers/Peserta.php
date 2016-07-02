@@ -65,6 +65,77 @@ class Peserta extends CI_Controller
 		$data['bukti'] 					= $this->tbl_bukti->join_pendaftar(array('bukti_pembayaran.NO_PENDAFTARAN'=>$no_pendaftaran));
 		$data['pendaftar']				= $this->tbl_pendaftar->get_id($no_pendaftaran);
 
+		// info directory
+		$files = directory_map("./assets/global/info/");
+		$info_arr = array();
+		if($files != null) {
+			foreach ($files as $file) {
+				// baca file
+				$file_value = read_file("./assets/global/info/".$file);
+				$arr_value = explode("|[]|", $file_value);
+				if(count($arr_value) > 0) {
+					$arr_file = array(
+							"judul"	=> $arr_value[0],
+							"tanggal" => $arr_value[1],
+							"isi" => $arr_value[2],
+							"filename" => $file
+						);
+					array_push($info_arr, $arr_file);
+				}
+			}
+		} else {
+			$arr_file = array(
+					"judul"	=> "Informasi",
+					"tanggal" => date("d/m/Y"),
+					"isi" => "Tidak ada informasi untuk saat ini.",
+					"filename" => null
+				);
+			array_push($info_arr, $arr_file);
+		}
+		$data['informasi'] = $info_arr;
+
+		//cek hasil tes
+		$status_hasil = false;
+
+		//mengecek pada database
+		$cek_h = $this->tbl_peserta->join_jadwal(array('peserta.NO_PENDAFTARAN'=>$no_pendaftaran));
+		if (count($cek_h) > 0)
+		{
+			$status_hasil = true;
+			foreach ($cek_h as $hasil) 
+			{
+				if ($hasil->TOTAL_NILAI == '' ||$hasil->TOTAL_NILAI == Null ||$hasil->TOTAL_NILAI == "0" )
+				{
+					$status_hasil = false;
+				}
+			}
+			$data['hasil_tes'] 	= $status_hasil;
+			$data['status_hasil'] = $this->tbl_peserta->get_id($no_pendaftaran,1)[0]->KETERANGAN;
+			$data['total_nilai'] = $this->tbl_peserta->get_id($no_pendaftaran,1)[0]->KEPUTUSAN;
+			$jurusan = $this->tbl_peserta->get_id($no_pendaftaran,2)[0]->KEPUTUSAN;
+			$data['jurusan'] = $jurusan!="0"?$this->m_jurusan->get_id($jurusan)[0]->NAMA_JURUSAN:''; 
+		}else{
+			$data['hasil_tes'] 	= $status_hasil;
+			$data['status_hasil'] = '';
+			$data['total_nilai'] = '0';
+			$data['jurusan'] = ''; 
+
+		}
+
+		//get bobot nilai
+		$data ['bidang_akademik']	= $this->tbl_bidang_soal_akademik->get_all();
+		$data ['total_akademik']	= count($this->tbl_tes_akademik->get_id($no_pendaftaran,1))>0?$this->tbl_tes_akademik->get_id($no_pendaftaran,1)[0]->TOTAL_NILAI:"0";
+		
+		$total_soal					= count($this->tbl_soal_akademik->get_all());
+		$total_presentasi			= $this->tbl_bidang_soal_akademik->total_bobot();
+		$data ['bobot_nilai']		= $total_presentasi/$total_soal;
+
+		$data ['kriteria']			= $this->tbl_detail_tes_wawancara->join_kriteria(array('detil_tes_wawancara.NO_PENDAFTARAN' => $no_pendaftaran));
+		$data ['total_wawancara']	= count($this->tbl_tes_wawancara->get_total(array('tes_wawancara.NO_PENDAFTARAN' => $no_pendaftaran)))>0?$this->tbl_tes_wawancara->get_total(array('tes_wawancara.NO_PENDAFTARAN' => $no_pendaftaran))[0]->TOTAL_NILAI:"0";
+
+
+
+
 		$this->load->view('peserta/layout', $data);
 	}	
 

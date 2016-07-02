@@ -115,7 +115,8 @@
 				<div class="form-group">
 					<label class='col-sm-3 control-label no-padding-right' for='tanggal'>Tanggal</label>
 					<div class='col-sm-3'>
-						<input type="date" id='tanggal' name="tanggal" placeholder='Tanggal Tes' class='form-control' required="" />
+						<input type="date" id='tanggal' name="tanggal" placeholder='Tanggal Tes' class='form-control' required="" onblur="check()" />
+						<!-- <span style="color:red">Tahap ini telah terjadwal di tanggal ini , silahkan pilih di lain tanggal ! </span> -->
 					</div>
 				</div>
 
@@ -137,7 +138,7 @@
 				<button class='btn btn-sm btn-danger pull-left' data-dismiss='modal'>
 					<i class='ace-icon fa fa-times'></i> Tutup
 				</button>&nbsp;
-				<button class='btn btn-success btn-sm' type='submit'>
+				<button class='btn btn-success btn-sm' type='submit' id="simpan-add" disabled="true">
 					<i class='ace-icon fa fa-check'></i> Simpan
 				</button>
 			</div>
@@ -213,5 +214,39 @@
 		$("#tanggal-u").val(tanggal);
 		$("#tempat-u").val(tempat);
 		$("#ruang-u").val(ruang);
+	}
+
+	function check()
+	{
+		var tahap = $("#tahap").val();
+		var tanggal = $("#tanggal").val();
+		if (tanggal && tahap)
+		{
+			$.ajax({
+				url 	: '<?php echo base_url() ?>jadwal/cek_jadwal',
+				type 	: 'post',
+				data 	: {'tanggal':tanggal,'tahap':tahap},
+				success : function(r)
+				{
+					var hasil = r;
+					var tes = "ada";
+					if (hasil == tes)
+						{alert("sama");}
+					else
+						{alert("tidak sama");}
+					//arrrrrrrrrrgh gak kenek lek pdahal wes podo ilho type data dan isi data e tapi gak isok deteksi lek sama
+				},
+				error 	: function()
+				{
+					alert("Sistem Error Please contact administrator !");
+				}
+			});
+		}else{
+			alert("Pilih Tahap tes dan Tanggal tidak boleh Kosong !");
+			$("#tanggal").val('');
+			$("#tahap").val('');
+			$("#tahap").focus();
+
+		}
 	}
 </script>

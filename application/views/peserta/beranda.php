@@ -115,6 +115,58 @@
 	<?php endif ?>
 	<?php endif ?>
 	</div>
+	
+	<?php if ($hasil_tes): ?>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="portlet light bordered">
+				<div class="portlet-title">
+					<div class="caption caption-md font-blue">
+						<i class="fa fa-graduation-cap font-blue"></i>
+						<span class="caption-subject theme-font bold uppercase">PENGUMUMAN HASIL TES</span>
+					</div>
+				</div>
+				<div class="portlet-body">
+					<p>Pengumuman Hasil Tes dari saudara , </p>
+					<table style="margin-left:50px;">
+						<tr>
+							<td>Nama Lengkap</td>
+							<td>&nbsp; : &nbsp;</td>
+							<td><?php echo $pendaftar[0]->NAMA ?></td>
+						</tr>
+						<tr>
+							<td>Tempat, Tanggal lahir</td>
+							<td>&nbsp; : &nbsp;</td>
+							<td><?php echo $pendaftar[0]->TEMPAT_LAHIR ?>, <?php echo date("d-m-Y",strtotime($pendaftar[0]->TANGGAL_LAHIR)) ?></td>
+						</tr>
+						<tr>
+							<td>Jenis kelamin</td>
+							<td>&nbsp; : &nbsp;</td>
+							<td><?php echo $pendaftar[0]->JENIS_KELAMIN=='L'?'Laki - laki':'Perempuan' ?></td>
+						</tr>
+						<tr>
+							<td>Alamat</td>
+							<td>&nbsp; : &nbsp;</td>
+							<td><?php echo $pendaftar[0]->ALAMAT_TETAP ?></td>
+						</tr>
+						<tr>
+							<td>No. handphone</td>
+							<td>&nbsp; : &nbsp;</td>
+							<td><?php echo $pendaftar[0]->NO_HANDPHONE ?></td>
+						</tr>
+					</table>
+					<br>
+					<?php if ($status_hasil == 'DITERIMA'): ?>
+					<p>Telah dinyatakan <strong><?php echo $status_hasil ?></strong> sebagai mahasiswa pada LP3I pada jurusan <strong><?php echo strtoupper($jurusan) ?></strong>, Dengan total nilai ujian <strong><?php echo $total_nilai ?></strong></p>
+					<?php else: ?>
+					<p>Telah dinyatakan <strong><?php echo $status_hasil ?></strong>, Dengan total nilai ujian <strong><?php echo $total_nilai ?></strong></p>
+					<?php endif ?>
+					<p><a href="#detil_hasil" data-toggle="modal">Lihat Detail Nilai</a></p>
+				</div>
+			</div><!-- end.portlet -->
+		</div>
+	</div>
+	<?php endif ?>
 
 	<div class="row">
 		<div class="col-md-12">
@@ -124,76 +176,30 @@
 						<i class="fa fa-bullhorn font-blue"></i>
 						<span class="caption-subject theme-font bold uppercase">INFORMATIONS</span>
 					</div>
-					<!-- <div class="actions">
-						<div class="btn-group">
-							<a class="btn btn-sm btn-default dropdown-toggle" href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-							Filter By <i class="fa fa-angle-down"></i>
-							</a>
-							<div class="dropdown-menu hold-on-click dropdown-checkboxes pull-right">
-								<label><input type="checkbox"/> Finance</label>
-								<label><input type="checkbox" checked=""/> Membership</label>
-								<label><input type="checkbox"/> Customer Support</label>
-								<label><input type="checkbox" checked=""/> HR</label>
-								<label><input type="checkbox"/> System</label>
-							</div>
-						</div>
-					</div> -->
 				</div>
 				<div class="portlet-body">
 					<div class="scroller" style="height: 308px;" data-always-visible="1" data-rail-visible="0">
 						<ul class="feeds">
-							<li>
-								<div class="col1">
-									<div class="cont">
-										<div class="cont-col1">
-											<div class="label label-sm label-info">
-												<i class="fa fa-check"></i>
+							<?php foreach ($informasi as $info) {
+								echo "<li>
+								<div class='col1'>
+									<div class='cont'>
+										<div class='cont-col1'>
+											<div class='label label-sm label-info'>
+												<i class='fa fa-calendar'></i>
 											</div>
 										</div>
-										<div class="cont-col2">
-											<div class="desc">
-												 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, eligendi quam voluptas reiciendis. Rerum est deleniti, laborum ad porro perferendis quasi repellendus ratione distinctio, dolores ipsum, necessitatibus aliquid commodi in. <span class="label label-sm label-warning ">
-												detail <i class="fa fa-share"></i>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li>
-								<a href="#">
-								<div class="col1">
-									<div class="cont">
-										<div class="cont-col1">
-											<div class="label label-sm label-success">
-												<i class="fa fa-bar-chart-o"></i>
-											</div>
-										</div>
-										<div class="cont-col2">
-											<div class="desc">
-												 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae quisquam libero, consequuntur aperiam adipisci tempore architecto aut aliquam laudantium sint error illum ducimus voluptas officia, cumque, et? Reprehenderit, officiis, similique!	
+										<div class='cont-col2'>
+											<div class='desc'>
+
+										<strong>".date('d M Y', strtotime($info['tanggal']))."</strong>: ".$info['judul']."
+									
 											</div>
 										</div>
 									</div>
 								</div>
-								</a>
-							</li>
-							<li>
-								<div class="col1">
-									<div class="cont">
-										<div class="cont-col1">
-											<div class="label label-sm label-danger">
-												<i class="fa fa-user"></i>
-											</div>
-										</div>
-										<div class="cont-col2">
-											<div class="desc">
-												 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt laborum, minima, qui officia magni, a cum soluta natus placeat atque quidem tempore maiores veritatis, earum fugit et neque minus. Non.
-											</div>
-										</div>
-									</div>
-								</div>
-							</li>
+								</li>";
+							} ?>
 						</ul>
 					</div>
 				</div>
@@ -285,3 +291,93 @@
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal -->
+
+	<?php if ($hasil_tes): ?>
+	<div class="modal fade" id="detil_hasil" tabindex="-1" role="basic" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form class='form-horizontal' role='form' action='<?php echo base_url()."upload/do_upload"; ?>' method='post' enctype="multipart/form-data">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+					<h4 class="modal-title">Detil Hasil Tes</h4>
+				</div>
+				<div class="modal-body">
+					<table class="table table-bordered">
+						<tr>
+							<th colspan="3" style="text-align:center;">AKADEMIK</th>
+						</tr>
+						<tr>
+							<td width="5%" style="text-align:center;">NO.</td>
+							<td width="80%" style="text-align:center;">BIDANG</td>
+							<td width="15%" style="text-align:center;">NILAI</td>
+						</tr>
+						<?php $no = 1; ?>
+						<?php foreach ($bidang_akademik as $akademik): ?>
+						<tr>
+							<td style="text-align:center;"><?php echo $no++ ?></td>
+							<td><?php echo $akademik->NAMA_BIDANG_SOAL ?></td>
+							<?php 
+								$cond_t = array(
+										'detil_tes_akademik.NO_PENDAFTARAN' => $pendaftar[0]->NO_PENDAFTARAN,
+										'jawaban_akademik.NILAI' => 1,
+										'bidang_soal_akademik.ID_BIDANG_SOAL' => $akademik->ID_BIDANG_SOAL
+									);
+								$benar = count($this->tbl_detail_tes_akademik->join_all($cond_t));
+								$nilai_benar = $benar * $bobot_nilai;
+							?>
+							<td style="text-align:center;"><?php echo round($nilai_benar, 0) ?></td>
+						</tr>	
+						<?php endforeach ?>
+						<tr>
+							<td colspan="2" style="text-align:right;">Total Nilai Akademik</td>
+							<td style="text-align:center;"><b><?php echo $total_akademik ?></b></td>
+						</tr>
+						<tr>
+							<td colspan="2" style="text-align:right;"><b>B x K</b></td>
+							<td style="text-align:center;"><b><?php echo round(($total_akademik*70)/100); ?></b></td>
+						</tr>
+					</table>
+					<br>
+					<table class="table table-bordered">
+						<tr>
+							<th colspan="3" style="text-align:center;">Wawancara</th>
+						</tr>
+						<tr>
+							<td width="5%" style="text-align:center;">NO.</td>
+							<td width="80%" style="text-align:center;">BIDANG</td>
+							<td width="15%" style="text-align:center;">NILAI</td>
+						</tr>
+						<?php $no = 1; ?>
+						<?php foreach ($kriteria as $kriteria): ?>
+						<tr>
+							<td style="text-align:center;"><?php echo $no++ ?></td>
+							<td><?php echo $kriteria->NAMA_KRITERIA ?></td>
+							<td style="text-align:center;"><?php echo $kriteria->SKOR ?></td>
+						</tr>
+						<?php endforeach ?>
+						<tr>
+							<td colspan="2" style="text-align:right;">Total Nilai Wawancara</td>
+							<td style="text-align:center;"><b><?php echo $total_wawancara; ?></b></td>
+						</tr>
+						<tr>
+							<td colspan="2" style="text-align:right;"><b>B x K</b></td>
+							<td style="text-align:center;"><b><?php echo round(($total_wawancara*30)/100); ?></b></td>
+						</tr>
+					</table>
+					<br>
+					<p>Total nilai Keseluruhan : <strong><?php echo $total_nilai ?></strong></p>
+
+				</div>
+				<div class="modal-footer">
+					<button class="btn" data-dismiss="modal">
+						Tutup
+					</button>
+				</div>
+				</form>	
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+	<?php endif ?>

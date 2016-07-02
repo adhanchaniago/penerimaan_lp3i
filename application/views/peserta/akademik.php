@@ -26,11 +26,31 @@
 									<div class="panel-heading">
 										<h4 class="panel-title">
 										<a class="accordion-toggle accordion-toggle-styled" data-toggle="collapse" data-parent="#accordion3" href="#collapse_3_<?= $s->ID_SOAL ?>">
-											<b><?= $no_soal++ ?>). <?= $s->TEKS_SOAL ?></b>
+											<b><?= $no_soal++ ?>). <?= $s->TEKS_SOAL ?></b><span id="soal_<?= $s->ID_SOAL ?>" class="badge badge-success" style="margin-left:15px"></span>
 										</a>
 										</h4>
 									</div>
+
+									
 									<div id="collapse_3_<?= $s->ID_SOAL ?>" class="panel-collapse collapse">
+									<div class="row">
+										<div class="col-md-12">
+											<center>
+									<?php 
+									$gambar = $this->tbl_gambar_akademik->get_soal($s->ID_SOAL);
+									if (count($gambar) > 0) {
+										$g = $gambar[0]->NAMA_FILE;
+										if ($g != '')
+										{
+											$url = base_url().substr_replace($gambar[0]->LOKASI_FILE, '', 0,2).$gambar[0]->NAMA_FILE;
+											echo "<img src='".$url."' alt='Gambar Soal'>";
+											
+										}
+									}
+									?>
+											</center>
+										</div>
+									</div>
 										<div class="row">
 											<div class="col-md-11" style="margin-left:20px;">
 												<?php $jawaban = $this->tbl_jawaban_akademik->get_soal($s->ID_SOAL); ?>
@@ -38,7 +58,7 @@
 												<?php foreach ($jawaban as $j): ?>
 													<div class="md-radio-list">
 														<div class="md-radio">
-															<input type="radio" id="jawaban<?= $j->ID_JAWABAN ?>" name="soal[<?= $s->ID_SOAL ?>]" class="md-radiobtn" value="<?= $j->ID_JAWABAN ?>">
+															<input type="radio" id="jawaban<?= $j->ID_JAWABAN ?>" name="soal[<?= $s->ID_SOAL ?>]" class="md-radiobtn" value="<?= $j->ID_JAWABAN ?>" onclick="tandai(<?= $s->ID_SOAL ?>)" >
 															<label for="jawaban<?= $j->ID_JAWABAN ?>">
 															<span></span>
 															<span class="check"></span>
@@ -86,5 +106,10 @@
 		}else{
 			return false;
 		}
+	}
+
+	function tandai(id)
+	{
+		$("#soal_"+id).html('<i class="fa fa-check"></i>');
 	}
 </script>

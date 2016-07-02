@@ -61,58 +61,58 @@
 		Telah dinyatakan DITERIMA sebagai mahasiswa pada LP3I pada jurusan <?php echo strtoupper($j); ?>. Berikut kami lampirkan hasil tes penerimaan anda yang telah di lakukan : 
 	</p>
 	<table style="width:100%" border="1px" cellspacing="0" cellpadding="4px">
-			<tr>
-				<th colspan="3" style="text-align:center;">AKADEMIK</th>
-			</tr>
-			<tr>
-				<td width="5%" style="text-align:center;">NO.</td>
-				<td width="80%" style="text-align:center;">BIDANG</td>
-				<td width="15%" style="text-align:center;">NILAI</td>
-			</tr>
-			<?php $no = 1; ?>
-			<?php foreach ($bidang_akademik as $akademik): ?>
-			<tr>
-				<td style="text-align:center;"><?php echo $no++ ?></td>
-				<td><?php echo $akademik->NAMA_BIDANG_SOAL ?></td>
-				<?php 
-					$cond_t = array(
-							'detil_tes_akademik.NO_PENDAFTARAN' => $pendaftar->NO_PENDAFTARAN,
-							'jawaban_akademik.NILAI' => 1,
-							'bidang_soal_akademik.ID_BIDANG_SOAL' => $akademik->ID_BIDANG_SOAL
-						);
-					$benar = count($this->tbl_detail_tes_akademik->join_all($cond_t));
-					$nilai_benar = $benar * $bobot_nilai;
-				?>
-				<td style="text-align:center;"><?php echo round($nilai_benar, 0) ?></td>
-			</tr>	
-			<?php endforeach ?>
-			<tr>
-				<td colspan="2" style="text-align:right;">Total Nilai Akademik</td>
-				<td style="text-align:center;"><b><?php echo $total_akademik ?></b></td>
-			</tr>
+		<tr>
+			<th colspan="3" style="text-align:center;">AKADEMIK</th>
+		</tr>
+		<tr>
+			<td width="5%" style="text-align:center;">NO.</td>
+			<td width="80%" style="text-align:center;">BIDANG</td>
+			<td width="15%" style="text-align:center;">NILAI</td>
+		</tr>
+		<?php $no = 1; ?>
+		<?php foreach ($bidang_akademik as $akademik): ?>
+		<tr>
+			<td style="text-align:center;"><?php echo $no++ ?></td>
+			<td><?php echo $akademik->NAMA_BIDANG_SOAL ?></td>
+			<?php 
+				$cond_t = array(
+						'detil_tes_akademik.NO_PENDAFTARAN' => $pendaftar->NO_PENDAFTARAN,
+						'jawaban_akademik.NILAI' => 1,
+						'bidang_soal_akademik.ID_BIDANG_SOAL' => $akademik->ID_BIDANG_SOAL
+					);
+				$benar = count($this->tbl_detail_tes_akademik->join_all($cond_t));
+				$nilai_benar = $benar * $bobot_nilai;
+			?>
+			<td style="text-align:center;"><?php echo round($nilai_benar, 0) ?></td>
+		</tr>	
+		<?php endforeach ?>
+		<tr>
+			<td colspan="2" style="text-align:right;">Total Nilai Akademik</td>
+			<td style="text-align:center;"><b><?php echo $total_akademik ?></b></td>
+		</tr>
 	</table>
 	<br>
 	<table style="width:100%" border="1px" cellspacing="0" cellpadding="4px">
-			<tr>
-				<th colspan="3" style="text-align:center;">WAWANCARA</th>
-			</tr>
-			<tr>
-				<td width="5%" style="text-align:center;">NO.</td>
-				<td width="80%" style="text-align:center;">BIDANG</td>
-				<td width="15%" style="text-align:center;">NILAI</td>
-			</tr>
-			<?php $no = 1; ?>
-			<?php foreach ($kriteria as $kriteria): ?>
-			<tr>
-				<td style="text-align:center;"><?php echo $no++ ?></td>
-				<td><?php echo $kriteria->NAMA_KRITERIA ?></td>
-				<td style="text-align:center;"><?php echo $kriteria->SKOR ?></td>
-			</tr>
-			<?php endforeach ?>
-			<tr>
-				<td colspan="2" style="text-align:right;">Total Nilai Wawancara</td>
-				<td style="text-align:center;"><b><?php echo $total_wawancara; ?></b></td>
-			</tr>	
+		<tr>
+			<th colspan="3" style="text-align:center;">WAWANCARA</th>
+		</tr>
+		<tr>
+			<td width="5%" style="text-align:center;">NO.</td>
+			<td width="80%" style="text-align:center;">BIDANG</td>
+			<td width="15%" style="text-align:center;">NILAI</td>
+		</tr>
+		<?php $no = 1; ?>
+		<?php foreach ($kriteria as $kriteria): ?>
+		<tr>
+			<td style="text-align:center;"><?php echo $no++ ?></td>
+			<td><?php echo $kriteria->NAMA_KRITERIA ?></td>
+			<td style="text-align:center;"><?php echo $kriteria->SKOR ?></td>
+		</tr>
+		<?php endforeach ?>
+		<tr>
+			<td colspan="2" style="text-align:right;">Total Nilai Wawancara</td>
+			<td style="text-align:center;"><b><?php echo $total_wawancara; ?></b></td>
+		</tr>	
 	</table>
 	<br>
 	<p>
