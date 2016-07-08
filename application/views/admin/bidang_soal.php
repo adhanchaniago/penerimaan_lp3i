@@ -20,12 +20,6 @@
       </div>
       <div class="portlet-body">
         <form class="form-horizontal" method="post" action="<?php echo base_url().'index.php/bidang_soal/tambah' ?>">
-            <!-- <div class="form-group">
-              <label class='col-sm-3 control-label' for='id'>ID</label>
-              <div class='col-sm-9'>
-                <input type='text' id='id' name="id" placeholder='ID' class='form-control' value="<?php //echo $id; ?>" readonly="" required="" />
-              </div>
-            </div> -->
             <input type='hidden' id='id' name="id" placeholder='ID' class='form-control' value="<?php echo $id; ?>" readonly="" required="" />
             <div class="form-group">
               <label class='col-md-3 control-label' for='nama'>Bidang Akademik</label>
@@ -36,7 +30,7 @@
             <div class="form-group">
               <label class='col-md-3 control-label' for='bobot'>Bobot (%)</label>
               <div class='col-sm-9'>
-                <input type='number' id='bobot' name="bobot" placeholder='0 - 100' class='form-control' required="" max="<?php echo $max_bobot; ?>" min="1" <?php if($total_bobot >= 100) { echo "readonly"; } ?> />
+                <input type='number' id='bobot' name="bobot" placeholder='1 - <?php echo $max_bobot; ?>' class='form-control' required="" max="<?php echo $max_bobot; ?>" min="1" <?php if($total_bobot >= 100) { echo "readonly"; } ?> />
               </div>
             </div>
             <div class="form-group">
@@ -92,7 +86,7 @@
                     <i class="ace-icon fa fa-pencil"></i> Ubah
                   </a>
 
-                  <a class="btn btn-xs btn-danger" href="<?php echo base_url().'index.php/bidang_soal/hapus/'.$j->ID_BIDANG_SOAL; ?>" onclick="return confirm('Anda yakin?');">
+                  <a class="btn btn-xs btn-danger" href="<?php echo base_url().'bidang_soal/hapus/'.$j->ID_BIDANG_SOAL; ?>" onclick="return confirm('Anda yakin?');">
                     <i class="ace-icon fa fa-trash-o"></i> Hapus
                   </a>
                 </div>
@@ -117,45 +111,54 @@
 					Ubah Bidang Soal
 				</div>
 			</div>
-      <form class='form-horizontal' role='form' action='<?php echo base_url()."index.php/bidang_soal/ubah"; ?>' method='post'>
-      <div class='modal-body no-padding'>
-        <!-- <div class="form-group">
-          <label class='col-sm-3 control-label no-padding-right' for='id-u'>ID</label>
-          <div class='col-sm-9'>
-            <input type='text' id='id-u' name="id-u" placeholder='ID' class='form-control' readonly="" required="" />
+      <form class='form-horizontal' id="box_edit" role='form' action='<?php echo base_url()."bidang_soal/ubah"; ?>' method='post'>
+        <!-- <div class='modal-body no-padding'>
+          <input type='hidden' id='id-u' name="id-u" placeholder='ID' class='form-control' readonly="" required="" />
+          <div class="form-group">
+            <label class='col-sm-3 control-label no-padding-right' for='nama-u'>Bidang Akademik</label>
+            <div class='col-sm-9'>
+              <input type='text' id='nama-u' name="nama-u" placeholder='Nama' class='form-control' required="" />
+            </div>
           </div>
+          <div class="form-group">
+            <label class='col-sm-3 control-label no-padding-right' for='bobot-u'>Bobot (%)</label>
+            <div class='col-sm-9'>
+              <input type='number' id='bobot-u' name="bobot-u" placeholder='XX' class='form-control' required="" max="100" min="1" />
+            </div>
+          </div>
+        </div>
+        <div class='modal-footer no-margin-top'>
+          <button class='btn btn-sm btn-danger pull-left' data-dismiss='modal'>
+            <i class='ace-icon fa fa-times'></i> Tutup
+          </button>&nbsp;
+          <button class='btn btn-primary btn-sm' type='submit' id="btn-simpan-u">
+            <i class='ace-icon fa fa-check'></i> Simpan
+          </button>
         </div> -->
-        <input type='hidden' id='id-u' name="id-u" placeholder='ID' class='form-control' readonly="" required="" />
-        <div class="form-group">
-          <label class='col-sm-3 control-label no-padding-right' for='nama-u'>Bidang Akademik</label>
-          <div class='col-sm-9'>
-            <input type='text' id='nama-u' name="nama-u" placeholder='Nama' class='form-control' required="" />
-          </div>
-        </div>
-        <div class="form-group">
-          <label class='col-sm-3 control-label no-padding-right' for='bobot-u'>Bobot (%)</label>
-          <div class='col-sm-9'>
-            <input type='number' id='bobot-u' name="bobot-u" placeholder='XX' class='form-control' required="" max="100" min="1" />
-          </div>
-        </div>
-      </div>
-      <div class='modal-footer no-margin-top'>
-        <button class='btn btn-sm btn-danger pull-left' data-dismiss='modal'>
-          <i class='ace-icon fa fa-times'></i> Tutup
-        </button>&nbsp;
-        <button class='btn btn-primary btn-sm' type='submit'>
-          <i class='ace-icon fa fa-check'></i> Simpan
-        </button>
-      </div>
       </form>
     </div>
   </div>
 </div>
 
 <script type="text/javascript">
-  function edit(id, nama, bobot) {
-    $('#id-u').val(id);
-    $('#nama-u').val(nama);
-    $('#bobot-u').val(bobot);
+  function edit(id, nama, bobot)
+  {
+    // $('#id-u').val(id);
+    // $('#nama-u').val(nama);
+    // $('#bobot-u').val(bobot);
+
+    $.ajax({
+      url   : '<?php echo base_url() ?>bidang_soal/edit',
+      type  : 'post',
+      data  : {'id':id,'nama':nama,'bobot':bobot},
+      success   : function(r)
+      {
+        $("#box_edit").html(r);
+      },
+      error     : function()
+      {
+        alert("Error !, Please contact administrator.");
+      }
+    });
   }
 </script>

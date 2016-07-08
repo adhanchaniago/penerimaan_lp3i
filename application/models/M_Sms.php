@@ -8,7 +8,8 @@ class M_Sms extends CI_Model
 		$sms = $this->load->database('sms',TRUE);
 		$data = array(
 				'DestinationNumber' => $nomer,
-				'TextDecoded' => $pesan
+				'TextDecoded' => $pesan,
+				'CreatorID'=>'Gammu'
 			);
 		$sms->insert('outbox',$data);
 	}

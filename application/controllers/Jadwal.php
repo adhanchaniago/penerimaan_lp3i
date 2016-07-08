@@ -138,8 +138,8 @@ class Jadwal extends CI_Controller
 		}else{
 			$this->session->set_flashdata('pesan','input jadwal peserta ujian '.$tahap.' gagal disimpan, cek data yang sudah ada!');
 		}
-		redirect('jadwal/participant/'.$jadwal);
-	}
+		redirect('jadwal/participant/'.$jadwal);	
+}
 
 	public function participant_del($no,$id)
 	{
@@ -150,11 +150,12 @@ class Jadwal extends CI_Controller
 	public function brodcast($id)
 	{
 		$brodcast = $this->tbl_peserta->join_full(array('peserta.ID' => $id));
+
 		foreach ($brodcast as $b)
 		{
 			$nomer = $b->NO_HANDPHONE;
 			$pesan = 'Pemberitahuan ! pelaksanaan ujian '.$b->TAHAP.' dilaksanakan pada tanggal '.date("d/m/Y",strtotime($b->TANGGAL)).' bertempat di '.$b->TEMPAT.' pada Ruang '.$b->RUANG;
-			$this->tbl_sms->outbox($nomer,$pesan);
+			passthru('gammu --sendsms text '.$nomer.' -text "'.$pesan.'"',$return);
 		}
 		$this->session->set_flashdata('pesan','<b>Berhasil! </b>Data telah berhasil di brodcast ke seluruh peserta pada tahap tersebut');
 		redirect('jadwal');	

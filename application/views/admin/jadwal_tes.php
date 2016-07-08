@@ -228,13 +228,10 @@
 				data 	: {'tanggal':tanggal,'tahap':tahap},
 				success : function(r)
 				{
-					var hasil = r;
-					var tes = "ada";
-					if (hasil == tes)
-						{alert("sama");}
+					if (r = "ada")
+						{alert("sama dan "+r);}
 					else
-						{alert("tidak sama");}
-					//arrrrrrrrrrgh gak kenek lek pdahal wes podo ilho type data dan isi data e tapi gak isok deteksi lek sama
+						{alert("tidak sama dan "+r);}
 				},
 				error 	: function()
 				{
