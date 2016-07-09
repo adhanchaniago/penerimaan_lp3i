@@ -217,30 +217,48 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<label for="bukti" class="control-label col-md-4">Pilih File</label>
+						<label for="nama_pendaftar" class="control-label col-md-4">Nama</label>
 						<div class="col-md-6">
-							<input type="file" id="bukti" name="bukti" accept=".jpg,.png,.bmp" class="form-control" required>
-							<p class="help-block">
-								 file type : jpg, bmp, png, pdf.
-							</p>
+							<input type="text" id="nama_pendaftar" name="nama_pendaftar" class="form-control"
+								value="<?php echo $pendaftar[0]->NAMA; ?>" readonly="">
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="keterangan" class="control-label col-md-4">Keterangan</label>
+						<label for="tgl_daftar" class="control-label col-md-4">Tanggal Daftar</label>
 						<div class="col-md-6">
-							<input type="text" id="keterangan" name="keterangan" class="form-control">
+							<input type="text" id="tgl_daftar" name="tgl_daftar" class="form-control" 
+								value="<?php echo $pendaftar[0]->TANGGAL_DAFTAR; ?>" readonly="">
 						</div>
 					</div>
+
+					<div class="form-group">
+						<label for="jml_transfer" class="control-label col-md-4">Jumlah Transfer</label>
+						<div class="col-md-6">
+							<input type="number" id="jml_transfer" name="jml_transfer" class="form-control" min="0" required>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="bukti" class="control-label col-md-4">Pilih File</label>
+						<div class="col-md-6">
+							<input type="file" id="bukti" name="bukti" accept=".jpg,.png,.bmp" class="form-control" required>
+							<p class="help-block">
+								file type : jpg, bmp, png, pdf.
+							</p>
+						</div>
+					</div>
+
+					<input type="hidden" id="keterangan" name="keterangan" class="form-control">
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-info" type="submit">
 						<i class="ace-icon fa fa-cloud-upload"></i>
-						Simpan
+						Unggah
 					</button>
 					<button class="btn" type="reset">
 						<i class="ace-icon fa fa-undo bigger-110"></i>
-						Cancel
+						Batal
 					</button>
 				</div>
 				</form>	
@@ -381,3 +399,20 @@
 	</div>
 	<!-- /.modal -->
 	<?php endif ?>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var nama = $("#nama_pendaftar").val();
+		var tgl = $("#tgl_daftar").val();
+		var jml = $("#jml_transfer").val();
+		var format = nama + "_" + tgl + "_" + jml;
+		$("#keterangan").val(format);
+
+		$("#jml_transfer").change(function() {
+			var nama = $("#nama_pendaftar").val();
+			var tgl = $("#tgl_daftar").val();
+			var jml = $("#jml_transfer").val();
+			var format = nama + "_" + tgl + "_" + jml;
+			$("#keterangan").val(format);
+		});
+	});
+</script>
