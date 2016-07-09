@@ -115,8 +115,8 @@
 				<div class="form-group">
 					<label class='col-sm-3 control-label no-padding-right' for='tanggal'>Tanggal</label>
 					<div class='col-sm-3'>
-						<input type="date" id='tanggal' name="tanggal" placeholder='Tanggal Tes' class='form-control' required="" onblur="check()" />
-						<!-- <span style="color:red">Tahap ini telah terjadwal di tanggal ini , silahkan pilih di lain tanggal ! </span> -->
+						<input type="date" id='tanggal' name="tanggal" placeholder='Tanggal Tes' class='form-control' required="" onchange="check()" />
+						<span class="helpTgl" style="color:red">Tahap ini telah terjadwal di tanggal ini , silahkan pilih di lain tanggal!</span>
 					</div>
 				</div>
 
@@ -164,7 +164,7 @@
 				<div class="form-group">
 					<label class='col-sm-3 control-label no-padding-right' for='tahap'>Tahap Tes</label>
 					<div class='col-sm-9'>
-						<select id='tahap-u' name="tahap-u" placeholder='Tahap Tes' class='form-control' required="" >
+						<select id='tahap-u' name="tahap-u" placeholder='Tahap Tes' class='form-control' required="" readonly="" >
 							<option></option>
 							<option>Akademik</option>
 							<option>Minat Bakat</option>
@@ -176,7 +176,7 @@
 				<div class="form-group">
 					<label class='col-sm-3 control-label no-padding-right' for='tanggal'>Tanggal</label>
 					<div class='col-sm-3'>
-						<input type="date" id='tanggal-u' name="tanggal-u" placeholder='Tanggal Tes' class='form-control' required="" />
+						<input type="date" id='tanggal-u' name="tanggal-u" placeholder='Tanggal Tes' class='form-control' required="" readonly="" />
 					</div>
 				</div>
 
@@ -198,7 +198,7 @@
 				<button class='btn btn-sm btn-danger pull-left' data-dismiss='modal'>
 					<i class='ace-icon fa fa-times'></i> Tutup
 				</button>&nbsp;
-				<button class='btn btn-success btn-sm' type='submit'>
+				<button class='btn btn-success btn-sm' type='submit' id="simpan-edit" disabled="true">
 					<i class='ace-icon fa fa-check'></i> Simpan
 				</button>
 			</div>
@@ -222,22 +222,19 @@
 		var tanggal = $("#tanggal").val();
 		if (tanggal && tahap)
 		{
-			$.ajax({
-				url 	: '<?php echo base_url() ?>jadwal/cek_jadwal',
-				type 	: 'post',
-				data 	: {'tanggal':tanggal,'tahap':tahap},
-				success : function(r)
-				{
-					if (r = "ada")
-						{alert("sama dan "+r);}
-					else
-						{alert("tidak sama dan "+r);}
-				},
-				error 	: function()
-				{
-					alert("Sistem Error Please contact administrator !");
-				}
-			});
+			var url = '<?php echo base_url() ?>jadwal/cek_jadwal';
+			var xhttp = new XMLHttpRequest();
+			xhttp.open("POST", url, false);
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhttp.send("tanggal=" + tanggal + "&tahap=" + tahap);
+			var resp = xhttp.responseText;
+			if(resp.trim() == "ada") {
+				$("#simpan-add").attr("disabled", true);
+				$(".helpTgl").show();
+			} else {
+				$("#simpan-add").attr("disabled", false);
+				$(".helpTgl").hide();
+			}
 		}else{
 			alert("Pilih Tahap tes dan Tanggal tidak boleh Kosong !");
 			$("#tanggal").val('');
@@ -246,4 +243,9 @@
 
 		}
 	}
+</script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".helpTgl").hide();
+	});
 </script>
