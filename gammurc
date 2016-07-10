@@ -8,7 +8,7 @@
 
 [gammu]
 
-device = com20:
+device = com3:
 connection = at19200
 ; Do not use model configuration unless you really need it
 ;model = E3276

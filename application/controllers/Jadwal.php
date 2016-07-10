@@ -149,6 +149,8 @@ class Jadwal extends CI_Controller
 
 	public function brodcast($id)
 	{
+		set_time_limit(0);
+		
 		$brodcast = $this->tbl_peserta->join_full(array('peserta.ID' => $id));
 
 		foreach ($brodcast as $b)

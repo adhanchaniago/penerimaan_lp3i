@@ -6,7 +6,7 @@
 [gammu]
 #device = /dev/ttyS1
 #model = 6110
-port = 	COM20
+port = 	COM3
 connection = at19200
 #synchronizetime = yes
 #logfile = c:\gammu\log.txt
@@ -60,7 +60,7 @@ sendtimeout = 30
 
 # Database backends congfiguration
 user = root
-password = jabrek
+password = 
 pc = localhost
 # pc can also contain port or socket path after colon (eg. localhost:/path/to/socket)
 database = smsd
