@@ -23,7 +23,7 @@
 									<div class="panel-heading">
 										<h4 class="panel-title">
 										<a class="accordion-toggle accordion-toggle-styled" data-toggle="collapse" data-parent="#accordion3" href="#collapse_3_<?= $s->ID_SOAL ?>">
-											<b><?= $no_soal++ ?>). <?= $s->TEKS_SOAL ?></b>
+											<b><?= $no_soal++ ?>). <?= $s->TEKS_SOAL ?></b><span id="soal_<?= $s->ID_SOAL ?>" class="badge badge-success" style="margin-left:15px"></span>
 										</a>
 										</h4>
 									</div>
@@ -35,7 +35,7 @@
 												<?php foreach ($jawaban as $j): ?>
 													<div class="md-radio-list">
 														<div class="md-radio">
-															<input type="radio" id="jawaban<?= $j->ID_JAWABAN ?>" name="soal[<?= $s->ID_SOAL ?>]" class="md-radiobtn" value="<?= $j->ID_JAWABAN ?>">
+															<input type="radio" id="jawaban<?= $j->ID_JAWABAN ?>" name="soal[<?= $s->ID_SOAL ?>]" class="md-radiobtn" value="<?= $j->ID_JAWABAN ?>" onclick="tandai(<?= $s->ID_SOAL ?>)">
 															<label for="jawaban<?= $j->ID_JAWABAN ?>">
 															<span></span>
 															<span class="check"></span>
@@ -81,5 +81,11 @@
 		}else{
 			return false;
 		}
+	}
+
+
+	function tandai(id)
+	{
+		$("#soal_"+id).html('<i class="fa fa-check"></i>');
 	}
 </script>
