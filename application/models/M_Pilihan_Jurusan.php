@@ -43,5 +43,10 @@ class M_Pilihan_Jurusan extends CI_Model
 		$this->db->where('id_jurusan', $id_jurusan);
 		return $this->db->delete('pilihan_jurusan');
 	}
+
+	public function get_by_jurusan($id)
+	{
+		return $this->db->get_where('pilihan_jurusan', array('id_jurusan' => $id))->result();
+	}
 }
 ?>

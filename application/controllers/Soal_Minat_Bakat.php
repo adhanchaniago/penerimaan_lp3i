@@ -85,11 +85,17 @@ class Soal_Minat_Bakat extends CI_Controller
 
 	public function hapus($id)
 	{
-		$query = $this->tbl_soal_minat_bakat->remove($id);
-		if ($query > 0) {
-			$this->session->set_flashdata('pesan', '<b>Berhasil!</b> Soal minat bakat telah dihapus.');
-		} else {
-			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Soal minat bakat gagal dihapus.');
+		$cek = $this->tbl_detail_tes_minat_bakat->join_jawaban(array('detil_tes_minat_bakat.ID_SOAL'=>$id));
+		if (count($cek) > 0)
+		{
+			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Soal minat bakat gagal dihapus, cek data yang terkait.');
+		}else{
+			$query = $this->tbl_soal_minat_bakat->remove($id);
+			if ($query > 0) {
+				$this->session->set_flashdata('pesan', '<b>Berhasil!</b> Soal minat bakat telah dihapus.');
+			} else {
+				$this->session->set_flashdata('pesan', '<b>Gagal!</b> Soal minat bakat gagal dihapus.');
+			}
 		}
 		redirect('soal_minat_bakat');
 	}

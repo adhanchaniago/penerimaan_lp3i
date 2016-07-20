@@ -56,11 +56,17 @@ class Bidang_Soal extends CI_Controller
 
 	public function hapus($id)
 	{
-		$query = $this->tbl_bidang_soal_akademik->remove($id);
-		if ($query > 0) {
-			$this->session->set_flashdata('pesan', '<b>Berhasil!</b> Data bidang soal akademik telah dihapus.');
-		} else {
-			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Data bidang soal akademik gagal dihapus.');
+		$cek = $this->tbl_soal_akademik->get_by_bidang($id);
+		if (count($cek) > 0 )
+		{
+			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Data bidang soal akademik gagal dihapus, cek data yang terkait.');
+		}else{
+			$query = $this->tbl_bidang_soal_akademik->remove($id);
+			if ($query > 0) {
+				$this->session->set_flashdata('pesan', '<b>Berhasil!</b> Data bidang soal akademik telah dihapus.');
+			} else {
+				$this->session->set_flashdata('pesan', '<b>Gagal!</b> Data bidang soal akademik gagal dihapus.');
+			}
 		}
 		redirect('bidang_soal');
 	}

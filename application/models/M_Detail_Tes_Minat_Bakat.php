@@ -23,4 +23,5 @@ class M_Detail_Tes_Minat_Bakat extends CI_Model
 			$this->db->where($cond);
 		return $this->db->get()->result();
 	}
+
 }

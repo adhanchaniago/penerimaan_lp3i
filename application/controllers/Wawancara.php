@@ -56,11 +56,17 @@ class Wawancara extends CI_Controller
 
 	public function hapus_pewawancara($id)
 	{
-		$query = $this->tbl_pewawancara->remove($id);
-		if ($query > 0) {
-			$this->session->set_flashdata('pesan', '<b>Berhasil!</b> Data pewawancara telah dihapus.');
-		} else {
-			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Data pewawancara gagal dihapus.');
+		$cek = $this->tbl_tes_wawancara->get_total(array('tes_wawancara.ID_PEWAWANCARA'=>$id));
+		if (count($cek))
+		{
+			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Data pewawancara gagal dihapus, cek data yang terkait.');
+		}else{
+			$query = $this->tbl_pewawancara->remove($id);
+			if ($query > 0) {
+				$this->session->set_flashdata('pesan', '<b>Berhasil!</b> Data pewawancara telah dihapus.');
+			} else {
+				$this->session->set_flashdata('pesan', '<b>Gagal!</b> Data pewawancara gagal dihapus.');
+			}
 		}
 		redirect('wawancara/pewawancara');
 	}
@@ -107,12 +113,19 @@ class Wawancara extends CI_Controller
 
 	public function hapus_kriteria($id)
 	{
-		$query = $this->tbl_kriteria_wawancara->remove($id);
-		if ($query > 0) {
-			$this->session->set_flashdata('pesan', '<b>Berhasil!</b> Data kriteria wawancara telah dihapus.');
-		} else {
-			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Data kriteria wawancara gagal dihapus.');
+		$cek =  $this->tbl_detail_tes_wawancara->join_kriteria(array('detil_tes_wawancara.ID_KRITERIA'=>$id));
+		if (count($cek) > 0)
+		{
+			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Data kriteria wawancara gagal dihapus, cek data yang terkait.');
+		}else{
+			$query = $this->tbl_kriteria_wawancara->remove($id);
+			if ($query > 0) {
+				$this->session->set_flashdata('pesan', '<b>Berhasil!</b> Data kriteria wawancara telah dihapus.');
+			} else {
+				$this->session->set_flashdata('pesan', '<b>Gagal!</b> Data kriteria wawancara gagal dihapus.');
+			}
 		}
+
 		redirect('wawancara/kriteria');
 	}
 }

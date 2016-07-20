@@ -141,11 +141,17 @@ class Soal_Akademik extends CI_Controller
 
 	public function hapus($id)
 	{
-		$query = $this->tbl_soal_akademik->remove($id);
-		if ($query > 0) {
-			$this->session->set_flashdata('pesan', '<b>Berhasil!</b> Soal akademik telah dihapus.');
-		} else {
-			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Soal akademik gagal dihapus.');
+		$cek = $this->tbl_detail_tes_akademik->join_all(array('detil_tes_akademik.ID_SOAL'=>$id));
+		if (count($cek) > 0)
+		{
+			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Soal akademik gagal dihapus, cek data yang terkait.');
+		}else{
+			$query = $this->tbl_soal_akademik->remove($id);
+			if ($query > 0) {
+				$this->session->set_flashdata('pesan', '<b>Berhasil!</b> Soal akademik telah dihapus.');
+			} else {
+				$this->session->set_flashdata('pesan', '<b>Gagal!</b> Soal akademik gagal dihapus.');
+			}
 		}
 		redirect('soal_akademik');
 	}

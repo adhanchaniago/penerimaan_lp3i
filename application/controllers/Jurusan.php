@@ -66,11 +66,19 @@ class Jurusan extends CI_Controller
 
 	public function hapus($id)
 	{
-		$query = $this->m_jurusan->remove($id);
-		if ($query > 0) {
-			$this->session->set_flashdata('pesan', '<b>Berhasil!</b> Data jurusan telah dihapus.');
-		} else {
-			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Data jurusan gagal dihapus.');
+		//mengecek apakah id tersebut di gunakan pada tabel lain
+		$cek = $this->tbl_pilihan->get_by_jurusan($id);
+		if (count($cek) > 0)
+		{
+			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Data jurusan gagal dihapus, cek data yang bersangkutan.');
+			redirect('jurusan');
+		}else{
+			$query = $this->m_jurusan->remove($id);
+			if ($query > 0) {
+				$this->session->set_flashdata('pesan', '<b>Berhasil!</b> Data jurusan telah dihapus.');
+			} else {
+				$this->session->set_flashdata('pesan', '<b>Gagal!</b> Data jurusan gagal dihapus.');
+			}
 		}
 		redirect('jurusan');
 	}

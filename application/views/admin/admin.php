@@ -114,7 +114,7 @@
                     <i class='ace-icon fa fa-pencil'></i> Ubah
                   </a>
 
-                  <a class='btn btn-xs btn-danger' href='".base_url().'index.php/admin/hapus/'.$j->ID_ADMIN." onclick='return confirm(\"Anda yakin?\");'>
+                  <a class='btn btn-xs btn-danger' href='".base_url().'admin/hapus/'.$j->ID_ADMIN."' onclick='return confirm(\"Anda yakin?\");'>
                     <i class='ace-icon fa fa-trash-o'></i> Hapus
                   </a>
                 </div>
