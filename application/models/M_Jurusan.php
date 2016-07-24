@@ -55,5 +55,14 @@ class M_Jurusan extends CI_Model
 		$this->db->where('no_pendaftaran', $no_pendaftaran);
 		return $this->db->get()->result();
 	}
+
+	public function count_tahun($jurusan, $tahun)
+	{
+		return $this->db->query("select count(*) as JUMLAH
+			from pendaftar
+			left join pilihan_jurusan on pendaftar.no_pendaftaran = pilihan_jurusan.no_pendaftaran
+			left join jurusan on pilihan_jurusan.id_jurusan = jurusan.id_jurusan
+			where jurusan.id_jurusan = ".$jurusan." and year(tanggal_daftar) = ".$tahun)->result();
+	}
 }
 ?>

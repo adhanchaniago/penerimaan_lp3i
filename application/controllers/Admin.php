@@ -114,6 +114,29 @@ class Admin extends CI_Controller
 		}
 		$data['informasi'] = $info_arr;
 
+		$arr_tahun = array();
+		$tahun = date('Y') - 4;
+		for ($i=0; $i < 5; $i++) { 
+			$arr_tahun[$i] = $tahun;
+			$tahun++;
+		}
+		$data['xtahun'] = $arr_tahun;
+
+		$arr_data_grafik = array();
+		$jurusan = $this->m_jurusan->get_all();
+		foreach ($jurusan as $jur) {
+			$arr_data = array();
+			$idx_data = 0;
+			$id_jur = $jur->ID_JURUSAN;
+			foreach ($arr_tahun as $thn) {
+				$count_jur = $this->m_jurusan->count_tahun($id_jur, $thn);
+				$arr_data[$idx_data] = $count_jur[0]->JUMLAH;
+				$idx_data++;
+			}
+			array_push($arr_data_grafik, array('name' => $jur->NAMA_JURUSAN, 'data' => $arr_data));
+		}
+		$data['grafik'] = $arr_data_grafik;
+
 		$this->load->view('admin/layout', $data);
 	}	
 

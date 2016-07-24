@@ -21,6 +21,13 @@
 			<div class="portlet-body">
 				<div class="table-toolbar">
 					<div class="row">
+						<div class="btn-group">
+							<select class="form-control" name="isvalid" id="isvalid">
+								<option value="semua">Semua</option>
+								<option value="sudah">Sudah Validasi</option>
+								<option value="belum">Belum Validasi</option>
+							</select>
+						</div>
 						<div class="btn-group pull-right">
 							<a class="btn green" href="<?php echo base_url().'index.php/page/register'; ?>">Tambah Aplikan Baru <i class="fa fa-plus"></i></a>
 						</div>
@@ -45,7 +52,7 @@
 								Alamat
 							</th>
 							<th>
-								No. Telepon
+								No. Handphone
 							</th>
 							<th>
 								Email
@@ -68,7 +75,7 @@
 								<td>".$jk."</td>
 								<td>".$p->TEMPAT_LAHIR.", ".date("d M Y", strtotime($p->TANGGAL_LAHIR))."</td>
 								<td>".$p->ALAMAT_TETAP."</td>
-								<td>".$p->NO_TELEPON."</td>
+								<td>".$p->NO_HANDPHONE."</td>
 								<td>".$p->EMAIL."</td>
 								<td>".$valid."</td>
 								<td style='text-align: center;'>

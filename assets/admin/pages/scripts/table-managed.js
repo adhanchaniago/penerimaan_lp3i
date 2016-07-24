@@ -6,7 +6,7 @@ var TableManaged = function () {
 
         // begin first table
         table.dataTable({
-
+            
             // Internationalisation. For more info refer to http://datatables.net/manual/i18n
             "language": {
                 "aria": {

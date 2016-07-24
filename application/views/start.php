@@ -60,14 +60,14 @@ License: You must have a valid license purchased only from themeforest(the above
 	                <!-- BEGIN TOPBAR ACTIONS -->
 	                <div class="topbar-actions">
 		                <!-- DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box -->
-						<form class="search-form" action="extra_search.html" method="GET">
+						<!-- <form class="search-form" action="extra_search.html" method="GET">
 							<div class="input-group">
 								<input type="text" class="form-control" placeholder="Cari..." name="query">
 								<span class="input-group-btn">
 									<a href="javascript:;" class="btn submit"><i class="fa fa-search"></i></a>
 								</span>
 							</div>
-						</form>
+						</form> -->
 						<!-- END HEADER SEARCH BOX -->
 					</div>
 	                <!-- END TOPBAR ACTIONS -->

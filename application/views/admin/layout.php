@@ -197,6 +197,8 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="<?php echo base_url(); ?>assets/admin/layout6/scripts/index.js" type="text/javascript"></script>
 		<script src="<?php echo base_url(); ?>assets/admin/pages/scripts/tasks.js" type="text/javascript"></script>
 		<script src="<?php echo base_url(); ?>assets/admin/pages/scripts/table-managed.js"></script>
+		<script src="<?php echo base_url(); ?>assets/global/scripts/highcharts/highcharts.js"></script>
+		<script src="<?php echo base_url(); ?>assets/global/scripts/highcharts/modules/exporting.js"></script>
 		<!-- END PAGE LEVEL SCRIPTS -->
 		<script>
 		jQuery(document).ready(function() {    
