@@ -83,7 +83,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">Nama Lengkap</label>
 									<div class="col-md-9">
-										<input type="text" name="nama" class="form-control" placeholder="Masukkan Nama Lengkap">
+										<input type="text" name="nama" class="form-control" pattern="[a-zA-Z].{2,}" title="Nama harus huruf" placeholder="Masukkan Nama Lengkap">
 									</div>
 								</div>
 								<div class="form-group">

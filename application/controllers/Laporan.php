@@ -26,17 +26,30 @@ class Laporan extends CI_Controller
 	public function keseluruhan()
 	{
 		$data['judul'] 		= "Laporan,Seluruh Peserta";
+		$data['konten'] 	= "admin/keseluruhan-view";
+		// $cond 				= array('peserta.ID' => 1);
+		// $data['pendaftar'] 	= $this->tbl_peserta->get_pengumuman_diterima($cond);
+		$this->load->view('admin/layout', $data);
+	}
+	
+	public function view_keseluruhan()
+	{
+		$periode 			= $this->input->post('periode');
+		$data['periode']	= $periode.' / '.($periode+1);
+		$data['tahun']		= $periode;
+
+		$data['judul'] 		= "Laporan,Seluruh Peserta";
 		$data['konten'] 	= "admin/keseluruhan";
-		$cond 				= array('peserta.ID' => 1);
-		$data['pendaftar'] 	= $this->tbl_peserta->get_pengumuman_diterima($cond);
+		$data['pendaftar'] 	= $this->tbl_peserta->get_pengumuman_terima($periode,1);
 		$this->load->view('admin/layout', $data);
 	}
 
-	public function cetak($tipe)
-	{
-		$cond 				= array('peserta.ID' => 1);
-		$data['pendaftar'] 	= $this->tbl_peserta->get_pengumuman_diterima($cond);
 
+
+	public function cetak($tahun)
+	{
+		$data['pendaftar'] 	= $this->tbl_peserta->get_pengumuman_terima($tahun,1);
+		$data['periode']	= $tahun.' / '.($tahun+1);
 		$fileName 			= 'Laporan Peserta '.date('dmY_His');
 		$this->pdf->load_view('admin/cetak_keseluruhan',$data);
 		$this->pdf->render();

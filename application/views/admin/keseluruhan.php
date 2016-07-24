@@ -3,6 +3,7 @@
 		<div class="portlet light bordered">
 			<div class="portlet-title">
 				<div class="caption font-dark">
+					<a class="btn btn-default" href="<?php echo base_url('laporan/keseluruhan'); ?>"><i class="fa fa-chevron-left"></i></a>
 					<span class="caption-subject bold uppercase"><?php echo explode(',', $judul)[0]; ?></span>
 					<span class="caption-helper uppercase"><?php echo explode(',', $judul)[1]; ?></span>
 				</div>
@@ -16,7 +17,7 @@
 						<center><u><b>PENGUMUMAN PMB</b></u></center>
 					</div>
 					<div>
-						<center>Periode tahun : 2016/2017</center>
+						<center>Periode tahun : <?php echo $periode; ?></center>
 					</div>
 					<br>
 					<table class="table table-bordered">
@@ -52,7 +53,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="btn-group pull-right">
-								<a class="btn green" href="<?php echo base_url().'laporan/cetak/all'; ?>"><i class="fa fa-print"></i> Print</a>
+								<a class="btn green" href="<?php echo base_url().'laporan/cetak/'.$tahun; ?>"><i class="fa fa-print"></i> Print</a>
 							</div>
 						</div>
 					</div>

@@ -16,7 +16,7 @@
 		</tr>
 		<tr>
 			<td style="text-align:center;">
-				Periode Penerimaan: <?php echo date('Y').'-'.(date('Y')+1); ?>
+				Periode Penerimaan: <?php echo $periode; ?>
 			</td>
 		</tr>
 	</table>
