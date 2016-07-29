@@ -135,14 +135,14 @@
         <div class="form-group">
 			<label class="col-md-3 control-label" for="mulai">Mulai/Masuk</label>
 			<div class="col-md-9">
-				<input class="form-control form-control-inline input-medium date-picker" id="mulai" name="mulai" size="16" type="date" placeholder="DD/MM/YYYY" />
+				<input class="form-control form-control-inline input-medium " id="mulai" name="mulai" size="16" type="date" placeholder="DD/MM/YYYY" />
 			</div>
 		</div>
 
 		<div class="form-group">
 			<label class="col-md-3 control-label" for="selesai">Selesai/Lulus</label>
 			<div class="col-md-9">
-				<input class="form-control form-control-inline input-medium date-picker" id="selesai" name="selesai" size="16" type="date" placeholder="DD/MM/YYYY" />
+				<input class="form-control form-control-inline input-medium " id="selesai" name="selesai" size="16" type="date" placeholder="DD/MM/YYYY" />
 			</div>
 		</div>
 
@@ -209,14 +209,14 @@
         <div class="form-group">
 			<label class="col-md-3 control-label" for="mulai-u">Mulai/Masuk</label>
 			<div class="col-md-9">
-				<input class="form-control form-control-inline input-medium date-picker" id="mulai-u" name="mulai-u" size="16" type="date" placeholder="DD/MM/YYYY" />
+				<input class="form-control form-control-inline input-medium " id="mulai-u" name="mulai-u" size="16" type="date" placeholder="DD/MM/YYYY" />
 			</div>
 		</div>
 
 		<div class="form-group">
 			<label class="col-md-3 control-label" for="selesai-u">Selesai/Lulus</label>
 			<div class="col-md-9">
-				<input class="form-control form-control-inline input-medium date-picker" id="selesai-u" name="selesai-u" size="16" type="date" placeholder="DD/MM/YYYY" />
+				<input class="form-control form-control-inline input-medium " id="selesai-u" name="selesai-u" size="16" type="date" placeholder="DD/MM/YYYY" />
 			</div>
 		</div>
 

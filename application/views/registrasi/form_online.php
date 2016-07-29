@@ -111,7 +111,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label">Tanggal Lahir</label>
 									<div class="col-md-9">
-										<input class="form-control form-control-inline input-medium date-picker" name="tgl_lahir" size="16" type="date" placeholder="MM/DD/YYYY" required />
+										<input class="form-control form-control-inline input-medium" name="tgl_lahir" size="16" type="date" placeholder="MM/DD/YYYY" required />
 									</div>
 								</div>
 								<div class="form-group">

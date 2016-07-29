@@ -58,7 +58,12 @@
 		$j = count($jurusan)>0?$jurusan[0]->NAMA_JURUSAN:'';
 	?>
 	<p>
-		Telah dinyatakan DITERIMA sebagai mahasiswa pada LP3I pada jurusan <?php echo strtoupper($j); ?>. Berikut kami lampirkan hasil tes penerimaan anda yang telah di lakukan : 
+		<?php if ($keputusan == 'DITERIMA'): ?>
+			Dinyatakan <?php echo $keputusan; ?> sebagai mahasiswa pada LP3I pada jurusan <?php echo strtoupper($j); ?> dengan total nilai <?php echo $total_nilai; ?>. Berikut kami lampirkan hasil tes penerimaan anda yang telah dilakukan : 
+			
+		<?php else: ?>
+			Dinyatakan TIDAK DITERIMA sebagai mahasiswa pada LP3I  dengan total nilai <?php echo $total_nilai; ?>. Berikut kami lampirkan hasil tes penerimaan anda yang telah dilakukan : 
+		<?php endif ?>
 	</p>
 	<table style="width:100%" border="1px" cellspacing="0" cellpadding="4px">
 		<tr>
@@ -115,11 +120,20 @@
 		</tr>	
 	</table>
 	<br>
-	<p>
-		Keterangan lebih lanjut untuk detail Administrasi dan jadwalnya telah kami lampirkan bersama surat ini.
+	<?php if ($keputusan == 'DITERIMA'): ?>
+	<p style="text-align:justify">
+		Keterangan lebih lanjut untuk detail Administrasi dan jadwal telah kami lampirkan bersama surat ini.
 		Dengan ini kami bangga menyambut anda sebagai keluarga LP3I Surabaya yang baru.
 		Demikian pemberitahuan dan ucapan selamat kami, atas perhatiannya kami ucapkan terimah kasih.
 	</p>
+	<?php else: ?>
+	<p style="text-align:justify">
+		Berdasarkan lampiran surat ini, dengan ini kami menyatakan bahwa anda belum memenuhi syarat untuk
+		bergabung sebagai keluarga LP3I Surabaya.
+		Demikian pemberitahuan kami sampaikan, atas perhatiannya kami ucapkan mohon maaf dan terimah kasih.
+	</p>
+	<?php endif ?>
+	
 	<table style="width:100%;">
 		<tr>
 			<td style="width:70%;text-align:center;"></td>

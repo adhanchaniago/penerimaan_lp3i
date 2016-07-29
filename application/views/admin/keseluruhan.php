@@ -36,13 +36,13 @@
 							<?php foreach ($pendaftar as $pendaftar): ?>
 							<tr>
 								<td style="text-align:center;"><?= $no++ ?></td>
-								<td><a href="<?php echo base_url(); ?>laporan/detail/<?php echo $pendaftar->NO_PENDAFTARAN ?> "><?= $pendaftar->NAMA ?></a></td>
+								<td><a href="<?php echo base_url(); ?>laporan/detail/<?php echo $pendaftar->NO_PENDAFTARAN ?> " target="_blank"><?= $pendaftar->NAMA ?></a></td>
 								<td><?= $pendaftar->ALAMAT_TETAP?></td>
 								<td style="text-align:center;"><?= $pendaftar->KETERANGAN=='DITERIMA'?'Diterima':'Tidak Diterima' ?></td>
 								<td style="text-align:center;">
 									<?php 
 										$jurusan = $this->tbl_peserta->join_jurusan(array('peserta.NO_PENDAFTARAN' => $pendaftar->NO_PENDAFTARAN));
-										echo count($jurusan)>0?$jurusan[0]->NAMA_JURUSAN:'-';
+										echo $pendaftar->KETERANGAN=='DITERIMA'?$jurusan[0]->NAMA_JURUSAN:'-';
 									?>
 								</td>
 								<td style="text-align:center;"><?= $pendaftar->KEPUTUSAN?></td>
@@ -53,7 +53,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="btn-group pull-right">
-								<a class="btn green" href="<?php echo base_url().'laporan/cetak/'.$tahun; ?>"><i class="fa fa-print"></i> Print</a>
+								<a class="btn green" href="<?php echo base_url().'laporan/cetak/'.$tahun; ?>" target="_blank"><i class="fa fa-print"></i> Print</a>
 							</div>
 						</div>
 					</div>

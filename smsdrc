@@ -6,7 +6,7 @@
 [gammu]
 #device = /dev/ttyS1
 #model = 6110
-port = 	COM20
+port = 	COM5
 connection = at19200
 #synchronizetime = yes
 #logfile = c:\gammu\log.txt

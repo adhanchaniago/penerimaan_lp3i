@@ -44,7 +44,7 @@
 				<td style="text-align:center;">
 					<?php 
 						$jurusan = $this->tbl_peserta->join_jurusan(array('peserta.NO_PENDAFTARAN' => $pendaftar->NO_PENDAFTARAN));
-						echo count($jurusan)>0?$jurusan[0]->NAMA_JURUSAN:'-';
+						echo $pendaftar->KETERANGAN=='DITERIMA'?$jurusan[0]->NAMA_JURUSAN:'-';
 					?>
 				</td>
 				<td style="text-align:center;"><?= $pendaftar->KEPUTUSAN?></td>
