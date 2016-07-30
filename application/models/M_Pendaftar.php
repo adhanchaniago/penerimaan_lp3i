@@ -23,7 +23,7 @@ class M_Pendaftar extends CI_Model
 	public function add($no_pendaftaran, $id_admin, $nama, $jk, $tempat_lahir, $tanggal_lahir, 
 		$agama, $status_pernikahan, $pekerjaan, $kewarganegaraan, $no_identitas, $alamat_tetap, 
 		$alamat_sekarang, $alamat_kantor, $no_handphone, $no_telepon, $email, $evaluasi_diri, 
-		$password, $valid, $tanggal_daftar, $sumber_informasi)
+		$password, $valid, $tanggal_daftar, $sumber_informasi, $pas_foto)
 	{
 		return $this->db->insert('pendaftar', array(
 				'no_pendaftaran' 		=> $no_pendaftaran,
@@ -48,6 +48,7 @@ class M_Pendaftar extends CI_Model
 				'valid' 				=> $valid,
 				'tanggal_daftar'		=> $tanggal_daftar,
 				'sumber_informasi'		=> $sumber_informasi,
+				'foto'					=> $pas_foto,
 			));
 	}
 

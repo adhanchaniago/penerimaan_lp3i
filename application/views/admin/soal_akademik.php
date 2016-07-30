@@ -11,6 +11,7 @@
     <div class="portlet light bordered">
       <div class="portlet-title">
         <div class="caption font-dark">
+          <a class="btn btn-default" href="<?php echo base_url('soal_akademik'); ?>"><i class="fa fa-chevron-left"></i></a>
           <span class="caption-subject bold uppercase">Daftar</span>
           <span class="caption-helper uppercase">Soal Akademik</span>
         </div>

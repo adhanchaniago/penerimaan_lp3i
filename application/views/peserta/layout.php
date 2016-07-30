@@ -112,9 +112,19 @@ License: You must have a valid license purchased only from themeforest(the above
 		                	<!-- END GROUP NOTIFICATION -->
 
 		                	<!-- BEGIN USER PROFILE -->
+							<?php 
+		                		if (isset($_SESSION['no_pendaftaran']))
+		                		{
+		                			$id_user = $this->session->userdata('no_pendaftaran');
+		                			$user = $this->tbl_pendaftar->get_id($id_user)[0];
+		                			$path = base_url("assets/global/img/photo/".$user->FOTO);
+		                		}else{
+									$path = '';		                			
+		                		}
+		                	?>
 			                <div class="btn-group-img btn-group">
 								<button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-									<img src="<?php echo base_url(); ?>assets/admin/layout6/img/avatar1.png" alt="">
+									<img src="<?php echo $path; ?>" alt="">
 								</button>
 								<ul class="dropdown-menu-v2" role="menu">
 									<li>

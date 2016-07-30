@@ -133,9 +133,6 @@ class Peserta extends CI_Controller
 		$data ['kriteria']			= $this->tbl_detail_tes_wawancara->join_kriteria(array('detil_tes_wawancara.NO_PENDAFTARAN' => $no_pendaftaran));
 		$data ['total_wawancara']	= count($this->tbl_tes_wawancara->get_total(array('tes_wawancara.NO_PENDAFTARAN' => $no_pendaftaran)))>0?$this->tbl_tes_wawancara->get_total(array('tes_wawancara.NO_PENDAFTARAN' => $no_pendaftaran))[0]->TOTAL_NILAI:"0";
 
-
-
-
 		$this->load->view('peserta/layout', $data);
 	}	
 

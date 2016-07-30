@@ -62,6 +62,31 @@ class Page extends CI_Controller
 		$this->load->view('registrasi/layout', $data);
 	}
 
+	private function do_upload_images($inputname) {
+		$this->load->library('upload');
+
+	    $files = $_FILES;
+
+	    $cpt = count ($_FILES [$inputname] ['name']);
+	    for($i = 0; $i < $cpt; $i ++) {
+
+	        $_FILES [$inputname] ['name'] = $files [$inputname] ['name'] [$i];
+	        $_FILES [$inputname] ['type'] = $files [$inputname] ['type'] [$i];
+	        $_FILES [$inputname] ['tmp_name'] = $files [$inputname] ['tmp_name'] [$i];
+	        $_FILES [$inputname] ['error'] = $files [$inputname] ['error'] [$i];
+	        $_FILES [$inputname] ['size'] = $files [$inputname] ['size'] [$i];
+
+	        $config = array ();
+		    $config ['upload_path'] = './assets/global/img/photo/';
+		    $config ['allowed_types'] = 'bmp|jpg|png';
+		    $config ['overwrite']	= TRUE;
+	        $this->upload->initialize($config);
+	        $this->upload->do_upload($inputname);
+
+	        return $_FILES[$inputname]['name'];
+	    }
+	}
+
 	public function register_act()
 	{
 		$no_pendaftaran = $this->tbl_pendaftar->create_no_pendaftaran();
@@ -93,13 +118,15 @@ class Page extends CI_Controller
 		$kode_unik = $this->input->post('kode_unik');
 		if ($kode_unik != $_SESSION['captcha_word']) {
 			$this->session->set_flashdata('pesan', '<b>Gagal!</b> Pastikan \'Kode Unik\' yang Anda masukkan sudah sesuai dengan gambar.');
-			redirect('registrasi/form_online');
+			redirect('page/register');
 		}
+
+		$pas_foto = $this->do_upload_images('pas_foto');
 
 		$act = $this->tbl_pendaftar->add($no_pendaftaran, $id_admin, $nama, $jk, $tempat_lahir, $tanggal_lahir,
 			$agama, $status_pernikahan, $pekerjaan, $kewarganegaraan, $no_identitas, $alamat_tetap,
 			$alamat_sekarang, $alamat_kantor, $no_handphone, $no_telepon, $email, $evaluasi_diri,
-			$password, $valid, $tanggal_daftar, $sumber_informasi);
+			$password, $valid, $tanggal_daftar, $sumber_informasi, $pas_foto);
 
 		if ($act > 0) {
 			if($prodi1 != '' || $prodi1 != null) $this->tbl_pilihan->add($no_pendaftaran, $prodi1);

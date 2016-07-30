@@ -241,12 +241,12 @@
 								</div>
 							</div>
 							<div class="col-md-4">
-								<!-- <div class="form-group">
+								<div class="form-group">
 									<label class="col-md-3 control-label">Pas Foto</label>
 									<div class="col-md-9">
-										<input type="file" name="pas_foto[]" class="form-control" accept=".png,.jpg,.bmp">
+										<input type="file" name="pas_foto[]" placeholder='Pilih Gambar...' class='form-control' accept=".jpg,.png,.bmp" required="true">
 									</div>
-								</div> -->
+								</div>
 							</div>
 						</div>
 						<div class="form-actions">

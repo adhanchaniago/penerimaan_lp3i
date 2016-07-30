@@ -13,12 +13,32 @@ class Soal_Akademik extends CI_Controller
 	public function index()
 	{
 		$this->security_check->admin_check();
+		$data['judul'] = 'Kelola, Soal Akademik';
+		$data['konten'] = 'admin/soal_akademik_view';
+
+		$data['bidang_soal'] = $this->tbl_bidang_soal_akademik->get_all();
+		$this->load->view('admin/layout', $data);
+	}
+	
+	public function view()
+	{
+		$this->security_check->admin_check();
+		$bidang_soal = $this->input->post('bidang_soal');
+		if ($bidang_soal == 'all')
+		{
+			$data['id'] = $this->security_check->gen_ai_id('soal_akademik', 'id_soal');
+			$data['bidang_soal'] = $this->tbl_bidang_soal_akademik->get_all();
+			$data['soal_akademik'] = $this->tbl_soal_akademik->get_all();
+		}else{
+
+			$data['id'] = $this->security_check->gen_ai_id('soal_akademik', 'id_soal');
+			$data['bidang_soal'] = $this->tbl_bidang_soal_akademik->get_id($bidang_soal);
+			$data['soal_akademik'] = $this->tbl_soal_akademik->get_by_bidang($bidang_soal);
+		}
+
 		$data['judul'] = 'Kelola Soal Akademik';
 		$data['konten'] = 'admin/soal_akademik';
 
-		$data['id'] = $this->security_check->gen_ai_id('soal_akademik', 'id_soal');
-		$data['bidang_soal'] = $this->tbl_bidang_soal_akademik->get_all();
-		$data['soal_akademik'] = $this->tbl_soal_akademik->get_all();
 
 		$this->load->view('admin/layout', $data);
 	}
